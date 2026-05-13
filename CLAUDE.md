@@ -6,11 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 PM portfolio for Shubham Arora (SDE → Product Manager pivot). Target audience: big-tech and high-growth startup recruiters.
 
-## Current phase
+## Phase status
 
-**Phase 0 ✓ complete** — scaffold, design system, site chrome deployed.  
-**Phase 1 → next** — Home hero, About page, Resume route.  
-See build plan: `~/.claude/plans/logical-gliding-metcalfe.md`
+All planned phases shipped. Open issues only:
+
+- **#10 P1** — replace `public/resume.pdf` with real CV (user action)
+- **#8 P2** — Sanity revalidation webhook
+- **#19 P2** — cover image layout bug on `/work/[slug]` (parked)
+- **#22 blocked** — Serif editorial UI refresh (PR #23 open, parked by design decision)
 
 ## Issue tracking (GitHub Issues + Projects)
 
@@ -48,10 +51,11 @@ npm run format   # Prettier + Tailwind class sort
 
 - **Next.js 16** App Router + TypeScript — RSC by default, `"use client"` only for interactivity
 - **Tailwind CSS v4** — tokens in `app/globals.css` only; no `tailwind.config.ts` color overrides
-- **Sanity CMS** (Phase 2+) — Studio at `/studio`, same Vercel deploy
+- **Sanity CMS** — Studio at `/studio`, same Vercel deploy; schemas in `sanity/schemas/`
 - **next-themes** — class-based dark mode; `attribute="class"`
 - **Geist Sans + Geist Mono** via `next/font/google`
-- **motion** (Phase 4+) — lazy-load: `dynamic(() => import('motion/react'), { ssr: false })`
+- **motion/react** — import directly as `"use client"` component (v12 renders static div on SSR; do NOT use `dynamic(..., { ssr: false })` — causes empty flash)
+- **@vercel/analytics** + **@vercel/speed-insights** — mounted in root layout; no-ops in local dev
 - **lucide-react** icons · **clsx + tailwind-merge** via `lib/utils.ts`
 
 ## Component index
@@ -64,7 +68,9 @@ npm run format   # Prettier + Tailwind class sort
 | `components/ui/BentoCard.tsx` | bento grid card with glow-on-hover | `span?: "1"\|"2"\|"3"` (maps to `md:col-span-N`) |
 | `components/site/Header.tsx` | sticky nav | edit `navLinks[]` to add routes |
 | `components/site/Footer.tsx` | footer + socials | reads `siteConfig` |
+| `components/site/HeroMotion.tsx` | fade-up entrance wrapper (motion/react) | `className?` — respects `prefers-reduced-motion` |
 | `components/site/ThemeToggle.tsx` | sun/moon toggle | client component |
+| `components/content/PortableText.tsx` | Sanity rich-text renderer | `value: unknown[]`, `className?` |
 | `components/providers/ThemeProvider.tsx` | next-themes wrapper | client boundary |
 | `lib/config.ts` | **single source of truth** for name, email, social URLs | update here first |
 | `lib/utils.ts` | `cn(...classes)` helper | clsx + twMerge |
@@ -91,6 +97,8 @@ npm run format   # Prettier + Tailwind class sort
 - `className="gradient-heading"` — violet→foreground gradient text, use on hero `<h1>` only.
 - `className="bento-glow"` — on hover: violet border tint + `box-shadow` glow. Applied via `BentoCard`.
 
+**Global focus ring:** `@layer base { *:focus-visible }` in `globals.css` sets a 2px violet outline. Components that need a custom ring use `focus-visible:outline-none` (higher-priority `@layer utilities`) to override it.
+
 Dark mode: next-themes sets `.dark` on `<html>`. `suppressHydrationWarning` on `<html>` — never remove.
 
 ## Where to add things
@@ -101,11 +109,12 @@ Dark mode: next-themes sets `.dark` on `<html>`. `suppressHydrationWarning` on `
 | Add a nav link | `components/site/Header.tsx` → `navLinks[]` |
 | Add a new color token | `app/globals.css` `:root` + `.dark` + `@theme inline` |
 | Add a new page | `app/(route)/page.tsx` + route group if needed |
-| Add a Sanity schema (Phase 2+) | `sanity/schemas/` + export from `sanity/schemas/index.ts` |
+| Add a Sanity schema | `sanity/schemas/` + export from `sanity/schemas/index.ts` |
+| Change OG image design | `app/og/route.tsx` — edge route, JSX → PNG via `next/og` |
 
 ## Next.js 16 rules
 
 - `params` is `Promise<{slug: string}>` in dynamic routes — always `await params`.
 - Always `next/image` with explicit `sizes` prop.
 - No global state lib — RSC + URL search params + local `useState`.
-- `npm run build` passes = the only required check before raising a PR.
+- `npm run build` + `npm run lint` must both pass before raising a PR.
