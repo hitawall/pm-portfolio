@@ -15,7 +15,7 @@ export default function NotFound() {
           </p>
           <Link
             href="/"
-            className="mt-6 inline-flex text-sm underline underline-offset-4 transition-colors duration-[120ms] hover:text-foreground-muted"
+            className="mt-6 inline-flex text-sm text-accent underline underline-offset-4 transition-colors duration-[120ms] hover:text-accent-hover"
           >
             Go home
           </Link>
