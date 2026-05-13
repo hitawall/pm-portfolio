@@ -6,12 +6,15 @@
   --foreground: #09090b;
   --foreground-muted: #71717a;
   --border: #e4e4e7;
+  --border-strong: #d4d4d8;
   --surface: #f4f4f5;
-  /* Indigo accent */
-  --accent: #6366f1;
-  --accent-hover: #4f46e5;
+  /* Violet accent */
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
   --accent-fg: #ffffff;
-  --accent-subtle: #eef2ff;
+  --accent-subtle: #f5f3ff;
+  /* Glow for card hover (raw rgba for box-shadow) */
+  --accent-glow: rgba(124, 58, 237, 0.18);
 }
 
 .dark {
@@ -19,12 +22,14 @@
   --foreground: #fafafa;
   --foreground-muted: #a1a1aa;
   --border: #27272a;
+  --border-strong: #3f3f46;
   --surface: #18181b;
-  /* Indigo accent (lighter for dark bg readability) */
-  --accent: #818cf8;
-  --accent-hover: #6366f1;
+  /* Violet accent — lighter for dark bg readability */
+  --accent: #a78bfa;
+  --accent-hover: #8b5cf6;
   --accent-fg: #ffffff;
   --accent-subtle: #1e1b4b;
+  --accent-glow: rgba(167, 139, 250, 0.18);
 }
 
 @theme inline {
@@ -32,6 +37,7 @@
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-surface: var(--surface);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
@@ -55,11 +61,15 @@ body {
   color: var(--accent-fg);
 }
 
-/* ---------- Gradient text utility ---------- */
-/* Usage: className="gradient-heading" on hero <h1> */
+/* ---------- Utilities ---------- */
 .gradient-heading {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--foreground) 60%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--foreground) 55%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.bento-glow:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 0 32px var(--accent-glow);
 }
