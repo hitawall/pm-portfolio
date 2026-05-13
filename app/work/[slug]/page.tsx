@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { PortableText } from "@/components/content/PortableText";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { siteConfig } from "@/lib/config";
+import { siteConfig, getBaseUrl } from "@/lib/config";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,9 +20,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const cs = await getCaseStudyBySlug(slug);
   if (!cs) return {};
+  const sub = [cs.company, cs.year].filter(Boolean).join(" · ");
+  const ogUrl = `${getBaseUrl()}/og?${new URLSearchParams({ title: cs.title, type: "Case Study", ...(sub && { sub }) }).toString()}`;
   return {
     title: `${cs.title} — ${siteConfig.name}`,
     description: cs.summary,
+    openGraph: {
+      images: [ogUrl],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [ogUrl],
+    },
   };
 }
 
