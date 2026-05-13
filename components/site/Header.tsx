@@ -26,7 +26,7 @@ export function Header() {
               <Link
                 key={href}
                 href={href}
-                className="hidden rounded-md px-3 py-1.5 text-sm text-foreground-muted transition-colors duration-[120ms] hover:text-foreground sm:block"
+                className="hidden rounded-md px-3 py-1.5 text-sm text-foreground-muted transition-colors duration-[120ms] hover:text-accent sm:block"
               >
                 {label}
               </Link>
