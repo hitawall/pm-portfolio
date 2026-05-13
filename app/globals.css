@@ -7,8 +7,11 @@
   --foreground-muted: #71717a;
   --border: #e4e4e7;
   --surface: #f4f4f5;
-  --accent: #18181b;
-  --accent-fg: #fafafa;
+  /* Indigo accent */
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-fg: #ffffff;
+  --accent-subtle: #eef2ff;
 }
 
 .dark {
@@ -17,8 +20,11 @@
   --foreground-muted: #a1a1aa;
   --border: #27272a;
   --surface: #18181b;
-  --accent: #fafafa;
-  --accent-fg: #09090b;
+  /* Indigo accent (lighter for dark bg readability) */
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --accent-fg: #ffffff;
+  --accent-subtle: #1e1b4b;
 }
 
 @theme inline {
@@ -28,7 +34,9 @@
   --color-border: var(--border);
   --color-surface: var(--surface);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-fg);
+  --color-accent-subtle: var(--accent-subtle);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -43,6 +51,15 @@ body {
 }
 
 ::selection {
-  background-color: var(--foreground);
-  color: var(--background);
+  background-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* ---------- Gradient text utility ---------- */
+/* Usage: className="gradient-heading" on hero <h1> */
+.gradient-heading {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--foreground) 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

@@ -6,56 +6,85 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 PM portfolio for Shubham Arora (SDE → Product Manager pivot). Target audience: big-tech and high-growth startup recruiters.
 
+## Current phase
+
+**Phase 0 ✓ complete** — scaffold, design system, site chrome deployed.  
+**Phase 1 → next** — Home hero, About page, Resume route.  
+See build plan: `~/.claude/plans/logical-gliding-metcalfe.md`
+
+## Git workflow
+
+Branches: `feat/phase1-home-hero`, `feat/phase1-about`, `fix/foo`, `chore/bar`  
+Pattern: `feat/phase{N}-{short-description}` — one PR per feature to `main`.  
+Never commit directly to `main`. Always raise a PR. Squash merge only.
+
 ## Commands
 
 ```bash
-npm run dev          # dev server at localhost:3000
-npm run build        # production build
-npm run start        # serve production build
-npm run lint         # ESLint
-npm run format       # Prettier (auto-sorts Tailwind classes)
+npm run dev      # dev server → localhost:3000
+npm run build    # production build (creates .next/)
+npm run lint     # ESLint — auto-allowed, no prompt needed
+npm run format   # Prettier + Tailwind class sort
 ```
 
 ## Stack
 
-- **Next.js 16** (App Router, RSC-first) + TypeScript
-- **Tailwind CSS v4** — design tokens live in `app/globals.css` via `@theme inline`; no `tailwind.config.ts` color overrides
-- **Sanity CMS** (Phase 2+) — embedded Studio at `/studio`
-- **next-themes** — class-based dark mode (`attribute="class"`)
+- **Next.js 16** App Router + TypeScript — RSC by default, `"use client"` only for interactivity
+- **Tailwind CSS v4** — tokens in `app/globals.css` only; no `tailwind.config.ts` color overrides
+- **Sanity CMS** (Phase 2+) — Studio at `/studio`, same Vercel deploy
+- **next-themes** — class-based dark mode; `attribute="class"`
 - **Geist Sans + Geist Mono** via `next/font/google`
-- **motion** (Framer Motion v11+, Phase 4+) — lazy-loaded with `dynamic`
-- **lucide-react** for icons; **clsx + tailwind-merge** via `lib/utils.ts`
+- **motion** (Phase 4+) — lazy-load: `dynamic(() => import('motion/react'), { ssr: false })`
+- **lucide-react** icons · **clsx + tailwind-merge** via `lib/utils.ts`
 
-## Architecture
+## Component index
 
-- `app/` — App Router; all components are RSC unless they need interactivity (`"use client"`).
-- `components/ui/` — layout primitives: `Container` (size sm/md/lg), `Section`.
-- `components/site/` — site chrome: `Header`, `Footer`, `ThemeToggle` (client).
-- `components/providers/` — client wrappers: `ThemeProvider`.
-- `components/content/` — (Phase 2+) PortableText renderers, code blocks, callouts.
-- `sanity/` — (Phase 2+) schemas, typed GROQ queries, Sanity client.
-- `lib/config.ts` — site-wide constants (name, URL, social links). **Update this first** when personalizing.
-- `lib/utils.ts` — `cn()` helper (clsx + tailwind-merge).
+| File | What it does | Key props/API |
+|---|---|---|
+| `components/ui/Container.tsx` | max-width wrapper | `size?: sm\|md\|lg`, `as?` |
+| `components/ui/Section.tsx` | vertical padding block | `as?` |
+| `components/ui/Button.tsx` | CTA button | `variant?: primary\|ghost`, `size?: sm\|md`, `as?` (renders as `<a>` for links) |
+| `components/site/Header.tsx` | sticky nav | edit `navLinks[]` to add routes |
+| `components/site/Footer.tsx` | footer + socials | reads `siteConfig` |
+| `components/site/ThemeToggle.tsx` | sun/moon toggle | client component |
+| `components/providers/ThemeProvider.tsx` | next-themes wrapper | client boundary |
+| `lib/config.ts` | **single source of truth** for name, email, social URLs | update here first |
+| `lib/utils.ts` | `cn(...classes)` helper | clsx + twMerge |
 
-## Design tokens
+## Design tokens (globals.css — do not re-read file, use table)
 
-All tokens in `app/globals.css`. CSS vars on `:root` / `.dark`, aliased via `@theme inline`:
+**Design language: Indigo Tech** — zinc neutrals + indigo accent (#6366f1 light / #818cf8 dark). Geist Sans throughout.
 
-| Token class | CSS var |
+| Tailwind class | Light | Dark |
+|---|---|---|
+| `bg-background` | `#ffffff` | `#09090b` |
+| `text-foreground` | `#09090b` | `#fafafa` |
+| `text-foreground-muted` | `#71717a` | `#a1a1aa` |
+| `border-border` | `#e4e4e7` | `#27272a` |
+| `bg-surface` | `#f4f4f5` | `#18181b` |
+| `bg-accent` | `#6366f1` (indigo-500) | `#818cf8` (indigo-400) |
+| `hover:bg-accent-hover` | `#4f46e5` (indigo-600) | `#6366f1` (indigo-500) |
+| `text-accent-foreground` | `#ffffff` | `#ffffff` |
+| `bg-accent-subtle` | `#eef2ff` (indigo-50) | `#1e1b4b` (indigo-950) |
+| `--ease-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | same |
+
+**CSS utility:** `className="gradient-heading"` — indigo→foreground gradient text, use on hero `<h1>` only.
+
+Dark mode: next-themes sets `.dark` on `<html>`. `suppressHydrationWarning` on `<html>` — never remove.
+
+## Where to add things
+
+| Task | File(s) to edit |
 |---|---|
-| `bg-background` | `--background` |
-| `text-foreground` | `--foreground` |
-| `text-foreground-muted` | `--foreground-muted` |
-| `border-border` | `--border` |
-| `bg-surface` | `--surface` |
-| `bg-accent` / `text-accent-foreground` | `--accent` / `--accent-fg` |
+| Change site name / email / social links | `lib/config.ts` only |
+| Add a nav link | `components/site/Header.tsx` → `navLinks[]` |
+| Add a new color token | `app/globals.css` `:root` + `.dark` + `@theme inline` |
+| Add a new page | `app/(route)/page.tsx` + route group if needed |
+| Add a Sanity schema (Phase 2+) | `sanity/schemas/` + export from `sanity/schemas/index.ts` |
 
-Dark mode is class-based (next-themes sets `.dark` on `<html>`).
+## Next.js 16 rules
 
-## Next.js 16 notes
-
-- `params` in dynamic routes is `Promise<>` — always `await params` in page components.
-- `suppressHydrationWarning` on `<html>` is required for next-themes — do not remove.
-- Motion: lazy-load via `dynamic(() => import('motion/react').then(m => m.motion), { ssr: false })`.
-- No global state library — RSC + URL search params + local `useState` only.
-- Always `next/image` for images with explicit `sizes` prop.
+- `params` is `Promise<{slug: string}>` in dynamic routes — always `await params`.
+- Always `next/image` with explicit `sizes` prop.
+- No global state lib — RSC + URL search params + local `useState`.
+- `npm run build` passes = the only required check before raising a PR.
