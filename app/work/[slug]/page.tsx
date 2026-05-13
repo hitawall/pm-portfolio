@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card";
+import { RuleDivider } from "@/components/ui/RuleDivider";
 import { PortableText } from "@/components/content/PortableText";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
@@ -33,65 +35,62 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <main className="flex-1">
-      <Container size="md" className="py-14 sm:py-20">
+      <Container size="md" className="py-16 sm:py-24">
 
         {/* Header */}
-        <div className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
-            {cs.company}{cs.year ? ` · ${cs.year}` : ""}
+        <div className="mb-12 text-center">
+          <p className="small-caps text-foreground-muted">
+            {cs.company}
+            {cs.year ? ` · ${cs.year}` : ""}
+            {cs.role ? ` · ${cs.role}` : ""}
           </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="mt-5 font-serif text-4xl text-foreground sm:text-5xl">
             {cs.title}
           </h1>
-          {cs.role && (
-            <p className="mt-2 text-sm text-foreground-muted">{cs.role}</p>
-          )}
           {cs.summary && (
-            <p className="mt-4 max-w-xl text-base text-foreground-muted">
+            <p className="mx-auto mt-5 max-w-lg font-serif text-xl italic text-foreground-muted">
               {cs.summary}
             </p>
           )}
         </div>
 
-        {/* Cover image */}
+        <RuleDivider />
+
+        {/* Cover image — fixed dimensions, no fill (fixes #19) */}
         {cs.coverImage && (
-          <div className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+          <figure className="my-12">
             <Image
               src={urlFor(cs.coverImage).width(1200).height(675).url()}
               alt={cs.title}
-              fill
-              className="object-cover"
+              width={1200}
+              height={675}
+              className="w-full rounded-lg border border-border object-cover"
               sizes="(max-width: 768px) 100vw, 800px"
+              priority
             />
-          </div>
+          </figure>
         )}
 
         {/* Outcome metrics */}
         {cs.outcomes && cs.outcomes.length > 0 && (
-          <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
+          <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {cs.outcomes.map((o, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-border bg-surface p-4"
-              >
-                <p className="text-xs text-foreground-muted">{o.label}</p>
-                <p className="mt-1 text-2xl font-bold tracking-tight">{o.value}</p>
+              <Card key={i} accentTop className="p-6 text-center">
+                <p className="small-caps text-foreground-muted">{o.label}</p>
+                <p className="mt-3 font-serif text-5xl text-foreground">{o.value}</p>
                 {o.delta && (
-                  <p className="mt-0.5 text-xs font-medium text-accent">{o.delta}</p>
+                  <p className="mt-2 small-caps text-accent">{o.delta}</p>
                 )}
-              </div>
+              </Card>
             ))}
           </div>
         )}
 
         {/* Tags */}
         {cs.tags && cs.tags.length > 0 && (
-          <div className="mb-10 flex flex-wrap gap-1.5">
+          <div className="mb-10 flex flex-wrap gap-3">
             {cs.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted"
-              >
+              <span key={tag} className="small-caps text-foreground-muted opacity-70">
                 {tag}
               </span>
             ))}
@@ -100,9 +99,10 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {/* Body */}
         {cs.body && (cs.body as unknown[]).length > 0 && (
-          <div className="border-t border-border pt-10">
+          <>
+            <RuleDivider className="mb-10" />
             <PortableText value={cs.body as unknown[]} />
-          </div>
+          </>
         )}
 
       </Container>

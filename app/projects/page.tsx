@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card";
+import { RuleDivider } from "@/components/ui/RuleDivider";
 import { getAllProjects } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -35,22 +37,23 @@ export default async function Projects({ searchParams }: Props) {
 
   return (
     <main className="flex-1">
-      <Container size="lg" className="py-14 sm:py-20">
+      <Container size="lg" className="py-16 sm:py-24">
 
-        <div className="mb-10">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
-            Projects
-          </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+        {/* Header */}
+        <div className="mb-14 text-center">
+          <p className="small-caps text-foreground-muted">Projects</p>
+          <h1 className="mt-5 font-serif text-5xl text-foreground sm:text-6xl">
             Things I&apos;ve built
           </h1>
-          <p className="mt-3 text-lg text-foreground-muted">
+          <p className="mx-auto mt-5 max-w-sm font-serif text-xl italic text-foreground-muted">
             Side projects and experiments.
           </p>
         </div>
 
+        <RuleDivider />
+
         {/* Kind filter */}
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mt-10 mb-10 flex flex-wrap justify-center gap-2">
           {FILTER_OPTIONS.map((opt) => {
             const isActive = opt.value === (kind ?? "");
             return (
@@ -58,10 +61,10 @@ export default async function Projects({ searchParams }: Props) {
                 key={opt.label}
                 href={opt.value ? `?kind=${opt.value}` : "/projects"}
                 className={cn(
-                  "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors duration-150",
+                  "small-caps rounded-full border px-4 py-1.5 transition-colors duration-150",
                   isActive
-                    ? "border-accent bg-accent-subtle text-accent"
-                    : "border-border text-foreground-muted hover:border-accent/40 hover:text-foreground"
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border text-foreground-muted hover:border-accent hover:text-accent"
                 )}
               >
                 {opt.label}
@@ -71,20 +74,17 @@ export default async function Projects({ searchParams }: Props) {
         </div>
 
         {filtered.length === 0 ? (
-          <p className="text-sm text-foreground-muted">
+          <p className="py-4 text-center text-sm text-foreground-muted">
             {kind ? `No ${KIND_LABELS[kind] ?? kind} projects yet.` : "Projects coming soon."}
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((project) => (
-              <div
-                key={project._id}
-                className="group flex flex-col justify-between rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:border-accent/40 hover:shadow-[0_0_32px_var(--accent-glow)]"
-              >
+              <Card key={project._id} hoverEffect className="flex flex-col justify-between p-7">
                 <div>
                   <div className="flex items-center justify-between">
                     {project.kind && (
-                      <span className="rounded-full bg-accent-subtle px-2.5 py-0.5 text-xs font-medium text-accent">
+                      <span className="small-caps text-accent">
                         {KIND_LABELS[project.kind] ?? project.kind}
                       </span>
                     )}
@@ -94,7 +94,7 @@ export default async function Projects({ searchParams }: Props) {
                       </span>
                     )}
                   </div>
-                  <h2 className="mt-4 text-base font-semibold leading-snug">
+                  <h2 className="mt-4 font-serif text-xl text-foreground">
                     {project.title}
                   </h2>
                   {project.summary && (
@@ -108,12 +108,12 @@ export default async function Projects({ searchParams }: Props) {
                     href={project.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-1 text-xs text-accent transition-colors hover:text-accent-hover"
+                    className="mt-6 inline-flex items-center gap-1 small-caps text-accent transition-colors duration-150 hover:text-foreground"
                   >
-                    View project <ArrowUpRight size={12} />
+                    View project <ArrowUpRight size={11} />
                   </a>
                 )}
-              </div>
+              </Card>
             ))}
           </div>
         )}

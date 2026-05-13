@@ -5,21 +5,17 @@ import { cn } from "@/lib/utils";
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="mb-5 leading-relaxed text-foreground-muted">{children}</p>
+      <p className="mb-6 text-base leading-[1.75] text-foreground">{children}</p>
     ),
     h2: ({ children }) => (
-      <h2 className="mb-4 mt-10 text-xl font-semibold tracking-tight text-foreground">
-        {children}
-      </h2>
+      <h2 className="mb-4 mt-12 font-serif text-3xl text-foreground">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mb-3 mt-8 text-lg font-semibold tracking-tight text-foreground">
-        {children}
-      </h3>
+      <h3 className="mb-3 mt-10 font-serif text-2xl text-foreground">{children}</h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="mb-5 border-l-2 border-accent pl-4 italic text-foreground-muted">
-        {children}
+      <blockquote className="relative mb-6 py-2 pl-6 before:absolute before:left-0 before:top-0 before:h-full before:w-px before:bg-accent">
+        <p className="font-serif italic text-lg text-foreground-muted">{children}</p>
       </blockquote>
     ),
   },
@@ -27,9 +23,11 @@ const components: PortableTextComponents = {
     strong: ({ children }) => (
       <strong className="font-semibold text-foreground">{children}</strong>
     ),
-    em: ({ children }) => <em className="italic">{children}</em>,
+    em: ({ children }) => (
+      <em className="font-serif italic">{children}</em>
+    ),
     code: ({ children }) => (
-      <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px] text-accent">
+      <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">
         {children}
       </code>
     ),
@@ -38,7 +36,7 @@ const components: PortableTextComponents = {
         href={value?.href}
         target={value?.href?.startsWith("http") ? "_blank" : undefined}
         rel={value?.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-        className="text-accent underline-offset-4 hover:underline"
+        className="text-accent underline decoration-accent underline-offset-4 transition-colors duration-150 hover:text-foreground"
       >
         {children}
       </a>
@@ -46,19 +44,15 @@ const components: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-5 list-disc space-y-1.5 pl-5 text-foreground-muted">
-        {children}
-      </ul>
+      <ul className="mb-6 list-disc space-y-2 pl-6 text-foreground">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-5 list-decimal space-y-1.5 pl-5 text-foreground-muted">
-        {children}
-      </ol>
+      <ol className="mb-6 list-decimal space-y-2 pl-6 text-foreground">{children}</ol>
     ),
   },
   listItem: {
-    bullet: ({ children }) => <li className="leading-relaxed">{children}</li>,
-    number: ({ children }) => <li className="leading-relaxed">{children}</li>,
+    bullet: ({ children }) => <li className="leading-[1.75]">{children}</li>,
+    number: ({ children }) => <li className="leading-[1.75]">{children}</li>,
   },
 };
 
@@ -69,7 +63,8 @@ interface Props {
 
 export function PortableText({ value, className }: Props) {
   return (
-    <div className={cn("text-[15px]", className)}>
+    <div className={cn("text-base", className)}>
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <BasePortableText value={value as any} components={components} />
     </div>
   );
