@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { BentoCard } from "@/components/ui/BentoCard";
@@ -35,7 +35,7 @@ export default function Home() {
       <Container size="lg" className="py-10 sm:py-14">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
 
-          {/* ── Hero card (2 col) ─────────────────────── */}
+          {/* ── Hero (2 col) ─────────────────────────────── */}
           <BentoCard
             span="2"
             className="flex min-h-72 flex-col justify-between [background:radial-gradient(ellipse_at_top_left,color-mix(in_srgb,var(--accent)_8%,transparent)_0%,transparent_60%)]"
@@ -54,8 +54,9 @@ export default function Home() {
             </div>
             <div>
               <p className="mb-5 max-w-sm text-sm text-foreground-muted">
-                Building at the intersection of technology and user needs.
-                5 years across finance, health, and cloud infrastructure.
+                PM who reads diffs and P&Ls with equal fluency. 5 years
+                shipping at scale across fintech, health, and cloud
+                infrastructure — now bringing that depth to product decisions.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button as={Link} href="/work">
@@ -68,7 +69,7 @@ export default function Home() {
             </div>
           </BentoCard>
 
-          {/* ── Companies card (1 col) ───────────────── */}
+          {/* ── Experience (1 col) ───────────────────────── */}
           <BentoCard className="flex flex-col">
             <p className="mb-3 text-xs font-medium uppercase tracking-widest text-foreground-muted">
               Experience
@@ -88,7 +89,7 @@ export default function Home() {
             </div>
           </BentoCard>
 
-          {/* ── Case study cards ─────────────────────── */}
+          {/* ── Case study cards (1 col each) ────────────── */}
           {caseStudies.map((cs) => (
             <BentoCard key={cs.href} className="flex flex-col justify-between">
               <div>
@@ -104,7 +105,7 @@ export default function Home() {
               </div>
               <div className="mt-6 flex items-center justify-between">
                 <span className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted">
-                  Phase 2
+                  Coming soon
                 </span>
                 <ArrowUpRight
                   size={16}
@@ -114,7 +115,7 @@ export default function Home() {
             </BentoCard>
           ))}
 
-          {/* ── Thoughts card ────────────────────────── */}
+          {/* ── Thoughts (1 col) ─────────────────────────── */}
           <BentoCard className="flex flex-col justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
@@ -131,6 +132,33 @@ export default function Home() {
             >
               View all <ArrowUpRight size={13} />
             </Link>
+          </BentoCard>
+
+          {/* ── Contact CTA (full width) ─────────────────── */}
+          <BentoCard
+            span="3"
+            className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center [background:radial-gradient(ellipse_at_bottom_right,color-mix(in_srgb,var(--accent)_6%,transparent)_0%,transparent_60%)]"
+          >
+            <div>
+              <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+                Open to opportunities
+              </p>
+              <p className="mt-2 text-base font-semibold">
+                Exploring Senior PM roles at product-led companies.
+              </p>
+              <p className="mt-1 text-sm text-foreground-muted">
+                Particular interest in 0→1, platform-scale, and
+                infra-adjacent product work.
+              </p>
+            </div>
+            <div className="flex flex-shrink-0 flex-wrap gap-3">
+              <Button as="a" href={`mailto:${siteConfig.email}`}>
+                <Mail size={14} /> Get in touch
+              </Button>
+              <Button as={Link} href="/resume" variant="ghost">
+                Resume
+              </Button>
+            </div>
           </BentoCard>
 
         </div>

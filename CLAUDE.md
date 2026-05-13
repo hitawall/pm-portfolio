@@ -44,6 +44,7 @@ npm run format   # Prettier + Tailwind class sort
 | `components/ui/Container.tsx` | max-width wrapper | `size?: sm\|md\|lg`, `as?` |
 | `components/ui/Section.tsx` | vertical padding block | `as?` |
 | `components/ui/Button.tsx` | CTA button | `variant?: primary\|ghost`, `size?: sm\|md`, `as?` (renders as `<a>` for links) |
+| `components/ui/BentoCard.tsx` | bento grid card with glow-on-hover | `span?: "1"\|"2"\|"3"` (maps to `md:col-span-N`) |
 | `components/site/Header.tsx` | sticky nav | edit `navLinks[]` to add routes |
 | `components/site/Footer.tsx` | footer + socials | reads `siteConfig` |
 | `components/site/ThemeToggle.tsx` | sun/moon toggle | client component |
@@ -53,7 +54,7 @@ npm run format   # Prettier + Tailwind class sort
 
 ## Design tokens (globals.css — do not re-read file, use table)
 
-**Design language: Indigo Tech** — zinc neutrals + indigo accent (#6366f1 light / #818cf8 dark). Geist Sans throughout.
+**Design language: Bento Violet** — zinc neutrals + violet accent (#7c3aed light / #a78bfa dark). Bento grid layout. Geist Sans throughout.
 
 | Tailwind class | Light | Dark |
 |---|---|---|
@@ -61,14 +62,17 @@ npm run format   # Prettier + Tailwind class sort
 | `text-foreground` | `#09090b` | `#fafafa` |
 | `text-foreground-muted` | `#71717a` | `#a1a1aa` |
 | `border-border` | `#e4e4e7` | `#27272a` |
+| `border-border-strong` | `#d4d4d8` | `#3f3f46` |
 | `bg-surface` | `#f4f4f5` | `#18181b` |
-| `bg-accent` | `#6366f1` (indigo-500) | `#818cf8` (indigo-400) |
-| `hover:bg-accent-hover` | `#4f46e5` (indigo-600) | `#6366f1` (indigo-500) |
+| `bg-accent` | `#7c3aed` (violet-600) | `#a78bfa` (violet-400) |
+| `hover:bg-accent-hover` | `#6d28d9` (violet-700) | `#8b5cf6` (violet-500) |
 | `text-accent-foreground` | `#ffffff` | `#ffffff` |
-| `bg-accent-subtle` | `#eef2ff` (indigo-50) | `#1e1b4b` (indigo-950) |
+| `bg-accent-subtle` | `#f5f3ff` (violet-50) | `#1e1b4b` (violet-950) |
 | `--ease-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | same |
 
-**CSS utility:** `className="gradient-heading"` — indigo→foreground gradient text, use on hero `<h1>` only.
+**CSS utilities:**
+- `className="gradient-heading"` — violet→foreground gradient text, use on hero `<h1>` only.
+- `className="bento-glow"` — on hover: violet border tint + `box-shadow` glow. Applied via `BentoCard`.
 
 Dark mode: next-themes sets `.dark` on `<html>`. `suppressHydrationWarning` on `<html>` — never remove.
 
