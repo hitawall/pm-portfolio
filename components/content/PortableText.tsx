@@ -70,6 +70,7 @@ interface Props {
 export function PortableText({ value, className }: Props) {
   return (
     <div className={cn("text-[15px]", className)}>
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <BasePortableText value={value as any} components={components} />
     </div>
   );

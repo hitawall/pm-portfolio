@@ -34,7 +34,7 @@ export default async function Projects({ searchParams }: Props) {
   const filtered = kind ? allProjects.filter((p) => p.kind === kind) : allProjects;
 
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <Container size="lg" className="py-14 sm:py-20">
 
         <div className="mb-10">

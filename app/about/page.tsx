@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <Container size="md" className="py-14 sm:py-20">
 
         {/* Header */}

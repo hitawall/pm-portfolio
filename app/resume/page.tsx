@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Resume() {
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <Container size="lg" className="py-10 sm:py-14">
 
         {/* Header */}
