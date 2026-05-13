@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
+import { siteConfig } from "@/lib/config";
 
 const navLinks = [
   { href: "/work", label: "Work" },
@@ -18,7 +19,7 @@ export function Header() {
             href="/"
             className="text-sm font-medium tracking-tight text-foreground transition-colors duration-[120ms] hover:text-foreground-muted"
           >
-            Saurabh Arora
+            {siteConfig.name}
           </Link>
           <div className="flex items-center gap-1">
             {navLinks.map(({ href, label }) => (

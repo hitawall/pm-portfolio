@@ -1,6 +1,6 @@
 # pm-portfolio
 
-Personal portfolio for Saurabh Arora — engineer turned PM.
+Personal portfolio for Shubham Arora — engineer turned PM.
 
 ## Stack
 

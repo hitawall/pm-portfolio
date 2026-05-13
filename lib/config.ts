@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "Saurabh Arora",
-  title: "Saurabh Arora — Engineer to PM",
+  name: "Shubham Arora",
+  title: "Shubham Arora — Engineer to PM",
   description:
     "Product thinker with an engineering foundation. 5 years building at JPMC, Amazon, Blink Health, and Nutanix.",
   github: "https://github.com/hitawall",
-  linkedin: "https://linkedin.com/in/saurabharora", // TODO: verify URL
-  email: "sarora0rpm@gmail.com",
+  linkedin: "https://linkedin.com/in/shubhamarora", // TODO: verify URL
+  email: "shubhaminkk@gmail.com",
 } as const;
 
 export function getBaseUrl() {

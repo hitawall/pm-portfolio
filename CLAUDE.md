@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-PM portfolio for Saurabh Arora (SDE → Product Manager pivot). Target audience: big-tech and high-growth startup recruiters.
+PM portfolio for Shubham Arora (SDE → Product Manager pivot). Target audience: big-tech and high-growth startup recruiters.
 
 ## Commands
 
