@@ -15,7 +15,7 @@ export default async function Work() {
   const caseStudies = await getAllCaseStudies();
 
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <Container size="md" className="py-14 sm:py-20">
 
         <div className="mb-12">

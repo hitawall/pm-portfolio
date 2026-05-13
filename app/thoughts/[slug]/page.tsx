@@ -11,10 +11,13 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+type PTChild = { text?: string };
+type PTBlock = { _type: string; children?: PTChild[] };
+
 function getReadingTime(body: unknown[]): number {
-  const words = (body as any[])
+  const words = (body as PTBlock[])
     .filter((b) => b._type === "block")
-    .flatMap((b) => (b.children as any[])?.map((c: any) => c.text ?? "") ?? [])
+    .flatMap((b) => b.children?.map((c) => c.text ?? "") ?? [])
     .join(" ")
     .split(/\s+/)
     .filter(Boolean).length;
@@ -58,7 +61,7 @@ export default async function ThoughtPage({ params }: Props) {
   const readingTime = post.body ? getReadingTime(post.body) : 1;
 
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <Container size="md" className="py-14 sm:py-20">
 
         {/* Header */}

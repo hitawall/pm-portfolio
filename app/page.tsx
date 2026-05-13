@@ -3,6 +3,7 @@ import { ArrowUpRight, Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { BentoCard } from "@/components/ui/BentoCard";
+import { HeroMotion } from "@/components/site/HeroMotion";
 import { getFeaturedCaseStudies } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
 
@@ -17,42 +18,44 @@ export default async function Home() {
   const featuredStudies = await getFeaturedCaseStudies();
 
   return (
-    <main className="flex-1">
+    <main id="main-content" className="flex-1">
       <Container size="lg" className="py-10 sm:py-14">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
 
           {/* ── Hero (2 col) ─────────────────────────────── */}
           <BentoCard
             span="2"
-            className="flex min-h-72 flex-col justify-between [background:radial-gradient(ellipse_at_top_left,color-mix(in_srgb,var(--accent)_8%,transparent)_0%,transparent_60%)]"
+            className="[background:radial-gradient(ellipse_at_top_left,color-mix(in_srgb,var(--accent)_8%,transparent)_0%,transparent_60%)]"
           >
-            <div>
-              <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
-                Engineer → Product Manager
-              </p>
-              <h1 className="gradient-heading mt-3 text-6xl font-bold leading-none tracking-tighter sm:text-7xl">
-                {siteConfig.name.split(" ").map((word) => (
-                  <span key={word} className="block">
-                    {word.toUpperCase()}
-                  </span>
-                ))}
-              </h1>
-            </div>
-            <div>
-              <p className="mb-5 max-w-sm text-sm text-foreground-muted">
-                PM who reads diffs and P&Ls with equal fluency. 5 years
-                shipping at scale across fintech, health, and cloud
-                infrastructure — now bringing that depth to product decisions.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Button as={Link} href="/work">
-                  View work <ArrowUpRight size={14} />
-                </Button>
-                <Button as={Link} href="/about" variant="ghost">
-                  About me
-                </Button>
+            <HeroMotion className="flex min-h-72 flex-col justify-between">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+                  Engineer → Product Manager
+                </p>
+                <h1 className="gradient-heading mt-3 text-6xl font-bold leading-none tracking-tighter sm:text-7xl">
+                  {siteConfig.name.split(" ").map((word) => (
+                    <span key={word} className="block">
+                      {word.toUpperCase()}
+                    </span>
+                  ))}
+                </h1>
               </div>
-            </div>
+              <div>
+                <p className="mb-5 max-w-sm text-sm text-foreground-muted">
+                  PM who reads diffs and P&Ls with equal fluency. 5 years
+                  shipping at scale across fintech, health, and cloud
+                  infrastructure — now bringing that depth to product decisions.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Button as={Link} href="/work">
+                    View work <ArrowUpRight size={14} />
+                  </Button>
+                  <Button as={Link} href="/about" variant="ghost">
+                    About me
+                  </Button>
+                </div>
+              </div>
+            </HeroMotion>
           </BentoCard>
 
           {/* ── Experience (1 col) ───────────────────────── */}

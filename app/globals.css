@@ -61,6 +61,17 @@ body {
   color: var(--accent-fg);
 }
 
+/* ---------- Accessibility ---------- */
+@layer base {
+  /* Default focus ring for all interactive elements.
+     Components that use focus-visible:outline-none (e.g. Button) override this via utilities layer. */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
 /* ---------- Utilities ---------- */
 .gradient-heading {
   background: linear-gradient(135deg, var(--accent) 0%, var(--foreground) 55%);
