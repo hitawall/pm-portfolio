@@ -10,6 +10,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   href?: string;
   target?: string;
   rel?: string;
+  download?: boolean | string;
 }
 
 export function Button({
