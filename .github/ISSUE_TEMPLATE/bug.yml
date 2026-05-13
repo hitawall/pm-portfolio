@@ -1,0 +1,41 @@
+name: Bug
+description: Something is broken or looks wrong
+labels: ["type:bug"]
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: What's broken
+      description: One sentence describing the problem
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to /work
+        2. Click case study card
+        3. Cover image missing
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 — critical (site broken)
+        - P1 — high (feature broken)
+        - P2 — medium (visual issue)
+        - P3 — low (minor)
+    validations:
+      required: true

@@ -12,10 +12,27 @@ PM portfolio for Shubham Arora (SDE → Product Manager pivot). Target audience:
 **Phase 1 → next** — Home hero, About page, Resume route.  
 See build plan: `~/.claude/plans/logical-gliding-metcalfe.md`
 
+## Issue tracking (GitHub Issues + Projects)
+
+**Labels** — always apply one of each:
+- Type: `type:feature` · `type:bug` · `type:chore` · `type:docs`
+- Priority: `priority:P0` · `priority:P1` · `priority:P2` · `priority:P3`
+- Phase: `phase:2` … `phase:5`
+
+**Milestones** = phases. Assign every issue to its milestone.
+
+**Minimum required fields on an issue:** title (imperative), type label, priority label, milestone, "Done when" checklist.
+
 ## Git workflow
 
-Branches: `feat/phase1-home-hero`, `feat/phase1-about`, `fix/foo`, `chore/bar`  
-Pattern: `feat/phase{N}-{short-description}` — one PR per feature to `main`.  
+**Branch naming:** `{type}/GH-{issue_number}-{short-slug}`
+Examples: `feat/GH-11-thoughts-index` · `fix/GH-15-og-image` · `chore/GH-8-webhook`
+
+**PR title:** `{type}: short description (closes #N)`
+Example: `feat: Thoughts index page (closes #11)`
+
+**PR body must include** `Closes #N` — GitHub auto-closes the issue on squash merge.
+
 Never commit directly to `main`. Always raise a PR. Squash merge only.
 
 ## Commands
