@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { RuleDivider } from "@/components/ui/RuleDivider";
 import { PortableText } from "@/components/content/PortableText";
 import { getAllPosts, getPostBySlug } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
@@ -11,10 +12,12 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+type PTBlock = { _type: string; children?: Array<{ text?: string }> };
+
 function getReadingTime(body: unknown[]): number {
-  const words = (body as any[])
+  const words = (body as PTBlock[])
     .filter((b) => b._type === "block")
-    .flatMap((b) => (b.children as any[])?.map((c: any) => c.text ?? "") ?? [])
+    .flatMap((b) => (b.children ?? []).map((c) => c.text ?? ""))
     .join(" ")
     .split(/\s+/)
     .filter(Boolean).length;
@@ -59,28 +62,20 @@ export default async function ThoughtPage({ params }: Props) {
 
   return (
     <main className="flex-1">
-      <Container size="md" className="py-14 sm:py-20">
+      <Container size="md" className="py-16 sm:py-24">
 
         {/* Header */}
-        <div className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
-            Thoughts
+        <div className="mb-12 text-center">
+          <p className="small-caps text-foreground-muted">
+            {formatDate(post.publishedAt)} · {readingTime} min read
           </p>
-          <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          <h1 className="mt-5 font-serif text-4xl text-foreground sm:text-5xl">
             {post.title}
           </h1>
-          <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-foreground-muted">
-            <span className="font-mono">{formatDate(post.publishedAt)}</span>
-            <span>·</span>
-            <span>{readingTime} min read</span>
-          </div>
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-1.5">
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
               {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted"
-                >
+                <span key={tag} className="small-caps text-foreground-muted opacity-60">
                   {tag}
                 </span>
               ))}
@@ -88,26 +83,29 @@ export default async function ThoughtPage({ params }: Props) {
           )}
         </div>
 
+        <RuleDivider className="mb-10" />
+
         {/* Body */}
-        {post.body && (
-          <div className="border-t border-border pt-10">
-            <PortableText value={post.body} />
-          </div>
-        )}
+        {post.body && <PortableText value={post.body} />}
+
+        <RuleDivider className="mt-10" />
 
         {/* Prev / Next */}
         {(prev || next) && (
-          <div className="mt-16 flex items-center justify-between gap-4 border-t border-border pt-8 text-sm">
+          <nav className="mt-10 flex items-start justify-between gap-4">
             {prev ? (
               <Link
                 href={`/thoughts/${prev.slug.current}`}
-                className="group flex items-center gap-2 text-foreground-muted transition-colors hover:text-accent"
+                className="group flex flex-col gap-1"
               >
-                <ArrowLeft
-                  size={14}
-                  className="transition-transform group-hover:-translate-x-0.5"
-                />
-                <span className="max-w-[200px] truncate">{prev.title}</span>
+                <span className="small-caps text-foreground-muted">Previous</span>
+                <span className="flex items-center gap-1.5 font-serif text-lg text-foreground transition-colors duration-150 group-hover:text-accent">
+                  <ArrowLeft
+                    size={14}
+                    className="transition-transform group-hover:-translate-x-0.5"
+                  />
+                  {prev.title}
+                </span>
               </Link>
             ) : (
               <span />
@@ -115,18 +113,21 @@ export default async function ThoughtPage({ params }: Props) {
             {next ? (
               <Link
                 href={`/thoughts/${next.slug.current}`}
-                className="group flex items-center gap-2 text-foreground-muted transition-colors hover:text-accent"
+                className="group flex flex-col items-end gap-1 text-right"
               >
-                <span className="max-w-[200px] truncate">{next.title}</span>
-                <ArrowRight
-                  size={14}
-                  className="transition-transform group-hover:translate-x-0.5"
-                />
+                <span className="small-caps text-foreground-muted">Next</span>
+                <span className="flex items-center gap-1.5 font-serif text-lg text-foreground transition-colors duration-150 group-hover:text-accent">
+                  {next.title}
+                  <ArrowRight
+                    size={14}
+                    className="transition-transform group-hover:translate-x-0.5"
+                  />
+                </span>
               </Link>
             ) : (
               <span />
             )}
-          </div>
+          </nav>
         )}
 
       </Container>

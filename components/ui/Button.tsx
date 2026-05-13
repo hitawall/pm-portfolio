@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
@@ -24,13 +24,22 @@ export function Button({
   return (
     <As
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors duration-[200ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-        size === "sm" && "h-8 px-3 text-sm",
-        size === "md" && "h-10 px-4 text-sm",
-        variant === "primary" &&
-          "bg-accent text-accent-foreground hover:bg-accent-hover",
-        variant === "ghost" &&
-          "border border-border text-foreground hover:bg-surface hover:border-border-strong",
+        "inline-flex touch-manipulation items-center justify-center gap-2 rounded-md font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        size === "sm" && "min-h-[36px] px-3 text-sm",
+        size === "md" && "min-h-[44px] px-5 text-sm",
+        variant === "primary" && [
+          "bg-accent text-accent-foreground shadow-sm",
+          "hover:-translate-y-0.5 hover:bg-accent-secondary hover:shadow-md",
+          "active:translate-y-0",
+        ],
+        variant === "secondary" && [
+          "border border-foreground bg-transparent text-foreground",
+          "hover:border-accent hover:bg-muted hover:text-accent",
+        ],
+        variant === "ghost" && [
+          "bg-transparent text-foreground-muted underline-offset-4",
+          "hover:text-accent hover:underline hover:decoration-accent",
+        ],
         className
       )}
       {...props}

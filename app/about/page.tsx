@@ -1,8 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { RuleDivider } from "@/components/ui/RuleDivider";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -14,29 +17,27 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <main className="flex-1">
-      <Container size="md" className="py-14 sm:py-20">
+      <Container size="md" className="py-16 sm:py-24">
 
         {/* Header */}
-        <div className="mb-16">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
-            About
-          </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+        <div className="mb-14 text-center">
+          <p className="small-caps text-foreground-muted">About</p>
+          <h1 className="mt-5 font-serif text-5xl text-foreground sm:text-6xl">
             {siteConfig.name}
           </h1>
-          <p className="mt-3 text-lg text-foreground-muted">
+          <p className="mx-auto mt-5 max-w-sm font-serif text-xl italic text-foreground-muted">
             Engineer turned Product Manager.
           </p>
         </div>
 
+        <RuleDivider />
+
         {/* Narrative */}
-        <article className="space-y-10 text-[15px] leading-relaxed text-foreground-muted">
+        <article className="mt-14 space-y-14 text-base leading-[1.75] text-foreground">
 
           <section>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground">
-              The engineering years
-            </h2>
-            <div className="space-y-4">
+            <SectionLabel align="start">The engineering years</SectionLabel>
+            <div className="space-y-5">
               <p>
                 I spent five years as a software engineer — at JPMC building
                 risk and compliance tooling, at Amazon working on large-scale
@@ -60,10 +61,8 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground">
-              Why the pivot
-            </h2>
-            <div className="space-y-4">
+            <SectionLabel align="start">Why the pivot</SectionLabel>
+            <div className="space-y-5">
               <p>
                 The shift wasn't sudden. It was a slow accumulation of moments
                 where I found myself most energized not by the implementation
@@ -90,10 +89,8 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground">
-              What engineering gives me as a PM
-            </h2>
-            <div className="space-y-4">
+            <SectionLabel align="start">What engineering gives me as a PM</SectionLabel>
+            <div className="space-y-5">
               <p>
                 I can read the diff. I can sit in an architecture review and
                 understand the trade-offs being discussed — not just the
@@ -121,10 +118,8 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground">
-              What I'm looking for
-            </h2>
-            <div className="space-y-4">
+            <SectionLabel align="start">What I'm looking for</SectionLabel>
+            <div className="space-y-5">
               <p>
                 I'm targeting Senior PM roles where engineering depth is treated
                 as an asset, not just a credential. I'm drawn to 0→1
@@ -142,9 +137,7 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground">
-              Outside work
-            </h2>
+            <SectionLabel align="start">Outside work</SectionLabel>
             <p>
               I follow AI/ML research more than is probably healthy. I build
               side projects — mostly tools I wish existed. I enjoy long runs
@@ -154,8 +147,10 @@ export default function About() {
 
         </article>
 
+        <RuleDivider className="mt-14" />
+
         {/* CTA */}
-        <div className="mt-16 flex flex-wrap gap-3 border-t border-border pt-10">
+        <div className="mt-10 flex flex-wrap gap-3">
           <Button as="a" href={`mailto:${siteConfig.email}`}>
             Get in touch <ArrowUpRight size={14} />
           </Button>
@@ -164,7 +159,7 @@ export default function About() {
             href={siteConfig.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            variant="ghost"
+            variant="secondary"
           >
             LinkedIn
           </Button>

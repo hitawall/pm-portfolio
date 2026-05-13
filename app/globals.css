@@ -2,49 +2,37 @@
 
 /* ---------- Semantic tokens ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #09090b;
-  --foreground-muted: #71717a;
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --surface: #f4f4f5;
-  /* Violet accent */
-  --accent: #7c3aed;
-  --accent-hover: #6d28d9;
-  --accent-fg: #ffffff;
-  --accent-subtle: #f5f3ff;
-  /* Glow for card hover (raw rgba for box-shadow) */
-  --accent-glow: rgba(124, 58, 237, 0.18);
-}
-
-.dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --foreground-muted: #a1a1aa;
-  --border: #27272a;
-  --border-strong: #3f3f46;
-  --surface: #18181b;
-  /* Violet accent — lighter for dark bg readability */
-  --accent: #a78bfa;
-  --accent-hover: #8b5cf6;
-  --accent-fg: #ffffff;
-  --accent-subtle: #1e1b4b;
-  --accent-glow: rgba(167, 139, 250, 0.18);
+  --background: #FAFAF8;
+  --foreground: #1A1A1A;
+  --foreground-muted: #6B6B6B;
+  --muted: #F5F3F0;
+  --card: #FFFFFF;
+  --border: #E8E4DF;
+  --border-strong: #D4CFC7;
+  --accent: #B8860B;
+  --accent-secondary: #D4A84B;
+  --accent-foreground: #FFFFFF;
+  --accent-subtle: rgba(184, 134, 11, 0.06);
+  --ring: #B8860B;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
-  --color-surface: var(--surface);
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-foreground: var(--accent-fg);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-foreground: var(--accent-foreground);
   --color-accent-subtle: var(--accent-subtle);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-source-sans);
+  --font-mono: var(--font-ibm-plex-mono);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -52,24 +40,28 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
 ::selection {
   background-color: var(--accent);
-  color: var(--accent-fg);
+  color: var(--accent-foreground);
 }
 
 /* ---------- Utilities ---------- */
-.gradient-heading {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--foreground) 55%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.bento-glow:hover {
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  box-shadow: 0 0 32px var(--accent-glow);
+.small-caps {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
