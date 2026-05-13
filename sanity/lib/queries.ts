@@ -17,9 +17,11 @@ export type CaseStudyPreview = {
   tags: string[];
 };
 
+export type SanityImage = { asset: { _ref: string }; hotspot?: object; crop?: object };
+
 export type CaseStudy = CaseStudyPreview & {
   role: string;
-  coverImage: unknown;
+  coverImage: SanityImage | null;
   outcomes: { label: string; value: string; delta?: string }[];
   body: unknown[];
 };
