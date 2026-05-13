@@ -50,6 +50,7 @@ npm run format   # Prettier + Tailwind class sort
 ## Stack
 
 - **Next.js 16** App Router + TypeScript — RSC by default, `"use client"` only for interactivity
+- **Route structure:** Site pages in `app/(site)/` (gets Header/Footer/ThemeProvider). Root layout is a minimal shell. Studio at `app/studio/[[...tool]]/` stays outside `(site)/` — it must own the full viewport or the Publish button is hidden
 - **Tailwind CSS v4** — tokens in `app/globals.css` only; no `tailwind.config.ts` color overrides
 - **Sanity CMS** — Studio at `/studio`, same Vercel deploy; schemas in `sanity/schemas/`
 - **next-themes** — class-based dark mode; `attribute="class"`
@@ -108,7 +109,7 @@ Dark mode: next-themes sets `.dark` on `<html>`. `suppressHydrationWarning` on `
 | Change site name / email / social links | `lib/config.ts` only |
 | Add a nav link | `components/site/Header.tsx` → `navLinks[]` |
 | Add a new color token | `app/globals.css` `:root` + `.dark` + `@theme inline` |
-| Add a new page | `app/(route)/page.tsx` + route group if needed |
+| Add a new site page | `app/(site)/(route)/page.tsx` — site pages live in the `(site)` route group |
 | Add a Sanity schema | `sanity/schemas/` + export from `sanity/schemas/index.ts` |
 | Change OG image design | `app/og/route.tsx` — edge route, JSX → PNG via `next/og` |
 
