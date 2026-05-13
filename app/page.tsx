@@ -3,6 +3,7 @@ import { ArrowUpRight, Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { BentoCard } from "@/components/ui/BentoCard";
+import { getFeaturedCaseStudies } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
 
 const companies = [
@@ -12,24 +13,9 @@ const companies = [
   { name: "Nutanix", period: "2023–25" },
 ];
 
-const caseStudies = [
-  {
-    label: "Case study",
-    title: "Reducing onboarding friction",
-    company: "Nutanix",
-    year: "2024",
-    href: "/work/nutanix-onboarding",
-  },
-  {
-    label: "Case study",
-    title: "Pricing experiments at scale",
-    company: "Blink Health",
-    year: "2023",
-    href: "/work/blink-pricing",
-  },
-];
+export default async function Home() {
+  const featuredStudies = await getFeaturedCaseStudies();
 
-export default function Home() {
   return (
     <main className="flex-1">
       <Container size="lg" className="py-10 sm:py-14">
@@ -89,31 +75,75 @@ export default function Home() {
             </div>
           </BentoCard>
 
-          {/* ── Case study cards (1 col each) ────────────── */}
-          {caseStudies.map((cs) => (
-            <BentoCard key={cs.href} className="flex flex-col justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
-                  {cs.label}
-                </p>
-                <p className="mt-3 text-base font-semibold leading-snug">
-                  {cs.title}
-                </p>
-                <p className="mt-1 text-sm text-foreground-muted">
-                  {cs.company} · {cs.year}
-                </p>
-              </div>
-              <div className="mt-6 flex items-center justify-between">
-                <span className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted">
-                  Coming soon
-                </span>
-                <ArrowUpRight
-                  size={16}
-                  className="text-foreground-muted transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+          {/* ── Featured case studies (from Sanity) ──────── */}
+          {featuredStudies.length > 0 ? (
+            featuredStudies.slice(0, 2).map((cs) => (
+              <BentoCard
+                key={cs._id}
+                className="group relative flex flex-col justify-between"
+              >
+                {/* overlay link makes the whole card clickable */}
+                <Link
+                  href={`/work/${cs.slug.current}`}
+                  className="absolute inset-0 rounded-2xl"
+                  aria-label={cs.title}
                 />
-              </div>
-            </BentoCard>
-          ))}
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+                    Case study
+                  </p>
+                  <p className="mt-3 text-base font-semibold leading-snug">
+                    {cs.title}
+                  </p>
+                  <p className="mt-1 text-sm text-foreground-muted">
+                    {cs.company}{cs.year ? ` · ${cs.year}` : ""}
+                  </p>
+                </div>
+                <div className="mt-6 flex items-center justify-between">
+                  {cs.tags && cs.tags[0] ? (
+                    <span className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted">
+                      {cs.tags[0]}
+                    </span>
+                  ) : (
+                    <span />
+                  )}
+                  <ArrowUpRight
+                    size={16}
+                    className="text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                  />
+                </div>
+              </BentoCard>
+            ))
+          ) : (
+            /* placeholder cards when no Sanity content yet */
+            [
+              { title: "Reducing onboarding friction", company: "Nutanix", year: "2024" },
+              { title: "Pricing experiments at scale", company: "Blink Health", year: "2023" },
+            ].map((cs) => (
+              <BentoCard
+                key={cs.title}
+                className="flex flex-col justify-between"
+              >
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+                    Case study
+                  </p>
+                  <p className="mt-3 text-base font-semibold leading-snug">
+                    {cs.title}
+                  </p>
+                  <p className="mt-1 text-sm text-foreground-muted">
+                    {cs.company} · {cs.year}
+                  </p>
+                </div>
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted">
+                    Coming soon
+                  </span>
+                  <ArrowUpRight size={16} className="text-foreground-muted" />
+                </div>
+              </BentoCard>
+            ))
+          )}
 
           {/* ── Thoughts (1 col) ─────────────────────────── */}
           <BentoCard className="flex flex-col justify-between">
