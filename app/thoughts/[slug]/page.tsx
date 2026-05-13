@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PortableText } from "@/components/content/PortableText";
 import { getAllPosts, getPostBySlug } from "@/sanity/lib/queries";
-import { siteConfig } from "@/lib/config";
+import { siteConfig, getBaseUrl } from "@/lib/config";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -41,9 +41,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return {};
+  const sub = post.publishedAt
+    ? new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+    : undefined;
+  const ogUrl = `${getBaseUrl()}/og?${new URLSearchParams({ title: post.title, type: "Thought", ...(sub && { sub }) }).toString()}`;
   return {
     title: `${post.title} — ${siteConfig.name}`,
     description: post.summary,
+    openGraph: {
+      images: [ogUrl],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [ogUrl],
+    },
   };
 }
 
