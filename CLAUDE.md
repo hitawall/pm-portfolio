@@ -6,6 +6,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 PM portfolio for Shubham Arora (SDE → Product Manager pivot). Target audience: big-tech and high-growth startup recruiters.
 
+## Claude Code context (memory + plans)
+
+This repo persists Claude Code memory and plans under `.claude/memory/` and `.claude/plans/` so context survives across machines.
+
+**On a new machine, after `git clone`:**
+
+```bash
+bash scripts/claude-context-link.sh
+```
+
+Symlinks `~/.claude/projects/<sanitized-path>/memory/` and any `~/.claude/plans/*.md` from this repo into Claude Code's expected locations. Idempotent — safe to re-run. Pre-existing files are backed up to `~/.claude/_context-backup-<timestamp>/`.
+
+After linking, any memory Claude writes during a session lands in the repo working tree. Commit memory changes alongside code so the next session — on any machine — picks them up.
+
+**Files:**
+- `.claude/memory/MEMORY.md` — index of memory files
+- `.claude/memory/user_profile.md` — user identity (Shubham, SDE→PM)
+- `.claude/memory/project_pm_portfolio.md` — project state (stack, phases, open issues)
+- `.claude/plans/` — in-flight or reference build plans
+- `.claude/settings.json` — shared permissions (versioned)
+- `.claude/settings.local.json` — per-machine permissions (gitignored; keep locally)
+
 ## Phase status
 
 All planned phases shipped. Open issues only:
