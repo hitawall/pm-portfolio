@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Product thinker with an engineering foundation. 5 years building at JPMC, Amazon, Blink Health, and Nutanix.",
   github: "https://github.com/hitawall",
-  linkedin: "https://linkedin.com/in/shubhamarora", // TODO: verify URL
+  linkedin: "https://www.linkedin.com/in/shubham-arora-se/",
   email: "shubhaminkk@gmail.com",
 } as const;
 
