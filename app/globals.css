@@ -1,35 +1,35 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens — Bloom Garden ---------- */
+/* ---------- Semantic tokens — Coastal Sunrise ---------- */
 :root {
-  --background: #fef6fb;
-  --foreground: #2d1b69;
-  --foreground-muted: #8b7ba8;
-  --border: #f0d6ec;
-  --border-strong: #e0b8d8;
-  --surface: #f9eefa;
-  /* Bloom accent — soft pink */
-  --accent: #ff85a1;
-  --accent-hover: #ff6b8a;
+  --background: #f0f8ff;
+  --foreground: #1a2744;
+  --foreground-muted: #5a7a9e;
+  --border: #c8dff5;
+  --border-strong: #a8c8ec;
+  --surface: #e6f2fd;
+  /* Coastal accent — sky blue */
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
   --accent-fg: #ffffff;
-  --accent-subtle: #fff0f4;
+  --accent-subtle: #e0f2fe;
   /* Glow for card hover (raw rgba for box-shadow) */
-  --accent-glow: rgba(255, 133, 161, 0.22);
+  --accent-glow: rgba(14, 165, 233, 0.18);
 }
 
 .dark {
-  --background: #1a0f2e;
-  --foreground: #f9ecf7;
-  --foreground-muted: #b89ec8;
-  --border: #3d2a58;
-  --border-strong: #5a3d7a;
-  --surface: #261642;
-  /* Soft pink holds on dark too */
-  --accent: #ff85a1;
-  --accent-hover: #ff6b8a;
+  --background: #0a1628;
+  --foreground: #e8f4fd;
+  --foreground-muted: #7aa8cc;
+  --border: #1e3a5c;
+  --border-strong: #2d5280;
+  --surface: #0f2040;
+  /* Lighter sky blue for dark bg readability */
+  --accent: #38bdf8;
+  --accent-hover: #0ea5e9;
   --accent-fg: #ffffff;
-  --accent-subtle: #3d1a2e;
-  --accent-glow: rgba(255, 133, 161, 0.22);
+  --accent-subtle: #0c2040;
+  --accent-glow: rgba(56, 189, 248, 0.20);
 }
 
 @theme inline {
