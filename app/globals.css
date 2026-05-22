@@ -1,35 +1,35 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens ---------- */
+/* ---------- Semantic tokens — Bloom Garden ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #09090b;
-  --foreground-muted: #71717a;
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --surface: #f4f4f5;
-  /* Violet accent */
-  --accent: #7c3aed;
-  --accent-hover: #6d28d9;
+  --background: #fef6fb;
+  --foreground: #2d1b69;
+  --foreground-muted: #8b7ba8;
+  --border: #f0d6ec;
+  --border-strong: #e0b8d8;
+  --surface: #f9eefa;
+  /* Bloom accent — soft pink */
+  --accent: #ff85a1;
+  --accent-hover: #ff6b8a;
   --accent-fg: #ffffff;
-  --accent-subtle: #f5f3ff;
+  --accent-subtle: #fff0f4;
   /* Glow for card hover (raw rgba for box-shadow) */
-  --accent-glow: rgba(124, 58, 237, 0.18);
+  --accent-glow: rgba(255, 133, 161, 0.22);
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --foreground-muted: #a1a1aa;
-  --border: #27272a;
-  --border-strong: #3f3f46;
-  --surface: #18181b;
-  /* Violet accent — lighter for dark bg readability */
-  --accent: #a78bfa;
-  --accent-hover: #8b5cf6;
+  --background: #1a0f2e;
+  --foreground: #f9ecf7;
+  --foreground-muted: #b89ec8;
+  --border: #3d2a58;
+  --border-strong: #5a3d7a;
+  --surface: #261642;
+  /* Soft pink holds on dark too */
+  --accent: #ff85a1;
+  --accent-hover: #ff6b8a;
   --accent-fg: #ffffff;
-  --accent-subtle: #1e1b4b;
-  --accent-glow: rgba(167, 139, 250, 0.18);
+  --accent-subtle: #3d1a2e;
+  --accent-glow: rgba(255, 133, 161, 0.22);
 }
 
 @theme inline {
@@ -43,7 +43,7 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-fg);
   --color-accent-subtle: var(--accent-subtle);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-jakarta);
   --font-mono: var(--font-geist-mono);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
