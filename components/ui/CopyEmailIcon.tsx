@@ -28,9 +28,12 @@ export function CopyEmailIcon() {
       onClick={handleCopy}
       aria-label={copied ? "Email copied!" : `Copy email: ${siteConfig.email}`}
       title={copied ? "Copied!" : siteConfig.email}
-      className="hidden rounded-md p-1.5 text-foreground-muted transition-colors duration-[120ms] hover:text-accent sm:block"
+      className="hidden items-center gap-1.5 rounded-md p-1.5 text-foreground-muted transition-colors duration-[120ms] hover:text-accent sm:flex"
     >
-      {copied ? <Check size={15} /> : <Mail size={15} />}
+      {copied ? <Check size={15} className="text-accent" /> : <Mail size={15} />}
+      {copied && (
+        <span className="text-xs font-medium text-accent">Copied!</span>
+      )}
     </button>
   );
 }
