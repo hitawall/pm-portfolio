@@ -1,35 +1,35 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens ---------- */
+/* ---------- Semantic tokens — Coastal Sunrise ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #09090b;
-  --foreground-muted: #71717a;
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --surface: #f4f4f5;
-  /* Violet accent */
-  --accent: #7c3aed;
-  --accent-hover: #6d28d9;
+  --background: #f0f8ff;
+  --foreground: #1a2744;
+  --foreground-muted: #5a7a9e;
+  --border: #c8dff5;
+  --border-strong: #a8c8ec;
+  --surface: #e6f2fd;
+  /* Coastal accent — sky blue */
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
   --accent-fg: #ffffff;
-  --accent-subtle: #f5f3ff;
+  --accent-subtle: #e0f2fe;
   /* Glow for card hover (raw rgba for box-shadow) */
-  --accent-glow: rgba(124, 58, 237, 0.18);
+  --accent-glow: rgba(14, 165, 233, 0.18);
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --foreground-muted: #a1a1aa;
-  --border: #27272a;
-  --border-strong: #3f3f46;
-  --surface: #18181b;
-  /* Violet accent — lighter for dark bg readability */
-  --accent: #a78bfa;
-  --accent-hover: #8b5cf6;
+  --background: #0a1628;
+  --foreground: #e8f4fd;
+  --foreground-muted: #7aa8cc;
+  --border: #1e3a5c;
+  --border-strong: #2d5280;
+  --surface: #0f2040;
+  /* Lighter sky blue for dark bg readability */
+  --accent: #38bdf8;
+  --accent-hover: #0ea5e9;
   --accent-fg: #ffffff;
-  --accent-subtle: #1e1b4b;
-  --accent-glow: rgba(167, 139, 250, 0.18);
+  --accent-subtle: #0c2040;
+  --accent-glow: rgba(56, 189, 248, 0.20);
 }
 
 @theme inline {
@@ -43,7 +43,7 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-fg);
   --color-accent-subtle: var(--accent-subtle);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-jakarta);
   --font-mono: var(--font-geist-mono);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }

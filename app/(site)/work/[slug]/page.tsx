@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { PortableText } from "@/components/content/PortableText";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { siteConfig, getBaseUrl } from "@/lib/config";
@@ -25,13 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${cs.title} — ${siteConfig.name}`,
     description: cs.summary,
-    openGraph: {
-      images: [ogUrl],
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: [ogUrl],
-    },
+    openGraph: { images: [ogUrl] },
+    twitter: { card: "summary_large_image", images: [ogUrl] },
   };
 }
 
@@ -41,11 +37,13 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!cs) notFound();
 
   return (
-    <main id="main-content" className="flex-1">
+    <main
+      id="main-content"
+      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
+    >
       <Container size="md" className="py-14 sm:py-20">
 
-        {/* Header */}
-        <div className="mb-12">
+        <ScrollReveal className="mb-12">
           <p className="text-xs font-medium uppercase tracking-widest text-accent">
             {cs.company}{cs.year ? ` · ${cs.year}` : ""}
           </p>
@@ -60,11 +58,10 @@ export default async function CaseStudyPage({ params }: Props) {
               {cs.summary}
             </p>
           )}
-        </div>
+        </ScrollReveal>
 
-        {/* Cover image */}
         {cs.coverImage && (
-          <div className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+          <ScrollReveal delay={0.1} className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
             <Image
               src={urlFor(cs.coverImage).width(1200).height(675).url()}
               alt={cs.title}
@@ -72,16 +69,15 @@ export default async function CaseStudyPage({ params }: Props) {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 800px"
             />
-          </div>
+          </ScrollReveal>
         )}
 
-        {/* Outcome metrics */}
         {cs.outcomes && cs.outcomes.length > 0 && (
-          <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
+          <ScrollReveal delay={0.15} className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
             {cs.outcomes.map((o, i) => (
               <div
                 key={i}
-                className="rounded-xl border border-border bg-surface p-4"
+                className="rounded-xl border border-border border-t-2 border-t-accent bg-surface p-4"
               >
                 <p className="text-xs text-foreground-muted">{o.label}</p>
                 <p className="mt-1 text-2xl font-bold tracking-tight">{o.value}</p>
@@ -90,12 +86,11 @@ export default async function CaseStudyPage({ params }: Props) {
                 )}
               </div>
             ))}
-          </div>
+          </ScrollReveal>
         )}
 
-        {/* Tags */}
         {cs.tags && cs.tags.length > 0 && (
-          <div className="mb-10 flex flex-wrap gap-1.5">
+          <ScrollReveal delay={0.2} className="mb-10 flex flex-wrap gap-1.5">
             {cs.tags.map((tag) => (
               <span
                 key={tag}
@@ -104,14 +99,13 @@ export default async function CaseStudyPage({ params }: Props) {
                 {tag}
               </span>
             ))}
-          </div>
+          </ScrollReveal>
         )}
 
-        {/* Body */}
         {cs.body && (cs.body as unknown[]).length > 0 && (
-          <div className="border-t border-border pt-10">
+          <ScrollReveal delay={0.1} className="border-t border-border pt-10">
             <PortableText value={cs.body as unknown[]} />
-          </div>
+          </ScrollReveal>
         )}
 
       </Container>
