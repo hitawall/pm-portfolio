@@ -211,7 +211,7 @@ export default async function Home() {
       </section>
 
       {/* ── Contact CTA ──────────────────────────────────────── */}
-      <section className="border-t border-border py-20 sm:py-28 [background:radial-gradient(ellipse_80%_80%_at_50%_110%,color-mix(in_srgb,var(--accent)_12%,transparent),transparent)]">
+      <section id="contact" className="border-t border-border py-20 sm:py-28 [background:radial-gradient(ellipse_80%_80%_at_50%_110%,color-mix(in_srgb,var(--accent)_12%,transparent),transparent)]">
         <Container size="md" className="text-center">
           <ScrollReveal>
           <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">

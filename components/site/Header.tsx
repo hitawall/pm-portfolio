@@ -35,6 +35,7 @@ export function Header() {
             <a
               href={`mailto:${siteConfig.email}`}
               aria-label="Email me"
+              title={siteConfig.email}
               className="hidden rounded-md p-1.5 text-foreground-muted transition-colors duration-[120ms] hover:text-accent sm:block"
             >
               <Mail size={15} />
