@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PortableText } from "@/components/content/PortableText";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts, getPostBySlug } from "@/sanity/lib/queries";
 import { siteConfig, getBaseUrl } from "@/lib/config";
 
@@ -48,13 +49,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} — ${siteConfig.name}`,
     description: post.summary,
-    openGraph: {
-      images: [ogUrl],
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: [ogUrl],
-    },
+    openGraph: { images: [ogUrl] },
+    twitter: { card: "summary_large_image", images: [ogUrl] },
   };
 }
 
@@ -67,16 +63,18 @@ export default async function ThoughtPage({ params }: Props) {
   if (!post) notFound();
 
   const idx = allPosts.findIndex((p) => p.slug.current === slug);
-  const prev = allPosts[idx + 1] ?? null; // older
-  const next = allPosts[idx - 1] ?? null; // newer
+  const prev = allPosts[idx + 1] ?? null;
+  const next = allPosts[idx - 1] ?? null;
   const readingTime = post.body ? getReadingTime(post.body) : 1;
 
   return (
-    <main id="main-content" className="flex-1">
+    <main
+      id="main-content"
+      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
+    >
       <Container size="md" className="py-14 sm:py-20">
 
-        {/* Header */}
-        <div className="mb-12">
+        <ScrollReveal className="mb-12">
           <p className="text-xs font-medium uppercase tracking-widest text-accent">
             Thoughts
           </p>
@@ -100,18 +98,16 @@ export default async function ThoughtPage({ params }: Props) {
               ))}
             </div>
           )}
-        </div>
+        </ScrollReveal>
 
-        {/* Body */}
         {post.body && (
-          <div className="border-t border-border pt-10">
+          <ScrollReveal delay={0.1} className="border-t border-border pt-10">
             <PortableText value={post.body} />
-          </div>
+          </ScrollReveal>
         )}
 
-        {/* Prev / Next */}
         {(prev || next) && (
-          <div className="mt-16 flex items-center justify-between gap-4 border-t border-border pt-8 text-sm">
+          <ScrollReveal delay={0.05} className="mt-16 flex items-center justify-between gap-4 border-t border-border pt-8 text-sm">
             {prev ? (
               <Link
                 href={`/thoughts/${prev.slug.current}`}
@@ -140,7 +136,7 @@ export default async function ThoughtPage({ params }: Props) {
             ) : (
               <span />
             )}
-          </div>
+          </ScrollReveal>
         )}
 
       </Container>
