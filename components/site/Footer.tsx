@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { CopyEmail } from "@/components/ui/CopyEmail";
 import { siteConfig } from "@/lib/config";
 
 export function Footer() {
@@ -24,12 +25,7 @@ export function Footer() {
             >
               LinkedIn
             </a>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="transition-colors duration-[120ms] hover:text-accent"
-            >
-              Email
-            </a>
+            <CopyEmail label="Email" variant="link" size="sm" className="h-auto p-0 text-sm font-normal" />
           </div>
         </div>
       </Container>

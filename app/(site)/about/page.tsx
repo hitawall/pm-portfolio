@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { CopyEmail } from "@/components/ui/CopyEmail";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/lib/config";
 
@@ -95,9 +95,7 @@ export default function About() {
         </article>
 
         <ScrollReveal className="mt-16 flex flex-wrap gap-3 border-t border-border pt-10">
-          <Button as="a" href={`mailto:${siteConfig.email}`}>
-            Get in touch <ArrowUpRight size={14} />
-          </Button>
+          <CopyEmail label="Get in touch" />
           <Button
             as="a"
             href={siteConfig.linkedin}
