@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
+import { CopyEmailIcon } from "@/components/ui/CopyEmailIcon";
 import { siteConfig } from "@/lib/config";
 
 const navLinks = [
@@ -32,14 +32,7 @@ export function Header() {
                 {label}
               </Link>
             ))}
-            <a
-              href={`mailto:${siteConfig.email}`}
-              aria-label="Email me"
-              title={siteConfig.email}
-              className="hidden rounded-md p-1.5 text-foreground-muted transition-colors duration-[120ms] hover:text-accent sm:block"
-            >
-              <Mail size={15} />
-            </a>
+            <CopyEmailIcon />
             <a
               href={siteConfig.linkedin}
               target="_blank"

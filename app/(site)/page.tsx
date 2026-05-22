@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { CopyEmail } from "@/components/ui/CopyEmail";
 import { HeroMotion } from "@/components/site/HeroMotion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getFeaturedCaseStudies, getAllPosts } from "@/sanity/lib/queries";
@@ -59,9 +60,7 @@ export default async function Home() {
               <Button as={Link} href="/work">
                 View work <ArrowUpRight size={14} />
               </Button>
-              <Button as="a" href={`mailto:${siteConfig.email}`} variant="ghost">
-                <Mail size={14} /> Get in touch
-              </Button>
+              <CopyEmail label="Get in touch" variant="ghost" />
             </div>
           </HeroMotion>
         </Container>
@@ -225,9 +224,7 @@ export default async function Home() {
             interest in 0→1, platform-scale, and infra-adjacent work.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button as="a" href={`mailto:${siteConfig.email}`}>
-              <Mail size={14} /> {siteConfig.email}
-            </Button>
+            <CopyEmail />
             <Button
               as="a"
               href={siteConfig.linkedin}
