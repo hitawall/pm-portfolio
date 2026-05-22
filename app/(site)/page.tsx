@@ -3,6 +3,7 @@ import { ArrowUpRight, Mail, ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { HeroMotion } from "@/components/site/HeroMotion";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getFeaturedCaseStudies, getAllPosts } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
 
@@ -77,7 +78,7 @@ export default async function Home() {
       {/* ── Selected Work ────────────────────────────────────── */}
       <section id="work" className="border-t border-border py-20 sm:py-28">
         <Container size="lg">
-          <div className="mb-10 flex items-end justify-between">
+          <ScrollReveal className="mb-10 flex items-end justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
                 Portfolio
@@ -92,10 +93,11 @@ export default async function Home() {
             >
               All work <ArrowUpRight size={14} />
             </Link>
-          </div>
+          </ScrollReveal>
 
           <div className="flex flex-col gap-4">
-            {studies.map((cs) => (
+            {studies.map((cs, i) => (
+              <ScrollReveal key={cs._id} delay={i * 0.1}>
               <div
                 key={cs._id}
                 className="group relative flex flex-col justify-between gap-4 rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-md sm:flex-row sm:items-center"
@@ -138,6 +140,7 @@ export default async function Home() {
                   className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
                 />
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </Container>
@@ -146,7 +149,7 @@ export default async function Home() {
       {/* ── Recent Thoughts ──────────────────────────────────── */}
       <section className="border-t border-border bg-surface py-20 sm:py-28">
         <Container size="lg">
-          <div className="mb-10 flex items-end justify-between">
+          <ScrollReveal className="mb-10 flex items-end justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
                 Writing
@@ -161,13 +164,13 @@ export default async function Home() {
             >
               All posts <ArrowUpRight size={14} />
             </Link>
-          </div>
+          </ScrollReveal>
 
           {recentPosts.length > 0 ? (
             <div className="flex flex-col divide-y divide-border">
-              {recentPosts.map((post) => (
+              {recentPosts.map((post, i) => (
+                <ScrollReveal key={post._id} delay={i * 0.08}>
                 <Link
-                  key={post._id}
                   href={`/thoughts/${post.slug.current}`}
                   className="group flex items-start justify-between gap-6 py-5 transition-colors hover:text-accent"
                 >
@@ -193,6 +196,7 @@ export default async function Home() {
                     className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
                   />
                 </Link>
+                </ScrollReveal>
               ))}
             </div>
           ) : (
@@ -209,6 +213,7 @@ export default async function Home() {
       {/* ── Contact CTA ──────────────────────────────────────── */}
       <section className="border-t border-border py-20 sm:py-28 [background:radial-gradient(ellipse_80%_80%_at_50%_110%,color-mix(in_srgb,var(--accent)_12%,transparent),transparent)]">
         <Container size="md" className="text-center">
+          <ScrollReveal>
           <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
             Open to opportunities
           </p>
@@ -233,6 +238,7 @@ export default async function Home() {
               LinkedIn <ArrowUpRight size={14} />
             </Button>
           </div>
+          </ScrollReveal>
         </Container>
       </section>
 
