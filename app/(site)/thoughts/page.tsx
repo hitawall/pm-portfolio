@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/config";
 export const metadata: Metadata = {
   title: `Thoughts — ${siteConfig.name}`,
   description:
-    "Writing on product thinking, engineering trade-offs, and the SDE→PM transition.",
+    "Writing on product thinking, engineering trade-offs, and systems at scale.",
 };
 
 function formatDate(dateString: string): string {
@@ -38,7 +38,7 @@ export default async function Thoughts() {
             Writing
           </h1>
           <p className="mt-3 text-lg text-foreground-muted">
-            Product thinking, engineering trade-offs, and the SDE→PM transition.
+            Product thinking, engineering trade-offs, and systems at scale.
           </p>
         </ScrollReveal>
 

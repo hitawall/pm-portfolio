@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/config";
 export const metadata: Metadata = {
   title: `About — ${siteConfig.name}`,
   description:
-    "SDE turned Product Manager. Five years shipping at JPMC, Amazon, Blink Health, and Nutanix — now bringing that depth to product decisions.",
+    "Engineer, builder, and product thinker. Five years shipping at JPMC, Amazon, Blink Health, and Nutanix.",
 };
 
 const sections = [
@@ -23,29 +23,29 @@ const sections = [
     ],
   },
   {
-    id: "pivot",
-    heading: "Why the pivot",
+    id: "how-i-think",
+    heading: "How I think",
     paragraphs: [
-      "The shift wasn't sudden. It was a slow accumulation of moments where I found myself most energized not by the implementation challenge, but by the upstream questions: Who is this for? What problem does this actually solve? What's the simplest version that proves the hypothesis?",
+      "The shift was gradual. I found myself most energized not by the implementation challenge, but by the upstream questions: Who is this for? What problem does this actually solve? What's the simplest version that proves the hypothesis?",
       "At Blink Health, I watched how pricing decisions — made without deep user context — created friction that engineering heroics couldn't fix. At Nutanix, I spent time embedded with customers and realized the gap between what we were building and what they needed was a strategy problem, not an execution problem. I started pulling on those threads.",
-      "I read every PM book I could find. I volunteered for cross-functional projects. I sat in on roadmap reviews and pushed back on feature specifications. Eventually I made it formal: I transitioned into product work at Nutanix before deciding to commit to PM fully.",
+      "Now I build with both lenses open at once. I care about the architecture and I care about whether we're building the right thing in the first place.",
     ],
   },
   {
-    id: "edge",
-    heading: "What engineering gives me as a PM",
+    id: "what-i-bring",
+    heading: "What I bring",
     paragraphs: [
-      "I can read the diff. I can sit in an architecture review and understand the trade-offs being discussed — not just the conclusion. I can give engineers meaningful feedback on a technical spec rather than nodding along. That creates trust, and trust is what gets PMs the early seat at the table, before decisions are made.",
-      "I built the pipelines I now want to query. I understand why certain APIs are slow, why some database designs create long-term constraints, and why a \"two-week fix\" sometimes isn't. That shapes how I scope work and set expectations with stakeholders — I don't overpromise on behalf of engineering, and I don't undersell what's possible.",
-      "More broadly: I think in systems. Years of debugging distributed infrastructure teaches you to reason about second-order effects, question assumptions, and model how a change propagates through everything else. That applies just as well to product strategy, pricing models, and growth loops.",
+      "I can read the diff. I can sit in an architecture review and understand the trade-offs being discussed — not just the conclusion. I can give meaningful feedback on a technical spec, scope work honestly with stakeholders, and push back on requirements that don't survive contact with the system.",
+      "I built the pipelines I now want to reason about. I understand why certain APIs are slow, why some database designs create long-term constraints, and why a \"two-week fix\" sometimes isn't. That keeps me grounded and makes me a useful partner — to engineers, to PMs, and to anyone trying to ship something real.",
+      "More broadly: I think in systems. Years of debugging distributed infrastructure teaches you to reason about second-order effects, question assumptions, and model how a change propagates through everything else. That applies to code, to products, and to organizations.",
     ],
   },
   {
-    id: "looking",
-    heading: "What I'm looking for",
+    id: "what-im-building",
+    heading: "What I'm building",
     paragraphs: [
-      "I'm targeting Senior PM roles where engineering depth is treated as an asset, not just a credential. I'm drawn to 0→1 challenges — especially in developer tools, infrastructure, and platform products where technical rigor and user empathy both matter. And to product-led growth motions where data and experimentation are first-class citizens.",
-      "I'm most effective on teams that move fast, argue from first principles, and hold themselves accountable to outcomes over outputs.",
+      "Lately I've been deep in LLM systems — building tools that automate tedious workflows, experimenting with retrieval and agent architectures, and thinking hard about where AI actually changes the product surface vs. where it's noise.",
+      "I'm interested in roles at the intersection of engineering and product: senior engineering positions with product scope, technical PM roles, AI/ML product work, or 0→1 builder roles at companies where technical depth is treated as a first-class asset. I work best on teams that move fast, argue from first principles, and hold themselves to outcomes over outputs.",
     ],
   },
   {
@@ -73,7 +73,7 @@ export default function About() {
             {siteConfig.name}
           </h1>
           <p className="mt-3 text-lg text-foreground-muted">
-            Engineer turned Product Manager.
+            Engineer, builder, product thinker.
           </p>
         </ScrollReveal>
 

@@ -35,14 +35,14 @@ export default async function Home() {
         <Container size="md" className="text-center">
           <HeroMotion>
             <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
-              Engineer → Product Manager
+              Builder · Engineer · Product Thinker
             </p>
             <h1 className="gradient-heading mt-5 text-6xl font-bold leading-[1.05] tracking-tighter sm:text-7xl lg:text-8xl">
               Shubham<br />Arora
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-base text-foreground-muted sm:text-lg">
-              PM who reads diffs and P&Ls with equal fluency. 5 years shipping
-              at scale across fintech, health, and cloud infrastructure.
+              Engineer with product depth. 5 years shipping at scale across
+              fintech, health, and cloud infrastructure.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               {companies.map((co) => (
@@ -201,7 +201,7 @@ export default async function Home() {
             </div>
           ) : (
             <p className="text-sm text-foreground-muted">
-              Writing on product thinking, engineering trade-offs, and the SDE→PM transition.{" "}
+              Writing on product thinking, engineering trade-offs, and systems at scale.{" "}
               <Link href="/thoughts" className="text-accent hover:underline">
                 Browse all posts →
               </Link>
@@ -221,8 +221,8 @@ export default async function Home() {
             Let&apos;s build something together
           </h2>
           <p className="mx-auto mt-4 max-w-md text-base text-foreground-muted">
-            Exploring Senior PM roles at product-led companies. Particular
-            interest in 0→1, platform-scale, and infra-adjacent work.
+            Open to senior engineering, product, and AI/LLM roles where craft
+            and customer obsession both matter.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button as="a" href={`mailto:${siteConfig.email}`}>

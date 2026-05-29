@@ -12,6 +12,33 @@ export const metadata: Metadata = {
   description: "Side projects and experiments across product, engineering, and hobby work.",
 };
 
+const STATIC_PROJECTS = [
+  {
+    _id: "static-1",
+    title: "Auto Job Tracker",
+    kind: "engineering",
+    year: 2025,
+    summary: "Automatically tracks job applications — description coming soon.",
+    externalUrl: "https://github.com/hitawall",
+  },
+  {
+    _id: "static-2",
+    title: "Forty Rules of Love",
+    kind: "hobby",
+    year: 2025,
+    summary: "A digital experience — description coming soon.",
+    externalUrl: "https://github.com/hitawall",
+  },
+  {
+    _id: "static-3",
+    title: "LLM Roadmap",
+    kind: "engineering",
+    year: 2025,
+    summary: "A structured roadmap for LLM systems engineering — description coming soon.",
+    externalUrl: "https://github.com/hitawall",
+  },
+];
+
 const KIND_LABELS: Record<string, string> = {
   product: "Product",
   engineering: "Engineering",
@@ -31,7 +58,8 @@ interface Props {
 
 export default async function Projects({ searchParams }: Props) {
   const { kind } = await searchParams;
-  const allProjects = await getAllProjects();
+  const sanityProjects = await getAllProjects();
+  const allProjects = [...STATIC_PROJECTS, ...sanityProjects];
   const filtered = kind ? allProjects.filter((p) => p.kind === kind) : allProjects;
 
   return (
