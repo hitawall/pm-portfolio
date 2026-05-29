@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Shubham Arora",
-  title: "Shubham Arora — Engineer to PM",
+  title: "Shubham Arora — Builder · Engineer · Product Thinker",
   description:
-    "Product thinker with an engineering foundation. 5 years building at JPMC, Amazon, Blink Health, and Nutanix.",
+    "Builder with product depth. 5 years shipping at scale across fintech, health, and cloud infrastructure.",
   github: "https://github.com/hitawall",
   linkedin: "https://in.linkedin.com/in/shubham-arora-se/",
   email: "shubhaminkk@gmail.com",

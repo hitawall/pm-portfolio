@@ -103,7 +103,7 @@ export async function GET(request: NextRequest) {
               {siteConfig.name}
             </div>
             <div style={{ fontSize: "13px", color: "#71717a", letterSpacing: "0.04em" }}>
-              Engineer → Product Manager
+              Builder · Engineer · Product Thinker
             </div>
           </div>
 

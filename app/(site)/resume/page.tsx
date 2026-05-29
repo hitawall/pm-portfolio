@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/config";
 export const metadata: Metadata = {
   title: `Resume — ${siteConfig.name}`,
   description:
-    "Resume of Shubham Arora — Product Manager with 5 years of software engineering experience at JPMC, Amazon, Blink Health, and Nutanix.",
+    "Resume of Shubham Arora — engineer and builder with 5 years of shipping at JPMC, Amazon, Blink Health, and Nutanix.",
 };
 
 export default function Resume() {
