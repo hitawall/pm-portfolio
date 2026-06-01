@@ -19,7 +19,7 @@ const STATIC_PROJECTS = [
     kind: "engineering",
     year: 2025,
     summary: "Chrome extension + spreadsheet that logs every job application automatically — no copy-paste, no forgotten follow-ups.",
-    externalUrl: null,
+    externalUrl: "https://auto-job-tracker-tau.vercel.app",
   },
   {
     _id: "static-2",
@@ -27,7 +27,7 @@ const STATIC_PROJECTS = [
     kind: "hobby",
     year: 2025,
     summary: "An interactive digital retelling of Elif Şafak's novel — one rule surfaced per day, built as a meditative reading experience.",
-    externalUrl: null,
+    externalUrl: "https://forty-rules-of-love-one.vercel.app",
   },
   {
     _id: "static-3",
@@ -35,7 +35,7 @@ const STATIC_PROJECTS = [
     kind: "engineering",
     year: 2025,
     summary: "A structured 12-week curriculum for engineers moving into LLM systems work — RAG, agents, evals, and production deployment.",
-    externalUrl: null,
+    externalUrl: "https://llm-systems-engineer-roadmap.vercel.app",
   },
 ];
 
