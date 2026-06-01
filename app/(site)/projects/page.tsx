@@ -19,7 +19,7 @@ const STATIC_PROJECTS = [
     kind: "engineering",
     year: 2026,
     summary: "Chrome extension + spreadsheet that logs every job application automatically — no copy-paste, no forgotten follow-ups.",
-    externalUrl: null,
+    externalUrl: "https://auto-job-tracker-two.vercel.app/",
   },
   {
     _id: "static-2",
