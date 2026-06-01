@@ -116,8 +116,14 @@ export async function GET(request: NextRequest) {
               height: "48px",
               borderRadius: "50%",
               background: "linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)",
+              fontSize: "16px",
+              fontWeight: 700,
+              color: "#ffffff",
+              letterSpacing: "-0.01em",
             }}
-          />
+          >
+            SA
+          </div>
         </div>
       </div>
     ),

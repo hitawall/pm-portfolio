@@ -1,16 +1,10 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
+import { NavLinks } from "@/components/site/NavLinks";
+import { MobileNav } from "@/components/site/MobileNav";
 import { CopyEmailIcon } from "@/components/ui/CopyEmailIcon";
 import { siteConfig } from "@/lib/config";
-
-const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/thoughts", label: "Thoughts" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/resume", label: "Resume" },
-];
 
 export function Header() {
   return (
@@ -24,15 +18,7 @@ export function Header() {
             {siteConfig.name}
           </Link>
           <div className="flex items-center gap-1">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="hidden rounded-md px-3 py-1.5 text-sm text-foreground-muted transition-colors duration-[120ms] hover:text-accent sm:block"
-              >
-                {label}
-              </Link>
-            ))}
+            <NavLinks />
             <CopyEmailIcon />
             <a
               href={siteConfig.linkedin}
@@ -48,6 +34,7 @@ export function Header() {
               </svg>
             </a>
             <ThemeToggle />
+            <MobileNav />
           </div>
         </nav>
       </Container>
