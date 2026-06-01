@@ -25,6 +25,12 @@ export function Footer() {
             >
               LinkedIn
             </a>
+            <a
+              href="/resume"
+              className="transition-colors duration-[120ms] hover:text-accent"
+            >
+              Resume
+            </a>
             <CopyEmail label="Email" variant="link" size="sm" className="h-auto p-0 text-sm font-normal" />
           </div>
         </div>
