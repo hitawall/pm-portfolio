@@ -10,9 +10,9 @@ import { siteConfig } from "@/lib/config";
 
 const companies = [
   { name: "JPMC", period: "2020–21" },
-  { name: "Amazon", period: "2021–22" },
-  { name: "Blink Health", period: "2022–23" },
-  { name: "Nutanix", period: "2023–25" },
+  { name: "Amazon", period: "2021–23" },
+  { name: "Blink Health", period: "2023–24" },
+  { name: "Nutanix", period: "2024–26" },
 ];
 
 export default async function Home() {
