@@ -15,17 +15,12 @@ const companies = [
   { name: "Nutanix", period: "2023–25" },
 ];
 
-const placeholderStudies = [
-  { _id: "1", title: "Reducing onboarding friction", company: "Nutanix", year: "2024", summary: "Redesigned the new user flow, cutting time-to-value by 40%.", tags: ["Growth"], slug: { current: "#" }, featured: true, order: 1 },
-  { _id: "2", title: "Pricing experiments at scale", company: "Blink Health", year: "2023", summary: "Led A/B pricing strategy that increased conversion by 22%.", tags: ["Monetisation"], slug: { current: "#" }, featured: true, order: 2 },
-];
-
 export default async function Home() {
   const [featuredStudies, allPosts] = await Promise.all([
     getFeaturedCaseStudies(),
     getAllPosts(),
   ]);
-  const studies = featuredStudies.length > 0 ? featuredStudies.slice(0, 3) : placeholderStudies;
+  const studies = featuredStudies.slice(0, 3);
   const recentPosts = allPosts.slice(0, 3);
 
   return (
@@ -35,15 +30,25 @@ export default async function Home() {
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden [background:radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_srgb,var(--accent)_14%,transparent),transparent)]">
         <Container size="md" className="text-center">
           <HeroMotion>
-            <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
-              Builder · Engineer · Product Thinker
-            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
+                Builder · Engineer · Product Thinker
+              </p>
+              <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                </span>
+                Open to PM &amp; senior eng roles
+              </p>
+            </div>
             <h1 className="gradient-heading mt-5 text-6xl font-bold leading-[1.05] tracking-tighter sm:text-7xl lg:text-8xl">
               Shubham<br />Arora
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-base text-foreground-muted sm:text-lg">
-              Engineer with product depth. 5 years shipping at scale across
-              fintech, health, and cloud infrastructure.
+              Five years building at scale across fintech, health, and cloud.
+              Now bringing that engineering depth to product — shipping the
+              right thing, not just building it right.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               {companies.map((co) => (
@@ -95,10 +100,9 @@ export default async function Home() {
           </ScrollReveal>
 
           <div className="flex flex-col gap-4">
-            {studies.map((cs, i) => (
+            {studies.length > 0 ? studies.map((cs, i) => (
               <ScrollReveal key={cs._id} delay={i * 0.1}>
               <div
-                key={cs._id}
                 className="group relative flex flex-col justify-between gap-4 rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-md sm:flex-row sm:items-center"
               >
                 <Link
@@ -140,7 +144,20 @@ export default async function Home() {
                 />
               </div>
               </ScrollReveal>
-            ))}
+            )) : (
+              <ScrollReveal>
+                <div className="rounded-2xl border border-dashed border-border bg-surface/50 p-8 text-center">
+                  <p className="text-sm font-medium text-foreground">
+                    Case studies in progress
+                  </p>
+                  <p className="mt-2 text-sm text-foreground-muted">
+                    Full write-ups dropping soon.{" "}
+                    <CopyEmail label="Reach out for a live walkthrough" variant="link" size="sm" className="h-auto p-0 text-sm font-normal text-accent underline-offset-4 hover:underline" />
+                    .
+                  </p>
+                </div>
+              </ScrollReveal>
+            )}
           </div>
         </Container>
       </section>

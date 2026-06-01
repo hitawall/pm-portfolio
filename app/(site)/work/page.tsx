@@ -35,7 +35,22 @@ export default async function Work() {
         </ScrollReveal>
 
         {caseStudies.length === 0 ? (
-          <p className="text-sm text-foreground-muted">Case studies coming soon.</p>
+          <div className="rounded-2xl border border-dashed border-border bg-surface/50 p-10 text-center">
+            <p className="text-sm font-medium text-foreground">
+              Detailed case studies in progress
+            </p>
+            <p className="mt-2 text-sm text-foreground-muted">
+              I&apos;m writing up the full stories behind the work — problem, process, and outcome.
+              In the meantime,{" "}
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="text-accent underline-offset-4 hover:underline"
+              >
+                reach out for a live walkthrough
+              </a>
+              .
+            </p>
+          </div>
         ) : (
           <div className="divide-y divide-border">
             {caseStudies.map((cs, i) => (
