@@ -29,15 +29,17 @@ export default async function Home() {
         <Container size="md" className="text-center">
           <HeroMotion>
             <div className="mb-6 flex justify-center">
-              <div className="relative h-24 w-24 overflow-hidden rounded-full ring-2 ring-accent ring-offset-4 ring-offset-background">
-                <Image
-                  src="/avatar.svg"
-                  alt="Shubham Arora"
-                  width={96}
-                  height={96}
-                  className="h-full w-full object-cover"
-                  priority
-                />
+              <div className="rounded-full bg-gradient-to-br from-accent via-violet-400 to-violet-300 p-[3px] shadow-xl shadow-accent/20">
+                <div className="h-36 w-36 overflow-hidden rounded-full">
+                  <Image
+                    src="/avatar.jpg"
+                    alt="Shubham Arora"
+                    width={144}
+                    height={144}
+                    className="h-full w-full object-cover"
+                    priority
+                  />
+                </div>
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-2">
