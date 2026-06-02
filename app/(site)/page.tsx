@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -27,6 +28,18 @@ export default async function Home() {
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden [background:radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_srgb,var(--accent)_14%,transparent),transparent)]">
         <Container size="md" className="text-center">
           <HeroMotion>
+            <div className="mb-6 flex justify-center">
+              <div className="relative h-24 w-24 overflow-hidden rounded-full ring-2 ring-accent ring-offset-4 ring-offset-background">
+                <Image
+                  src="/avatar.svg"
+                  alt="Shubham Arora"
+                  width={96}
+                  height={96}
+                  className="h-full w-full object-cover"
+                  priority
+                />
+              </div>
+            </div>
             <div className="flex flex-wrap justify-center gap-2">
               <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
                 Builder · Engineer · Product Thinker
