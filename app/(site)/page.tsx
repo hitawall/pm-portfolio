@@ -30,12 +30,12 @@ export default async function Home() {
           <HeroMotion>
             <div className="mb-6 flex justify-center">
               <div className="rounded-full bg-gradient-to-br from-accent via-violet-400 to-violet-300 p-[3px] shadow-xl shadow-accent/20">
-                <div className="h-36 w-36 overflow-hidden rounded-full">
+                <div className="h-56 w-56 overflow-hidden rounded-full">
                   <Image
                     src="/avatar.jpg"
                     alt="Shubham Arora"
-                    width={144}
-                    height={144}
+                    width={224}
+                    height={224}
                     className="h-full w-full object-cover"
                     priority
                   />
@@ -55,7 +55,7 @@ export default async function Home() {
               </p>
             </div>
             <h1 className="gradient-heading mt-5 text-6xl font-bold leading-[1.05] tracking-tighter sm:text-7xl lg:text-8xl">
-              Shubham<br />Arora
+              Shubham Arora
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-base text-foreground-muted sm:text-lg">
               Five years building at scale across fintech, health, and cloud.
