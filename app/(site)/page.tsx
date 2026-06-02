@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -27,6 +28,20 @@ export default async function Home() {
       <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden [background:radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_srgb,var(--accent)_14%,transparent),transparent)]">
         <Container size="md" className="text-center">
           <HeroMotion>
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full bg-gradient-to-br from-accent via-violet-400 to-violet-300 p-[3px] shadow-xl shadow-accent/20">
+                <div className="h-56 w-56 overflow-hidden rounded-full">
+                  <Image
+                    src="/avatar.jpg"
+                    alt="Shubham Arora"
+                    width={224}
+                    height={224}
+                    className="h-full w-full object-cover [object-position:50%_48%] scale-[1.1] translate-x-2"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
             <div className="flex flex-wrap justify-center gap-2">
               <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
                 Builder · Engineer · Product Thinker
@@ -40,7 +55,7 @@ export default async function Home() {
               </p>
             </div>
             <h1 className="gradient-heading mt-5 text-6xl font-bold leading-[1.05] tracking-tighter sm:text-7xl lg:text-8xl">
-              Shubham<br />Arora
+              Shubham Arora
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-base text-foreground-muted sm:text-lg">
               Five years building at scale across fintech, health, and cloud.
