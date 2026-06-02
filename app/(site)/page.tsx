@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/Button";
 import { CopyEmail } from "@/components/ui/CopyEmail";
 import { HeroMotion } from "@/components/site/HeroMotion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { getFeaturedCaseStudies, getAllPosts } from "@/sanity/lib/queries";
+import { getAllPosts } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
+import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
 
 const companies = [
   { name: "JPMC", period: "2020–21" },
@@ -16,11 +17,7 @@ const companies = [
 ];
 
 export default async function Home() {
-  const [featuredStudies, allPosts] = await Promise.all([
-    getFeaturedCaseStudies(),
-    getAllPosts(),
-  ]);
-  const studies = featuredStudies.slice(0, 3);
+  const allPosts = await getAllPosts();
   const recentPosts = allPosts.slice(0, 3);
 
   return (
@@ -62,8 +59,8 @@ export default async function Home() {
               ))}
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button as={Link} href="/work">
-                View work <ArrowUpRight size={14} />
+              <Button as={Link} href="/projects">
+                View projects <ArrowUpRight size={14} />
               </Button>
               <CopyEmail label="Get in touch" variant="ghost" />
             </div>
@@ -71,93 +68,67 @@ export default async function Home() {
         </Container>
 
         <a
-          href="#work"
-          aria-label="Scroll to work"
+          href="#projects"
+          aria-label="Scroll to projects"
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-foreground-muted transition-colors duration-150 hover:text-accent"
         >
           <ChevronDown size={20} className="animate-bounce" />
         </a>
       </section>
 
-      {/* ── Selected Work ────────────────────────────────────── */}
-      <section id="work" className="border-t border-border py-20 sm:py-28">
+      {/* ── Projects ─────────────────────────────────────────── */}
+      <section id="projects" className="border-t border-border py-20 sm:py-28">
         <Container size="lg">
           <ScrollReveal className="mb-10 flex items-end justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
-                Portfolio
+                Projects
               </p>
               <h2 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
-                Selected Work
+                Things I&apos;ve built
               </h2>
             </div>
             <Link
-              href="/work"
+              href="/projects"
               className="flex items-center gap-1 text-sm text-accent transition-colors hover:text-accent-hover"
             >
-              All work <ArrowUpRight size={14} />
+              All projects <ArrowUpRight size={14} />
             </Link>
           </ScrollReveal>
 
-          <div className="flex flex-col gap-4">
-            {studies.length > 0 ? studies.map((cs, i) => (
-              <ScrollReveal key={cs._id} delay={i * 0.1}>
-              <div
-                className="group relative flex flex-col justify-between gap-4 rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-md sm:flex-row sm:items-center"
-              >
-                <Link
-                  href={`/work/${cs.slug.current}`}
-                  className="absolute inset-0 rounded-2xl"
-                  aria-label={cs.title}
-                />
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-sm font-medium text-foreground-muted">
-                      {cs.company}
-                    </span>
-                    {cs.year && (
-                      <>
-                        <span className="text-foreground-muted">·</span>
-                        <span className="font-mono text-xs text-foreground-muted">
-                          {cs.year}
-                        </span>
-                      </>
-                    )}
-                    {cs.tags?.[0] && (
-                      <span className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted">
-                        {cs.tags[0]}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {STATIC_PROJECTS.map((project, i) => (
+              <ScrollReveal key={project._id} delay={i * 0.1}>
+                <div className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-md">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full bg-accent-subtle px-2.5 py-0.5 text-xs font-medium text-accent">
+                        {KIND_LABELS[project.kind] ?? project.kind}
                       </span>
-                    )}
-                  </div>
-                  <p className="mt-2 text-lg font-semibold leading-snug">
-                    {cs.title}
-                  </p>
-                  {cs.summary && (
-                    <p className="mt-1 text-sm text-foreground-muted line-clamp-2">
-                      {cs.summary}
+                      <span className="font-mono text-xs text-foreground-muted">
+                        {project.year}
+                      </span>
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold leading-snug">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-foreground-muted">
+                      {project.summary}
                     </p>
+                  </div>
+                  {project.externalUrl && (
+                    <a
+                      href={project.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 inline-flex items-center gap-1 text-xs text-accent transition-colors hover:text-accent-hover"
+                    >
+                      View project <ArrowUpRight size={12} />
+                    </a>
                   )}
                 </div>
-                <ArrowUpRight
-                  size={18}
-                  className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-                />
-              </div>
               </ScrollReveal>
-            )) : (
-              <ScrollReveal>
-                <div className="rounded-2xl border border-dashed border-border bg-surface/50 p-8 text-center">
-                  <p className="text-sm font-medium text-foreground">
-                    Case studies in progress
-                  </p>
-                  <p className="mt-2 text-sm text-foreground-muted">
-                    Full write-ups dropping soon.{" "}
-                    <CopyEmail label="Reach out for a live walkthrough" variant="link" size="sm" className="h-auto p-0 text-sm font-normal text-accent underline-offset-4 hover:underline" />
-                    .
-                  </p>
-                </div>
-              </ScrollReveal>
-            )}
+            ))}
           </div>
         </Container>
       </section>
