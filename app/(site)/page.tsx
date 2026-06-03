@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CopyEmail } from "@/components/ui/CopyEmail";
@@ -25,70 +25,76 @@ export default async function Home() {
     <main id="main-content" className="flex-1">
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden [background:radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_srgb,var(--accent)_14%,transparent),transparent)]">
-        <Container size="md" className="text-center">
+      <section className="border-b border-border py-20 sm:py-28">
+        <Container size="md">
           <HeroMotion>
-            <div className="mb-6 flex justify-center">
-              <div className="rounded-full bg-gradient-to-br from-accent via-violet-400 to-violet-300 p-[3px] shadow-xl shadow-accent/20">
-                <div className="h-56 w-56 overflow-hidden rounded-full">
+            <div className="flex flex-col items-center gap-10 sm:flex-row sm:items-center sm:gap-16">
+
+              {/* Avatar */}
+              <div className="shrink-0">
+                <div className="h-44 w-44 overflow-hidden rounded-full border border-border-strong shadow-sm sm:h-52 sm:w-52">
                   <Image
                     src="/avatar.jpg"
                     alt="Shubham Arora"
-                    width={224}
-                    height={224}
+                    width={208}
+                    height={208}
                     className="h-full w-full object-cover [object-position:50%_48%] scale-[1.1] translate-x-2"
                     priority
                   />
                 </div>
               </div>
-            </div>
-            <div className="flex flex-wrap justify-center gap-2">
-              <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
-                Builder · Engineer · Product Thinker
-              </p>
-              <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-foreground-muted backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-                </span>
-                Open to PM &amp; senior eng roles
-              </p>
-            </div>
-            <h1 className="gradient-heading mt-5 text-6xl font-bold leading-[1.05] tracking-tighter sm:text-7xl lg:text-8xl">
-              Shubham Arora
-            </h1>
-            <p className="mx-auto mt-6 max-w-lg text-base text-foreground-muted sm:text-lg">
-              Five years building at scale across fintech, health, and cloud.
-              Now bringing that engineering depth to product — shipping the
-              right thing, not just building it right.
-            </p>
-            <div className="mt-5 flex flex-wrap justify-center gap-2">
-              {companies.map((co) => (
-                <span
-                  key={co.name}
-                  className="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium backdrop-blur-sm"
-                >
-                  {co.name}{" "}
-                  <span className="text-foreground-muted">{co.period}</span>
-                </span>
-              ))}
-            </div>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button as={Link} href="/projects">
-                View projects <ArrowUpRight size={14} />
-              </Button>
-              <CopyEmail label="Get in touch" variant="ghost" />
+
+              {/* Text */}
+              <div className="flex flex-col gap-4 text-center sm:text-left">
+                <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
+                  <span className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+                    Builder · Engineer · Product Thinker
+                  </span>
+                </div>
+
+                <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+                  Shubham Arora
+                </h1>
+
+                <p className="text-base text-foreground-muted sm:text-lg">
+                  Five years building at scale across fintech, health, and cloud.
+                  Now bringing that engineering depth to product — shipping the
+                  right thing, not just building it right.
+                </p>
+
+                <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
+                  {companies.map((co) => (
+                    <span
+                      key={co.name}
+                      className="rounded-full border border-border px-3 py-1 text-xs font-medium"
+                    >
+                      {co.name}{" "}
+                      <span className="text-foreground-muted">{co.period}</span>
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-3 sm:justify-start">
+                  <p className="inline-flex items-center gap-2 text-xs font-medium text-foreground-muted">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                    </span>
+                    Open to PM &amp; senior eng roles
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-3 sm:justify-start">
+                  <Button as={Link} href="/projects">
+                    View projects <ArrowUpRight size={14} />
+                  </Button>
+                  <CopyEmail label="Get in touch" variant="ghost" />
+                </div>
+              </div>
+
             </div>
           </HeroMotion>
         </Container>
-
-        <a
-          href="#projects"
-          aria-label="Scroll to projects"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-foreground-muted transition-colors duration-150 hover:text-accent"
-        >
-          <ChevronDown size={20} className="animate-bounce" />
-        </a>
       </section>
 
       {/* ── Projects ─────────────────────────────────────────── */}
