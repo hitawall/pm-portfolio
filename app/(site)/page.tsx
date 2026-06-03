@@ -165,7 +165,7 @@ export default async function Home() {
             </div>
             <Link
               href="/thoughts"
-              className="flex items-center gap-1 text-sm text-accent transition-colors hover:text-accent-hover"
+              className="flex items-center gap-1 text-sm text-foreground-muted transition-colors hover:text-foreground"
             >
               All posts <ArrowUpRight size={14} />
             </Link>
@@ -177,7 +177,7 @@ export default async function Home() {
                 <ScrollReveal key={post._id} delay={i * 0.08}>
                 <Link
                   href={`/thoughts/${post.slug.current}`}
-                  className="group flex items-start justify-between gap-6 py-5 transition-colors hover:text-accent"
+                  className="group flex items-start justify-between gap-6 py-5 transition-colors"
                 >
                   <div className="flex-1">
                     <p className="font-mono text-xs text-foreground-muted">
@@ -198,7 +198,7 @@ export default async function Home() {
                   </div>
                   <ArrowUpRight
                     size={16}
-                    className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                    className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />
                 </Link>
                 </ScrollReveal>
@@ -207,7 +207,7 @@ export default async function Home() {
           ) : (
             <p className="text-sm text-foreground-muted">
               Writing on product thinking, engineering trade-offs, and systems at scale.{" "}
-              <Link href="/thoughts" className="text-accent hover:underline">
+              <Link href="/thoughts" className="underline underline-offset-4 hover:text-foreground">
                 Browse all posts →
               </Link>
             </p>
