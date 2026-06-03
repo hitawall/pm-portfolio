@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens — Editorial Ink ---------- */
+/* ---------- Semantic tokens — Editorial Ink + Amber ---------- */
 :root {
   --background: #fafaf8;
   --foreground: #18181b;
@@ -8,13 +8,13 @@
   --border: #e4e4dc;
   --border-strong: #cfcfc4;
   --surface: #f4f4ef;
-  /* Editorial accent — ink black */
-  --accent: #18181b;
-  --accent-hover: #3f3f3a;
-  --accent-fg: #fafaf8;
-  --accent-subtle: #ededea;
+  /* Editorial accent — warm amber */
+  --accent: #b45309;
+  --accent-hover: #92400e;
+  --accent-fg: #fffbeb;
+  --accent-subtle: #fef3c7;
   /* Glow for card hover (raw rgba for box-shadow) */
-  --accent-glow: rgba(24, 24, 27, 0.06);
+  --accent-glow: rgba(180, 83, 9, 0.10);
 }
 
 .dark {
@@ -24,12 +24,12 @@
   --border: #2a2a26;
   --border-strong: #3d3d38;
   --surface: #171716;
-  /* Near-white for dark bg readability */
-  --accent: #e8e8e2;
-  --accent-hover: #f5f5ef;
-  --accent-fg: #0f0f0e;
-  --accent-subtle: #1e1e1b;
-  --accent-glow: rgba(232, 232, 226, 0.06);
+  /* Bright amber for dark bg readability */
+  --accent: #fbbf24;
+  --accent-hover: #f59e0b;
+  --accent-fg: #1c1008;
+  --accent-subtle: #1c1200;
+  --accent-glow: rgba(251, 191, 36, 0.12);
 }
 
 @theme inline {
