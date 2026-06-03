@@ -1,35 +1,35 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens — Coastal Sunrise ---------- */
+/* ---------- Semantic tokens — Editorial Ink ---------- */
 :root {
-  --background: #f0f8ff;
-  --foreground: #1a2744;
-  --foreground-muted: #5a7a9e;
-  --border: #c8dff5;
-  --border-strong: #a8c8ec;
-  --surface: #e6f2fd;
-  /* Coastal accent — sky blue */
-  --accent: #0ea5e9;
-  --accent-hover: #0284c7;
-  --accent-fg: #ffffff;
-  --accent-subtle: #e0f2fe;
+  --background: #fafaf8;
+  --foreground: #18181b;
+  --foreground-muted: #71716a;
+  --border: #e4e4dc;
+  --border-strong: #cfcfc4;
+  --surface: #f4f4ef;
+  /* Editorial accent — ink black */
+  --accent: #18181b;
+  --accent-hover: #3f3f3a;
+  --accent-fg: #fafaf8;
+  --accent-subtle: #ededea;
   /* Glow for card hover (raw rgba for box-shadow) */
-  --accent-glow: rgba(14, 165, 233, 0.18);
+  --accent-glow: rgba(24, 24, 27, 0.06);
 }
 
 .dark {
-  --background: #0a1628;
-  --foreground: #e8f4fd;
-  --foreground-muted: #7aa8cc;
-  --border: #1e3a5c;
-  --border-strong: #2d5280;
-  --surface: #0f2040;
-  /* Lighter sky blue for dark bg readability */
-  --accent: #38bdf8;
-  --accent-hover: #0ea5e9;
-  --accent-fg: #ffffff;
-  --accent-subtle: #0c2040;
-  --accent-glow: rgba(56, 189, 248, 0.20);
+  --background: #0f0f0e;
+  --foreground: #f0f0eb;
+  --foreground-muted: #a0a09a;
+  --border: #2a2a26;
+  --border-strong: #3d3d38;
+  --surface: #171716;
+  /* Near-white for dark bg readability */
+  --accent: #e8e8e2;
+  --accent-hover: #f5f5ef;
+  --accent-fg: #0f0f0e;
+  --accent-subtle: #1e1e1b;
+  --accent-glow: rgba(232, 232, 226, 0.06);
 }
 
 @theme inline {
@@ -74,7 +74,7 @@ body {
 
 /* ---------- Utilities ---------- */
 .gradient-heading {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--foreground) 55%);
+  background: linear-gradient(135deg, var(--foreground) 0%, var(--foreground-muted) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
