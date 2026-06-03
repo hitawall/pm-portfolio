@@ -8,16 +8,16 @@ import { siteConfig } from "@/lib/config";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 border-b border-border bg-background">
       <Container>
         <nav className="flex h-14 items-center justify-between">
           <Link
             href="/"
-            className="text-sm font-medium tracking-tight text-foreground transition-colors duration-[120ms] hover:text-foreground-muted"
+            className="text-sm font-semibold tracking-tight text-foreground transition-colors duration-[120ms] hover:text-foreground-muted"
           >
             {siteConfig.name}
           </Link>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-6">
             <NavLinks />
             <CopyEmailIcon />
             <a
@@ -25,7 +25,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn profile"
-              className="hidden rounded-md p-1.5 text-foreground-muted transition-colors duration-[120ms] hover:text-accent sm:block"
+              className="hidden rounded-md p-1.5 text-foreground-muted transition-colors duration-[120ms] hover:text-foreground sm:block"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />

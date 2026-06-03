@@ -20,10 +20,10 @@ export function NavLinks() {
         <Link
           key={href}
           href={href}
-          className={`hidden rounded-md px-3 py-1.5 text-sm transition-colors duration-[120ms] sm:block ${
+          className={`hidden text-sm transition-colors duration-[120ms] sm:block ${
             pathname === href || pathname.startsWith(href + "/")
-              ? "font-medium text-foreground"
-              : "text-foreground-muted hover:text-accent"
+              ? "font-semibold text-foreground"
+              : "text-foreground-muted hover:text-foreground"
           }`}
         >
           {label}

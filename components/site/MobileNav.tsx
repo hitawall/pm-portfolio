@@ -28,17 +28,17 @@ export function MobileNav() {
       </button>
 
       {open && (
-        <div className="absolute left-0 right-0 top-14 border-b border-border bg-background/95 backdrop-blur-sm">
-          <nav className="flex flex-col px-4 py-3">
+        <div className="absolute left-0 right-0 top-14 border-b border-border bg-background">
+          <nav className="flex flex-col px-6 py-4">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className={`rounded-md px-3 py-2.5 text-sm transition-colors duration-[120ms] ${
+                className={`py-2.5 text-sm transition-colors duration-[120ms] ${
                   pathname === href || pathname.startsWith(href + "/")
-                    ? "font-medium text-foreground"
-                    : "text-foreground-muted hover:text-accent"
+                    ? "font-semibold text-foreground"
+                    : "text-foreground-muted hover:text-foreground"
                 }`}
               >
                 {label}
