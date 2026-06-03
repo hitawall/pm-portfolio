@@ -70,12 +70,12 @@ export default async function ThoughtPage({ params }: Props) {
   return (
     <main
       id="main-content"
-      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
+      className="flex-1"
     >
-      <Container size="md" className="py-14 sm:py-20">
+      <Container size="md" className="py-20 sm:py-28">
 
         <ScrollReveal className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
+          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
             Thoughts
           </p>
           <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
@@ -111,7 +111,7 @@ export default async function ThoughtPage({ params }: Props) {
             {prev ? (
               <Link
                 href={`/thoughts/${prev.slug.current}`}
-                className="group flex items-center gap-2 text-foreground-muted transition-colors hover:text-accent"
+                className="group flex items-center gap-2 text-foreground-muted transition-colors hover:text-foreground"
               >
                 <ArrowLeft
                   size={14}
@@ -125,7 +125,7 @@ export default async function ThoughtPage({ params }: Props) {
             {next ? (
               <Link
                 href={`/thoughts/${next.slug.current}`}
-                className="group flex items-center gap-2 text-foreground-muted transition-colors hover:text-accent"
+                className="group flex items-center gap-2 text-foreground-muted transition-colors hover:text-foreground"
               >
                 <span className="max-w-[200px] truncate">{next.title}</span>
                 <ArrowRight

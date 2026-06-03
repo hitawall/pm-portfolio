@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="mb-5 leading-relaxed text-foreground-muted">{children}</p>
+      <p className="mb-6 font-serif text-base leading-[1.85] text-foreground">{children}</p>
     ),
     h2: ({ children }) => (
       <h2 className="mb-4 mt-10 text-xl font-semibold tracking-tight text-foreground">
@@ -18,7 +18,7 @@ const components: PortableTextComponents = {
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="mb-5 border-l-2 border-accent pl-4 italic text-foreground-muted">
+      <blockquote className="mb-6 border-l-2 border-border-strong pl-5 font-serif text-base leading-[1.85] italic text-foreground-muted">
         {children}
       </blockquote>
     ),
@@ -29,7 +29,7 @@ const components: PortableTextComponents = {
     ),
     em: ({ children }) => <em className="italic">{children}</em>,
     code: ({ children }) => (
-      <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px] text-accent">
+      <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px] text-foreground">
         {children}
       </code>
     ),
@@ -38,7 +38,7 @@ const components: PortableTextComponents = {
         href={value?.href}
         target={value?.href?.startsWith("http") ? "_blank" : undefined}
         rel={value?.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-        className="text-accent underline-offset-4 hover:underline"
+        className="underline underline-offset-4 hover:text-foreground-muted"
       >
         {children}
       </a>
@@ -46,19 +46,19 @@ const components: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-5 list-disc space-y-1.5 pl-5 text-foreground-muted">
+      <ul className="mb-6 list-disc space-y-2 pl-5 font-serif text-base leading-[1.85] text-foreground">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-5 list-decimal space-y-1.5 pl-5 text-foreground-muted">
+      <ol className="mb-6 list-decimal space-y-2 pl-5 font-serif text-base leading-[1.85] text-foreground">
         {children}
       </ol>
     ),
   },
   listItem: {
-    bullet: ({ children }) => <li className="leading-relaxed">{children}</li>,
-    number: ({ children }) => <li className="leading-relaxed">{children}</li>,
+    bullet: ({ children }) => <li className="leading-[1.85]">{children}</li>,
+    number: ({ children }) => <li className="leading-[1.85]">{children}</li>,
   },
 };
 

@@ -61,12 +61,12 @@ export default function About() {
   return (
     <main
       id="main-content"
-      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
+      className="flex-1"
     >
-      <Container size="md" className="py-14 sm:py-20">
+      <Container size="md" className="py-20 sm:py-28">
 
-        <ScrollReveal className="mb-16">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
+        <ScrollReveal className="mb-20">
+          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
             About
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
@@ -77,11 +77,11 @@ export default function About() {
           </p>
         </ScrollReveal>
 
-        <article className="space-y-10 text-[15px] leading-relaxed text-foreground-muted">
+        <article className="space-y-14 font-serif text-base leading-[1.85] text-foreground">
           {sections.map((s, i) => (
             <ScrollReveal key={s.id} delay={i * 0.07}>
               <section>
-                <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground">
+                <h2 className="mb-5 text-xl font-bold tracking-tight text-foreground">
                   {s.heading}
                 </h2>
                 <div className="space-y-4">
