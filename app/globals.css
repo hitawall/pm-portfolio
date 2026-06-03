@@ -44,6 +44,7 @@
   --color-accent-foreground: var(--accent-fg);
   --color-accent-subtle: var(--accent-subtle);
   --font-sans: var(--font-jakarta);
+  --font-serif: var(--font-lora);
   --font-mono: var(--font-geist-mono);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -69,6 +70,10 @@ body {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 2px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-lora), Georgia, serif;
   }
 }
 
