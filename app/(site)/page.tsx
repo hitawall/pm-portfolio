@@ -99,8 +99,8 @@ export default async function Home() {
 
       {/* ── Projects ─────────────────────────────────────────── */}
       <section id="projects" className="border-t border-border py-20 sm:py-28">
-        <Container size="lg">
-          <ScrollReveal className="mb-10 flex items-end justify-between">
+        <Container size="md">
+          <ScrollReveal className="mb-8 flex items-end justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
                 Projects
@@ -111,43 +111,40 @@ export default async function Home() {
             </div>
             <Link
               href="/projects"
-              className="flex items-center gap-1 text-sm text-accent transition-colors hover:text-accent-hover"
+              className="flex items-center gap-1 text-sm text-foreground-muted transition-colors hover:text-foreground"
             >
               All projects <ArrowUpRight size={14} />
             </Link>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="divide-y divide-border">
             {STATIC_PROJECTS.map((project, i) => (
-              <ScrollReveal key={project._id} delay={i * 0.1}>
-                <div className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-md">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="rounded-full bg-accent-subtle px-2.5 py-0.5 text-xs font-medium text-accent">
+              <ScrollReveal key={project._id} delay={i * 0.08}>
+                <a
+                  href={project.externalUrl ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start justify-between gap-6 py-7"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
                         {KIND_LABELS[project.kind] ?? project.kind}
                       </span>
-                      <span className="font-mono text-xs text-foreground-muted">
-                        {project.year}
-                      </span>
+                      <span className="text-xs text-foreground-muted">· {project.year}</span>
                     </div>
-                    <h3 className="mt-4 text-base font-semibold leading-snug">
+                    <h3 className="mt-1 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-foreground-muted">
                       {project.title}
                     </h3>
-                    <p className="mt-2 text-sm text-foreground-muted">
+                    <p className="mt-1.5 max-w-lg text-sm text-foreground-muted">
                       {project.summary}
                     </p>
                   </div>
-                  {project.externalUrl && (
-                    <a
-                      href={project.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center gap-1 text-xs text-accent transition-colors hover:text-accent-hover"
-                    >
-                      View project <ArrowUpRight size={12} />
-                    </a>
-                  )}
-                </div>
+                  <ArrowUpRight
+                    size={16}
+                    className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
               </ScrollReveal>
             ))}
           </div>

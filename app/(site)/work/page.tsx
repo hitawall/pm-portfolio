@@ -18,12 +18,12 @@ export default async function Work() {
   return (
     <main
       id="main-content"
-      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
+      className="flex-1"
     >
       <Container size="md" className="py-14 sm:py-20">
 
         <ScrollReveal className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
+          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
             Work
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
@@ -75,7 +75,7 @@ export default async function Work() {
                         </span>
                       )}
                     </div>
-                    <h2 className="mt-1 text-lg font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
+                    <h2 className="mt-1 text-lg font-semibold tracking-tight transition-colors duration-150 group-hover:text-foreground-muted">
                       {cs.title}
                     </h2>
                     {cs.summary && (
@@ -98,7 +98,7 @@ export default async function Work() {
                   </div>
                   <ArrowUpRight
                     size={18}
-                    className="mt-1 flex-shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                    className="mt-1 flex-shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />
                 </Link>
               </ScrollReveal>

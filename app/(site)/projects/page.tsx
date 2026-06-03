@@ -33,23 +33,23 @@ export default async function Projects({ searchParams }: Props) {
   return (
     <main
       id="main-content"
-      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
+      className="flex-1"
     >
-      <Container size="lg" className="py-14 sm:py-20">
+      <Container size="md" className="py-14 sm:py-20">
 
         <ScrollReveal className="mb-10">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
+          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
             Projects
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
             Things I&apos;ve built
           </h1>
-          <p className="mt-3 text-lg text-foreground-muted">
+          <p className="mt-3 text-base text-foreground-muted">
             Side projects and experiments.
           </p>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.05} className="mb-8 flex flex-wrap gap-2">
+        <ScrollReveal delay={0.05} className="mb-8 flex gap-6">
           {FILTER_OPTIONS.map((opt) => {
             const isActive = opt.value === (kind ?? "");
             return (
@@ -57,10 +57,10 @@ export default async function Projects({ searchParams }: Props) {
                 key={opt.label}
                 href={opt.value ? `?kind=${opt.value}` : "/projects"}
                 className={cn(
-                  "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors duration-150",
+                  "text-sm transition-colors duration-150",
                   isActive
-                    ? "border-accent bg-accent-subtle text-accent"
-                    : "border-border text-foreground-muted hover:border-accent/40 hover:text-foreground"
+                    ? "font-semibold text-foreground underline underline-offset-4"
+                    : "text-foreground-muted hover:text-foreground"
                 )}
               >
                 {opt.label}
@@ -74,45 +74,50 @@ export default async function Projects({ searchParams }: Props) {
             {kind ? `No ${KIND_LABELS[kind] ?? kind} projects yet.` : "Projects coming soon."}
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((project, i) => (
-              <ScrollReveal key={project._id} delay={i * 0.07}>
-                <div className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:border-accent/40 hover:shadow-md">
-                  <div>
-                    <div className="flex items-center justify-between">
+          <div className="divide-y divide-border">
+            {filtered.map((project, i) => {
+              const row = (
+                <div className="group flex items-start justify-between gap-6 py-7">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3">
                       {project.kind && (
-                        <span className="rounded-full bg-accent-subtle px-2.5 py-0.5 text-xs font-medium text-accent">
+                        <span className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
                           {KIND_LABELS[project.kind] ?? project.kind}
                         </span>
                       )}
                       {project.year && (
-                        <span className="font-mono text-xs text-foreground-muted">
-                          {project.year}
-                        </span>
+                        <span className="text-xs text-foreground-muted">· {project.year}</span>
                       )}
                     </div>
-                    <h2 className="mt-4 text-base font-semibold leading-snug">
+                    <h2 className="mt-1 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-foreground-muted">
                       {project.title}
                     </h2>
                     {project.summary && (
-                      <p className="mt-2 text-sm text-foreground-muted">
+                      <p className="mt-1.5 max-w-lg text-sm text-foreground-muted">
                         {project.summary}
                       </p>
                     )}
                   </div>
                   {project.externalUrl && (
-                    <a
-                      href={project.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 inline-flex items-center gap-1 text-xs text-accent transition-colors hover:text-accent-hover"
-                    >
-                      View project <ArrowUpRight size={12} />
-                    </a>
+                    <ArrowUpRight
+                      size={16}
+                      className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
                   )}
                 </div>
-              </ScrollReveal>
-            ))}
+              );
+              return (
+                <ScrollReveal key={project._id} delay={i * 0.07}>
+                  {project.externalUrl ? (
+                    <a href={project.externalUrl} target="_blank" rel="noopener noreferrer">
+                      {row}
+                    </a>
+                  ) : (
+                    row
+                  )}
+                </ScrollReveal>
+              );
+            })}
           </div>
         )}
 
