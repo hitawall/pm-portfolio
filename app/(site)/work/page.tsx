@@ -23,7 +23,7 @@ export default async function Work() {
       <Container size="md" className="py-14 sm:py-20">
 
         <ScrollReveal className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+          <p className="text-xs font-medium uppercase tracking-widest text-accent">
             Work
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">

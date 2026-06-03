@@ -38,7 +38,7 @@ export default async function Projects({ searchParams }: Props) {
       <Container size="md" className="py-14 sm:py-20">
 
         <ScrollReveal className="mb-10">
-          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+          <p className="text-xs font-medium uppercase tracking-widest text-accent">
             Projects
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
@@ -59,7 +59,7 @@ export default async function Projects({ searchParams }: Props) {
                 className={cn(
                   "text-sm transition-colors duration-150",
                   isActive
-                    ? "font-semibold text-foreground underline underline-offset-4"
+                    ? "font-semibold text-accent"
                     : "text-foreground-muted hover:text-foreground"
                 )}
               >

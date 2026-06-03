@@ -75,7 +75,7 @@ export default async function ThoughtPage({ params }: Props) {
       <Container size="md" className="py-20 sm:py-28">
 
         <ScrollReveal className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+          <p className="text-xs font-medium uppercase tracking-widest text-accent">
             Thoughts
           </p>
           <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
