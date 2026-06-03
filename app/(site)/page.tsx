@@ -25,7 +25,7 @@ export default async function Home() {
     <main id="main-content" className="flex-1">
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="border-b border-border py-20 sm:py-28">
+      <section className="border-b border-border py-24 sm:py-32">
         <Container size="md">
           <HeroMotion>
             <div className="flex flex-col items-center gap-10 sm:flex-row sm:items-center sm:gap-16">
@@ -98,9 +98,9 @@ export default async function Home() {
       </section>
 
       {/* ── Projects ─────────────────────────────────────────── */}
-      <section id="projects" className="border-t border-border py-20 sm:py-28">
+      <section id="projects" className="border-t border-border py-24 sm:py-32">
         <Container size="md">
-          <ScrollReveal className="mb-8 flex items-end justify-between">
+          <ScrollReveal className="mb-12 flex items-end justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
                 Projects
@@ -152,9 +152,9 @@ export default async function Home() {
       </section>
 
       {/* ── Recent Thoughts ──────────────────────────────────── */}
-      <section className="border-t border-border bg-surface py-20 sm:py-28">
-        <Container size="lg">
-          <ScrollReveal className="mb-10 flex items-end justify-between">
+      <section className="border-t border-border py-24 sm:py-32">
+        <Container size="md">
+          <ScrollReveal className="mb-12 flex items-end justify-between">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
                 Writing
@@ -177,7 +177,7 @@ export default async function Home() {
                 <ScrollReveal key={post._id} delay={i * 0.08}>
                 <Link
                   href={`/thoughts/${post.slug.current}`}
-                  className="group flex items-start justify-between gap-6 py-5 transition-colors"
+                  className="group flex items-start justify-between gap-6 py-7 transition-colors"
                 >
                   <div className="flex-1">
                     <p className="font-mono text-xs text-foreground-muted">
@@ -216,7 +216,7 @@ export default async function Home() {
       </section>
 
       {/* ── Contact CTA ──────────────────────────────────────── */}
-      <section id="contact" className="border-t border-border py-20 sm:py-28 [background:radial-gradient(ellipse_80%_80%_at_50%_110%,color-mix(in_srgb,var(--accent)_12%,transparent),transparent)]">
+      <section id="contact" className="border-t border-border py-24 sm:py-32">
         <Container size="md" className="text-center">
           <ScrollReveal>
           <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
