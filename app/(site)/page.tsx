@@ -75,7 +75,7 @@ export default async function Home() {
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-3 sm:justify-start">
-                  <p className="inline-flex items-center gap-2 text-xs font-medium text-foreground-muted">
+                  <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-subtle px-3 py-1 text-xs font-medium text-accent">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
@@ -102,7 +102,7 @@ export default async function Home() {
         <Container size="md">
           <ScrollReveal className="mb-12 flex items-end justify-between">
             <div>
-              <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+              <p className="text-xs font-medium uppercase tracking-widest text-accent">
                 Projects
               </p>
               <h2 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -156,7 +156,7 @@ export default async function Home() {
         <Container size="md">
           <ScrollReveal className="mb-12 flex items-end justify-between">
             <div>
-              <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+              <p className="text-xs font-medium uppercase tracking-widest text-accent">
                 Writing
               </p>
               <h2 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -219,7 +219,7 @@ export default async function Home() {
       <section id="contact" className="border-t border-border py-24 sm:py-32">
         <Container size="md" className="text-center">
           <ScrollReveal>
-          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+          <p className="text-xs font-medium uppercase tracking-widest text-accent">
             Open to opportunities
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">

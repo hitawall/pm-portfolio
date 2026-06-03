@@ -66,7 +66,7 @@ export default function About() {
       <Container size="md" className="py-20 sm:py-28">
 
         <ScrollReveal className="mb-20">
-          <p className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
+          <p className="text-xs font-medium uppercase tracking-widest text-accent">
             About
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
