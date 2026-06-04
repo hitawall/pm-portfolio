@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
             left: 0,
             right: 0,
             height: "4px",
-            background: "linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%)",
+            background: "linear-gradient(90deg, #b45309 0%, #fbbf24 100%)",
           }}
         />
 
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
                     fontWeight: 600,
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: "#a78bfa",
+                    color: "#fbbf24",
                   }}
                 >
                   {type}
@@ -111,18 +111,16 @@ export async function GET(request: NextRequest) {
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              width: "48px",
-              height: "48px",
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)",
-              fontSize: "16px",
+              background: "linear-gradient(135deg, #b45309 0%, #fbbf24 100%)",
+              borderRadius: "100px",
+              padding: "12px 28px",
+              fontSize: "15px",
               fontWeight: 700,
-              color: "#ffffff",
+              color: "#1c1008",
               letterSpacing: "-0.01em",
             }}
           >
-            SA
+            View Portfolio →
           </div>
         </div>
       </div>
