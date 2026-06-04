@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Shubham Arora",
   title: "Shubham Arora — Builder · Engineer · Product Thinker",
   description:
-    "Builder with product depth. 5 years shipping at scale across fintech, health, and cloud infrastructure. Engineering-led PM making an impact.",
+    "Engineer, builder, and product thinker. 5 years shipping at scale across fintech, health, and cloud. Open to engineering, product, and AI roles.",
   github: "https://github.com/hitawall",
   linkedin: "https://in.linkedin.com/in/shubham-arora-se/",
   email: "shubhaminkk@gmail.com",
