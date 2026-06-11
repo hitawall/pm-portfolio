@@ -7,10 +7,12 @@ import { CopyEmail } from "@/components/ui/CopyEmail";
 import { HeroMotion } from "@/components/site/HeroMotion";
 import { ContributionGraph } from "@/components/site/ContributionGraph";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { getAllPosts } from "@/sanity/lib/queries";
+import { getAllPosts, getNowEntries } from "@/sanity/lib/queries";
 import { siteConfig, githubFallbackStats } from "@/lib/config";
 import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
 import { getGitHubStats, formatRelativeTime, type GitHubStats } from "@/lib/github";
+import { NOW_FALLBACK } from "@/lib/now";
+import { NowFeed } from "@/components/site/NowFeed";
 
 const companies = ["JPMC", "Amazon", "Blink Health", "Nutanix"];
 
@@ -42,9 +44,17 @@ function buildHeroStats(gh: GitHubStats | null) {
 }
 
 export default async function Home() {
-  const [allPosts, gh] = await Promise.all([getAllPosts(), getGitHubStats()]);
+  const [allPosts, gh, sanityNow] = await Promise.all([
+    getAllPosts(),
+    getGitHubStats(),
+    getNowEntries(),
+  ]);
   const recentPosts = allPosts.slice(0, 3);
   const heroStats = buildHeroStats(gh);
+  const nowEntries = sanityNow.length > 0 ? sanityNow : NOW_FALLBACK;
+  const currentNow =
+    nowEntries.find((e) => e.current && e.status === "building") ??
+    nowEntries.find((e) => e.current);
 
   return (
     <main id="main-content" className="flex-1">
@@ -117,6 +127,17 @@ export default async function Home() {
               {companies.join(" → ")} · 2020 → 2026
             </p>
 
+            {currentNow && (
+              <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-xs text-foreground-muted backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                </span>
+                {currentNow.status === "building" ? "building" : currentNow.status}:{" "}
+                <span className="text-foreground">{currentNow.title}</span>
+              </p>
+            )}
+
             <div className="mt-7 flex flex-wrap gap-3">
               <Button as={Link} href="/projects">
                 View projects <ArrowUpRight size={14} />
@@ -156,6 +177,23 @@ export default async function Home() {
               />
             </HeroMotion>
           )}
+        </Container>
+      </section>
+
+      {/* ── Now ──────────────────────────────────────────────── */}
+      <section id="now" className="py-20 sm:py-24">
+        <Container size="md">
+          <ScrollReveal className="mb-10">
+            <p className="text-xs font-medium uppercase tracking-widest text-accent">
+              Now
+            </p>
+            <h2 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+              What I&apos;m building
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.08}>
+            <NowFeed entries={nowEntries} />
+          </ScrollReveal>
         </Container>
       </section>
 
