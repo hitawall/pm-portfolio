@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Geist_Mono, Lora } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig, getBaseUrl } from "@/lib/config";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const lora = Lora({
-  variable: "--font-lora",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
 });
@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${lora.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${spaceGrotesk.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <body className="flex min-h-dvh flex-col bg-background text-foreground antialiased">

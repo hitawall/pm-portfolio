@@ -4,10 +4,12 @@ import { siteConfig } from "@/lib/config";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-border py-8">
+    <footer className="mt-auto border-t border-border/60 py-8">
       <Container>
         <div className="flex flex-col items-start justify-between gap-4 text-sm text-foreground-muted sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} {siteConfig.name}</p>
+          <p className="font-mono text-xs">
+            © {new Date().getFullYear()} {siteConfig.name}
+          </p>
           <div className="flex items-center gap-5">
             <a
               href={siteConfig.github}
