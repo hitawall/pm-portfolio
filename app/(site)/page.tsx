@@ -7,26 +7,43 @@ import { CopyEmail } from "@/components/ui/CopyEmail";
 import { HeroMotion } from "@/components/site/HeroMotion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts } from "@/sanity/lib/queries";
-import { siteConfig } from "@/lib/config";
+import { siteConfig, githubFallbackStats } from "@/lib/config";
 import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
+import { getGitHubStats, formatRelativeTime, type GitHubStats } from "@/lib/github";
 
 const companies = ["JPMC", "Amazon", "Blink Health", "Nutanix"];
 
-// Placeholder values — replaced by live GitHub data in Phase 2 (GH-77, GH-78)
-const heroStats = [
-  { label: "Years shipping", value: "05", detail: "fintech · health · cloud" },
-  {
-    label: "Projects built",
-    value: String(STATIC_PROJECTS.length).padStart(2, "0"),
-    detail: "side quests included",
-  },
-  { label: "Contributions", value: "1,108", detail: "past year · GitHub" },
-  { label: "Last commit", value: "3h ago", detail: "github.com/hitawall" },
-];
+function buildHeroStats(gh: GitHubStats | null) {
+  return [
+    { label: "Years shipping", value: "05", detail: "fintech · health · cloud" },
+    {
+      label: "Projects built",
+      value: String(STATIC_PROJECTS.length).padStart(2, "0"),
+      detail: "side quests included",
+    },
+    {
+      label: "Contributions",
+      value: gh
+        ? gh.totalContributions.toLocaleString("en-US")
+        : githubFallbackStats.contributions,
+      detail: "past year · GitHub",
+    },
+    {
+      label: "Last commit",
+      value: gh?.lastPush
+        ? formatRelativeTime(gh.lastPush.pushedAt)
+        : githubFallbackStats.lastCommit,
+      detail: gh?.lastPush
+        ? gh.lastPush.repo
+        : `github.com/${siteConfig.githubUsername}`,
+    },
+  ];
+}
 
 export default async function Home() {
-  const allPosts = await getAllPosts();
+  const [allPosts, gh] = await Promise.all([getAllPosts(), getGitHubStats()]);
   const recentPosts = allPosts.slice(0, 3);
+  const heroStats = buildHeroStats(gh);
 
   return (
     <main id="main-content" className="flex-1">
