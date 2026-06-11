@@ -2,7 +2,7 @@
 
 /* ---------- Semantic tokens — Product Dark (Redesign 2.0) ----------
    Dark is the designed-first surface; light is derived from the same
-   cool-zinc hue system. Accent: electric indigo with a cyan edge. */
+   cool-zinc hue system. Accent: tangerine with a sunny-yellow edge. */
 :root {
   --background: #fafafa;
   --foreground: #111113;
@@ -10,13 +10,13 @@
   --border: #e4e4e7;
   --border-strong: #d4d4d8;
   --surface: #f4f4f5;
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
+  --accent: #ea580c;
+  --accent-hover: #c2410c;
   --accent-fg: #ffffff;
-  --accent-subtle: #e0e7ff;
-  --accent-2: #0891b2;
+  --accent-subtle: #ffedd5;
+  --accent-2: #ca8a04;
   /* Raw rgba for box-shadow glows */
-  --accent-glow: rgba(79, 70, 229, 0.18);
+  --accent-glow: rgba(234, 88, 12, 0.18);
 }
 
 .dark {
@@ -26,12 +26,13 @@
   --border: #1f1f23;
   --border-strong: #2e2e35;
   --surface: #131316;
-  --accent: #6366f1;
-  --accent-hover: #818cf8;
-  --accent-fg: #ffffff;
-  --accent-subtle: #1e1b4b;
-  --accent-2: #22d3ee;
-  --accent-glow: rgba(99, 102, 241, 0.25);
+  --accent: #fb923c;
+  --accent-hover: #fdba74;
+  /* Bright orange-400 bg needs dark text for contrast */
+  --accent-fg: #431407;
+  --accent-subtle: #2b1205;
+  --accent-2: #fde047;
+  --accent-glow: rgba(251, 146, 60, 0.25);
 }
 
 @theme inline {
