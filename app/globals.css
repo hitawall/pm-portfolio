@@ -85,15 +85,3 @@ body {
   }
 }
 
-/* ---------- Utilities ---------- */
-.gradient-heading {
-  background: linear-gradient(135deg, var(--foreground) 0%, var(--foreground-muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.bento-glow:hover {
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  box-shadow: 0 0 32px var(--accent-glow);
-}
