@@ -19,10 +19,20 @@ export type CaseStudyPreview = {
 
 export type SanityImage = { asset: { _ref: string }; hotspot?: object; crop?: object };
 
+export type CaseStudyDecision = {
+  decision: string;
+  rationale?: string;
+  tradeoff?: string;
+};
+
 export type CaseStudy = CaseStudyPreview & {
   role: string;
   coverImage: SanityImage | null;
   outcomes: { label: string; value: string; delta?: string }[];
+  problem?: string;
+  constraints?: string[];
+  decisions?: CaseStudyDecision[];
+  outcomeNarrative?: string;
   body: unknown[];
 };
 
@@ -89,7 +99,8 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
   if (!hasProjectId) return null;
   return client.fetch(
     groq`*[_type == "caseStudy" && slug.current == $slug][0] {
-      ${CASE_STUDY_PREVIEW_FIELDS}, role, coverImage, outcomes, body
+      ${CASE_STUDY_PREVIEW_FIELDS}, role, coverImage, outcomes,
+      problem, constraints, decisions, outcomeNarrative, body
     }`,
     { slug },
     revalidate
