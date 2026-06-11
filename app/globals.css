@@ -1,35 +1,38 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens — Editorial Ink + Amber ---------- */
+/* ---------- Semantic tokens — Product Dark (Redesign 2.0) ----------
+   Dark is the designed-first surface; light is derived from the same
+   cool-zinc hue system. Accent: tangerine with a sunny-yellow edge. */
 :root {
-  --background: #fafaf8;
-  --foreground: #18181b;
-  --foreground-muted: #71716a;
-  --border: #e4e4dc;
-  --border-strong: #cfcfc4;
-  --surface: #f4f4ef;
-  /* Editorial accent — warm amber */
-  --accent: #b45309;
-  --accent-hover: #92400e;
-  --accent-fg: #fffbeb;
-  --accent-subtle: #fef3c7;
-  /* Glow for card hover (raw rgba for box-shadow) */
-  --accent-glow: rgba(180, 83, 9, 0.10);
+  --background: #fafafa;
+  --foreground: #111113;
+  --foreground-muted: #6b6b76;
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --surface: #f4f4f5;
+  --accent: #ea580c;
+  --accent-hover: #c2410c;
+  --accent-fg: #ffffff;
+  --accent-subtle: #ffedd5;
+  --accent-2: #ca8a04;
+  /* Raw rgba for box-shadow glows */
+  --accent-glow: rgba(234, 88, 12, 0.18);
 }
 
 .dark {
-  --background: #0f0f0e;
-  --foreground: #f0f0eb;
-  --foreground-muted: #a0a09a;
-  --border: #2a2a26;
-  --border-strong: #3d3d38;
-  --surface: #171716;
-  /* Bright amber for dark bg readability */
-  --accent: #fbbf24;
-  --accent-hover: #f59e0b;
-  --accent-fg: #1c1008;
-  --accent-subtle: #1c1200;
-  --accent-glow: rgba(251, 191, 36, 0.12);
+  --background: #0a0a0b;
+  --foreground: #f4f4f5;
+  --foreground-muted: #9b9ba4;
+  --border: #1f1f23;
+  --border-strong: #2e2e35;
+  --surface: #131316;
+  --accent: #fb923c;
+  --accent-hover: #fdba74;
+  /* Bright orange-400 bg needs dark text for contrast */
+  --accent-fg: #431407;
+  --accent-subtle: #2b1205;
+  --accent-2: #fde047;
+  --accent-glow: rgba(251, 146, 60, 0.25);
 }
 
 @theme inline {
@@ -43,9 +46,13 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-fg);
   --color-accent-subtle: var(--accent-subtle);
-  --font-sans: var(--font-jakarta);
-  --font-serif: var(--font-lora);
+  --color-accent-2: var(--accent-2);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
+  /* font-serif is still referenced by about + PortableText; renders as
+     sans until those pages are restyled in Phase 6 (GH-88). */
+  --font-serif: var(--font-geist-sans);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -73,7 +80,8 @@ body {
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-lora), Georgia, serif;
+    font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
