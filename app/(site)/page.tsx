@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CopyEmail } from "@/components/ui/CopyEmail";
 import { HeroMotion } from "@/components/site/HeroMotion";
+import { ContributionGraph } from "@/components/site/ContributionGraph";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts } from "@/sanity/lib/queries";
 import { siteConfig, githubFallbackStats } from "@/lib/config";
@@ -145,6 +146,16 @@ export default async function Home() {
               ))}
             </div>
           </HeroMotion>
+
+          {/* Contribution graph — only when live data is available */}
+          {gh && (
+            <HeroMotion delay={0.2} className="mt-3">
+              <ContributionGraph
+                weeks={gh.weeks}
+                totalContributions={gh.totalContributions}
+              />
+            </HeroMotion>
+          )}
         </Container>
       </section>
 
