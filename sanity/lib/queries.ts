@@ -5,16 +5,21 @@ const hasProjectId = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
+export type OutcomeMetric = { label: string; value: string; delta?: string };
+
 export type CaseStudyPreview = {
   _id: string;
   title: string;
   slug: { current: string };
   company: string;
+  role?: string;
   year: string;
   summary: string;
   featured: boolean;
   order: number;
   tags: string[];
+  coverImage: SanityImage | null;
+  outcomes?: OutcomeMetric[];
 };
 
 export type SanityImage = { asset: { _ref: string }; hotspot?: object; crop?: object };
@@ -70,7 +75,8 @@ export type Project = {
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 const CASE_STUDY_PREVIEW_FIELDS = groq`
-  _id, title, slug, company, year, summary, featured, order, tags
+  _id, title, slug, company, role, year, summary, featured, order, tags,
+  coverImage, outcomes
 `;
 
 const revalidate = { next: { revalidate: 60 } } as const;
