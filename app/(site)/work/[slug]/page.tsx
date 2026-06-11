@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { PortableText } from "@/components/content/PortableText";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { MetricStat } from "@/components/ui/MetricStat";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { siteConfig, getBaseUrl } from "@/lib/config";
@@ -31,10 +32,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function SectionEyebrow({ index, title }: { index: number; title: string }) {
+  return (
+    <p className="font-mono text-xs uppercase tracking-widest text-accent">
+      {String(index).padStart(2, "0")} — {title}
+    </p>
+  );
+}
+
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
   const cs = await getCaseStudyBySlug(slug);
   if (!cs) notFound();
+
+  const hasBody = !!cs.body && (cs.body as unknown[]).length > 0;
+  const hasNarrative =
+    !!cs.problem ||
+    !!cs.constraints?.length ||
+    !!cs.decisions?.length ||
+    !!cs.outcomeNarrative;
+
+  // Sequential section numbering regardless of which fields exist
+  let sectionIndex = 0;
+  const nextIndex = () => ++sectionIndex;
 
   return (
     <main
@@ -42,26 +62,39 @@ export default async function CaseStudyPage({ params }: Props) {
       className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
     >
       <Container size="md" className="py-14 sm:py-20">
-
-        <ScrollReveal className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
-            {cs.company}{cs.year ? ` · ${cs.year}` : ""}
+        <ScrollReveal className="mb-10">
+          <p className="font-mono text-xs uppercase tracking-widest text-foreground-muted">
+            {cs.company}
+            {cs.role ? ` · ${cs.role}` : ""}
+            {cs.year ? ` · ${cs.year}` : ""}
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
             {cs.title}
           </h1>
-          {cs.role && (
-            <p className="mt-2 text-sm text-foreground-muted">{cs.role}</p>
-          )}
           {cs.summary && (
-            <p className="mt-4 max-w-xl text-base text-foreground-muted">
+            <p className="mt-4 max-w-xl text-base text-foreground-muted sm:text-lg">
               {cs.summary}
             </p>
+          )}
+          {cs.tags && cs.tags.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-1.5">
+              {cs.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-border px-2.5 py-0.5 font-mono text-[11px] text-foreground-muted"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           )}
         </ScrollReveal>
 
         {cs.coverImage && (
-          <ScrollReveal delay={0.1} className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+          <ScrollReveal
+            delay={0.1}
+            className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border"
+          >
             <Image
               src={urlFor(cs.coverImage).width(1200).height(675).url()}
               alt={cs.title}
@@ -72,42 +105,117 @@ export default async function CaseStudyPage({ params }: Props) {
           </ScrollReveal>
         )}
 
-        {cs.outcomes && cs.outcomes.length > 0 && (
-          <ScrollReveal delay={0.15} className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {cs.outcomes.map((o, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-border border-t-2 border-t-accent bg-surface p-4"
+        <div className="flex flex-col gap-10 lg:flex-row-reverse lg:gap-12">
+          {/* Outcomes — strip on mobile, sticky rail on desktop */}
+          {cs.outcomes && cs.outcomes.length > 0 && (
+            <aside className="lg:w-60 lg:shrink-0">
+              <ScrollReveal
+                delay={0.12}
+                className="grid grid-cols-2 gap-x-6 gap-y-5 rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm lg:sticky lg:top-24 lg:grid-cols-1"
               >
-                <p className="text-xs text-foreground-muted">{o.label}</p>
-                <p className="mt-1 text-2xl font-bold tracking-tight">{o.value}</p>
-                {o.delta && (
-                  <p className="mt-0.5 text-xs font-medium text-accent">{o.delta}</p>
+                <p className="col-span-full font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
+                  Outcomes
+                </p>
+                {cs.outcomes.map((o) => (
+                  <MetricStat
+                    key={o.label}
+                    label={o.label}
+                    value={o.value}
+                    delta={o.delta}
+                  />
+                ))}
+              </ScrollReveal>
+            </aside>
+          )}
+
+          <div className="min-w-0 flex-1">
+            {cs.problem && (
+              <ScrollReveal className="mb-12">
+                <SectionEyebrow index={nextIndex()} title="Problem" />
+                <p className="mt-3 text-base leading-relaxed text-foreground">
+                  {cs.problem}
+                </p>
+              </ScrollReveal>
+            )}
+
+            {cs.constraints && cs.constraints.length > 0 && (
+              <ScrollReveal className="mb-12">
+                <SectionEyebrow index={nextIndex()} title="Constraints" />
+                <ul className="mt-4 space-y-2.5">
+                  {cs.constraints.map((c) => (
+                    <li
+                      key={c}
+                      className="flex gap-3 text-sm leading-relaxed text-foreground-muted"
+                    >
+                      <span
+                        aria-hidden
+                        className="select-none font-mono text-accent"
+                      >
+                        —
+                      </span>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </ScrollReveal>
+            )}
+
+            {cs.decisions && cs.decisions.length > 0 && (
+              <ScrollReveal className="mb-12">
+                <SectionEyebrow index={nextIndex()} title="Decisions" />
+                <div className="mt-4 divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface/40">
+                  {cs.decisions.map((d, i) => (
+                    <div key={i} className="p-5">
+                      <p className="text-sm font-semibold tracking-tight">
+                        {d.decision}
+                      </p>
+                      {d.rationale && (
+                        <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+                          <span className="font-mono text-[11px] uppercase tracking-wide text-accent">
+                            Why ·{" "}
+                          </span>
+                          {d.rationale}
+                        </p>
+                      )}
+                      {d.tradeoff && (
+                        <p className="mt-1.5 text-sm leading-relaxed text-foreground-muted">
+                          <span className="font-mono text-[11px] uppercase tracking-wide text-accent-2">
+                            Trade-off ·{" "}
+                          </span>
+                          {d.tradeoff}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </ScrollReveal>
+            )}
+
+            {cs.outcomeNarrative && (
+              <ScrollReveal className="mb-12">
+                <SectionEyebrow index={nextIndex()} title="Outcome" />
+                <p className="mt-3 text-base leading-relaxed text-foreground">
+                  {cs.outcomeNarrative}
+                </p>
+              </ScrollReveal>
+            )}
+
+            {hasBody && (
+              <ScrollReveal
+                className={
+                  hasNarrative ? "border-t border-border pt-10" : undefined
+                }
+              >
+                {hasNarrative && (
+                  <div className="mb-6">
+                    <SectionEyebrow index={nextIndex()} title="Notes" />
+                  </div>
                 )}
-              </div>
-            ))}
-          </ScrollReveal>
-        )}
-
-        {cs.tags && cs.tags.length > 0 && (
-          <ScrollReveal delay={0.2} className="mb-10 flex flex-wrap gap-1.5">
-            {cs.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-border px-2.5 py-0.5 text-xs text-foreground-muted"
-              >
-                {tag}
-              </span>
-            ))}
-          </ScrollReveal>
-        )}
-
-        {cs.body && (cs.body as unknown[]).length > 0 && (
-          <ScrollReveal delay={0.1} className="border-t border-border pt-10">
-            <PortableText value={cs.body as unknown[]} />
-          </ScrollReveal>
-        )}
-
+                <PortableText value={cs.body as unknown[]} />
+              </ScrollReveal>
+            )}
+          </div>
+        </div>
       </Container>
     </main>
   );

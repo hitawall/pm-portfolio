@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="mb-6 font-serif text-base leading-[1.85] text-foreground">{children}</p>
+      <p className="mb-5 text-base leading-relaxed text-foreground">{children}</p>
     ),
     h2: ({ children }) => (
       <h2 className="mb-4 mt-10 text-xl font-semibold tracking-tight text-foreground">
@@ -18,7 +18,7 @@ const components: PortableTextComponents = {
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="mb-6 border-l-2 border-border-strong pl-5 font-serif text-base leading-[1.85] italic text-foreground-muted">
+      <blockquote className="mb-5 border-l-2 border-accent pl-5 text-base leading-relaxed italic text-foreground-muted">
         {children}
       </blockquote>
     ),
@@ -46,19 +46,19 @@ const components: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-6 list-disc space-y-2 pl-5 font-serif text-base leading-[1.85] text-foreground">
+      <ul className="mb-5 list-disc space-y-2 pl-5 text-base leading-relaxed text-foreground">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-6 list-decimal space-y-2 pl-5 font-serif text-base leading-[1.85] text-foreground">
+      <ol className="mb-5 list-decimal space-y-2 pl-5 text-base leading-relaxed text-foreground">
         {children}
       </ol>
     ),
   },
   listItem: {
-    bullet: ({ children }) => <li className="leading-[1.85]">{children}</li>,
-    number: ({ children }) => <li className="leading-[1.85]">{children}</li>,
+    bullet: ({ children }) => <li className="leading-relaxed">{children}</li>,
+    number: ({ children }) => <li className="leading-relaxed">{children}</li>,
   },
 };
 
