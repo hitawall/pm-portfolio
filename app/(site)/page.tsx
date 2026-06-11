@@ -10,11 +10,18 @@ import { getAllPosts } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
 import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
 
-const companies = [
-  { name: "JPMC", period: "2020–21" },
-  { name: "Amazon", period: "2021–23" },
-  { name: "Blink Health", period: "2023–24" },
-  { name: "Nutanix", period: "2024–26" },
+const companies = ["JPMC", "Amazon", "Blink Health", "Nutanix"];
+
+// Placeholder values — replaced by live GitHub data in Phase 2 (GH-77, GH-78)
+const heroStats = [
+  { label: "Years shipping", value: "05", detail: "fintech · health · cloud" },
+  {
+    label: "Projects built",
+    value: String(STATIC_PROJECTS.length).padStart(2, "0"),
+    detail: "side quests included",
+  },
+  { label: "Contributions", value: "1,108", detail: "past year · GitHub" },
+  { label: "Last commit", value: "3h ago", detail: "github.com/hitawall" },
 ];
 
 export default async function Home() {
@@ -24,74 +31,101 @@ export default async function Home() {
   return (
     <main id="main-content" className="flex-1">
 
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="border-b border-border py-24 sm:py-32">
-        <Container size="md">
+      {/* ── Hero — proof-of-work dashboard ───────────────────── */}
+      <section className="relative overflow-hidden border-b border-border py-20 sm:py-28">
+        {/* Gradient glow backdrop */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute -top-32 left-1/2 h-[420px] w-[760px] max-w-full -translate-x-1/2 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%)",
+            }}
+          />
+          <div
+            className="absolute -top-16 left-[12%] h-[260px] w-[400px] blur-3xl"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, color-mix(in srgb, var(--accent-2) 12%, transparent) 0%, transparent 70%)",
+            }}
+          />
+        </div>
+
+        <Container size="md" className="relative">
           <HeroMotion>
-            <div className="flex flex-col items-center gap-10 sm:flex-row sm:items-center sm:gap-16">
-
-              {/* Avatar */}
-              <div className="shrink-0">
-                <div className="h-44 w-44 overflow-hidden rounded-full border border-border-strong shadow-sm sm:h-52 sm:w-52">
-                  <Image
-                    src="/avatar.jpg"
-                    alt="Shubham Arora"
-                    width={208}
-                    height={208}
-                    className="h-full w-full object-cover [object-position:50%_48%] scale-[1.1] translate-x-2"
-                    priority
-                  />
-                </div>
+            {/* Identity row */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+              <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border-strong">
+                <Image
+                  src="/avatar.jpg"
+                  alt="Shubham Arora"
+                  width={48}
+                  height={48}
+                  className="h-full w-full scale-[1.1] object-cover [object-position:50%_48%]"
+                  priority
+                />
               </div>
-
-              {/* Text */}
-              <div className="flex flex-col gap-4 text-center sm:text-left">
-                <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
-                  <span className="text-xs font-medium uppercase tracking-widest text-foreground-muted">
-                    Builder · Engineer · Product Thinker
-                  </span>
-                </div>
-
-                <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+              <div>
+                <p className="font-display text-sm font-semibold tracking-tight">
                   Shubham Arora
-                </h1>
-
-                <p className="text-base text-foreground-muted sm:text-lg">
-                  Five years building at scale across fintech, health, and cloud.
-                  Now bringing that engineering depth to product — shipping the
-                  right thing, not just building it right.
                 </p>
+                <p className="text-xs text-foreground-muted">
+                  Builder · Engineer · Product Thinker
+                </p>
+              </div>
+              <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-subtle px-3 py-1 text-xs font-medium text-accent sm:ml-auto">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                </span>
+                Open to PM &amp; senior eng roles
+              </p>
+            </div>
 
-                <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
-                  {companies.map((co) => (
-                    <span
-                      key={co.name}
-                      className="rounded-full border border-border px-3 py-1 text-xs font-medium"
-                    >
-                      {co.name}{" "}
-                      <span className="text-foreground-muted">{co.period}</span>
-                    </span>
-                  ))}
-                </div>
+            <h1 className="mt-9 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+              Engineering depth.{" "}
+              <span className="bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">
+                Product instincts.
+              </span>
+            </h1>
 
-                <div className="flex flex-wrap justify-center gap-3 sm:justify-start">
-                  <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-subtle px-3 py-1 text-xs font-medium text-accent">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-                    </span>
-                    Open to PM &amp; senior eng roles
+            <p className="mt-5 max-w-xl text-base text-foreground-muted sm:text-lg">
+              Five years building at scale across fintech, health, and cloud.
+              Now bringing that engineering depth to product — shipping the
+              right thing, not just building it right.
+            </p>
+
+            <p className="mt-4 font-mono text-xs text-foreground-muted">
+              {companies.join(" → ")} · 2020 → 2026
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Button as={Link} href="/projects">
+                View projects <ArrowUpRight size={14} />
+              </Button>
+              <CopyEmail label="Get in touch" variant="ghost" />
+            </div>
+          </HeroMotion>
+
+          {/* Stat cards */}
+          <HeroMotion delay={0.12} className="mt-12">
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+              {heroStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl border border-border bg-surface/60 p-4 backdrop-blur-sm transition-colors duration-200 hover:border-border-strong"
+                >
+                  <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                    {stat.label}
+                  </p>
+                  <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted">
+                    {stat.detail}
                   </p>
                 </div>
-
-                <div className="flex flex-wrap justify-center gap-3 sm:justify-start">
-                  <Button as={Link} href="/projects">
-                    View projects <ArrowUpRight size={14} />
-                  </Button>
-                  <CopyEmail label="Get in touch" variant="ghost" />
-                </div>
-              </div>
-
+              ))}
             </div>
           </HeroMotion>
         </Container>
