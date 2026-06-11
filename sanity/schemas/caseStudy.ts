@@ -4,6 +4,13 @@ export const caseStudy = defineType({
   name: "caseStudy",
   title: "Case Study",
   type: "document",
+  fieldsets: [
+    {
+      name: "narrative",
+      title: "PM narrative (problem → constraints → decisions → outcome)",
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -24,6 +31,43 @@ export const caseStudy = defineType({
       name: "coverImage",
       type: "image",
       options: { hotspot: true },
+    }),
+    defineField({
+      name: "problem",
+      type: "text",
+      rows: 4,
+      fieldset: "narrative",
+      description: "What was broken, for whom, and why it mattered",
+    }),
+    defineField({
+      name: "constraints",
+      type: "array",
+      of: [{ type: "string" }],
+      fieldset: "narrative",
+      description: "Technical, organizational, or timeline constraints",
+    }),
+    defineField({
+      name: "decisions",
+      type: "array",
+      fieldset: "narrative",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "decision", type: "string", title: "Decision" },
+            { name: "rationale", type: "text", rows: 2, title: "Why" },
+            { name: "tradeoff", type: "text", rows: 2, title: "Trade-off accepted" },
+          ],
+          preview: { select: { title: "decision", subtitle: "tradeoff" } },
+        },
+      ],
+    }),
+    defineField({
+      name: "outcomeNarrative",
+      type: "text",
+      rows: 4,
+      fieldset: "narrative",
+      description: "What changed — the story behind the outcome metrics",
     }),
     defineField({
       name: "outcomes",
