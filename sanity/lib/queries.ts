@@ -37,6 +37,16 @@ export type Post = {
 
 export type PostFull = Post & { body: unknown[] };
 
+export type NowEntry = {
+  _id: string;
+  title: string;
+  status: "building" | "shipped" | "learning" | "paused";
+  description?: string;
+  link?: string;
+  startedAt: string;
+  current: boolean;
+};
+
 export type Project = {
   _id: string;
   title: string;
@@ -100,6 +110,15 @@ export async function getPostBySlug(slug: string): Promise<PostFull | null> {
   return client.fetch(
     groq`*[_type == "post" && slug.current == $slug][0] { _id, title, slug, publishedAt, summary, tags, body }`,
     { slug },
+    revalidate
+  );
+}
+
+export async function getNowEntries(): Promise<NowEntry[]> {
+  if (!hasProjectId) return [];
+  return client.fetch(
+    groq`*[_type == "now"] | order(startedAt desc)[0...6] { _id, title, status, description, link, startedAt, current }`,
+    {},
     revalidate
   );
 }
