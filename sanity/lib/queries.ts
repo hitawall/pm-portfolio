@@ -62,6 +62,22 @@ export type NowEntry = {
   current: boolean;
 };
 
+export type SiteSettings = {
+  tagline?: string;
+  statusBadge?: string;
+  heroHeadlinePlain?: string;
+  heroHeadlineAccent?: string;
+  heroSubtitle?: string;
+  companies?: string[];
+  careerStartYear?: number;
+  yearsShipping?: string;
+  industryDetail?: string;
+  ctaLabel?: string;
+  ctaHeadline?: string;
+  ctaBody?: string;
+  resumeUrl?: string;
+};
+
 export type Project = {
   _id: string;
   title: string;
@@ -137,6 +153,21 @@ export async function getNowEntries(): Promise<NowEntry[]> {
     groq`*[_type == "now"] | order(startedAt desc)[0...6] { _id, title, status, description, link, startedAt, current }`,
     {},
     revalidate
+  );
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  if (!hasProjectId) return {};
+  return (
+    (await client.fetch(
+      groq`*[_type == "siteSettings" && _id == "siteSettings"][0] {
+        tagline, statusBadge, heroHeadlinePlain, heroHeadlineAccent, heroSubtitle,
+        companies, careerStartYear, yearsShipping, industryDetail,
+        ctaLabel, ctaHeadline, ctaBody, resumeUrl
+      }`,
+      {},
+      revalidate
+    )) ?? {}
   );
 }
 

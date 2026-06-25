@@ -9,18 +9,37 @@ import { CopyEmail } from "@/components/ui/CopyEmail";
 import { HeroMotion } from "@/components/site/HeroMotion";
 import { ContributionGraph } from "@/components/site/ContributionGraph";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { getAllPosts, getNowEntries } from "@/sanity/lib/queries";
+import { getAllPosts, getNowEntries, getSiteSettings } from "@/sanity/lib/queries";
 import { siteConfig, githubFallbackStats } from "@/lib/config";
 import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
 import { getGitHubStats, formatRelativeTime, type GitHubStats } from "@/lib/github";
 import { NOW_FALLBACK } from "@/lib/now";
 import { NowFeed } from "@/components/site/NowFeed";
 
-const companies = ["JPMC", "Amazon", "Blink Health", "Nutanix"];
+const DEFAULTS = {
+  tagline: "Builder · Engineer · Product Thinker",
+  statusBadge: "Open to PM & senior eng roles",
+  heroHeadlinePlain: "Engineering depth.",
+  heroHeadlineAccent: "Product instincts.",
+  heroSubtitle:
+    "Five years building at scale across fintech, health, and cloud. Now bringing that engineering depth to product — shipping the right thing, not just building it right.",
+  companies: ["JPMC", "Amazon", "Blink Health", "Nutanix"],
+  careerStartYear: 2020,
+  yearsShipping: "05",
+  industryDetail: "fintech · health · cloud",
+  ctaLabel: "Open to opportunities",
+  ctaHeadline: "Let's build something together",
+  ctaBody:
+    "Open to senior engineering, product, and AI/LLM roles where craft and customer obsession both matter.",
+};
 
-function buildHeroStats(gh: GitHubStats | null) {
+function buildHeroStats(
+  gh: GitHubStats | null,
+  yearsShipping: string,
+  industryDetail: string
+) {
   return [
-    { label: "Years shipping", value: "05", detail: "fintech · health · cloud" },
+    { label: "Years shipping", value: yearsShipping, detail: industryDetail },
     {
       label: "Projects built",
       value: String(STATIC_PROJECTS.length).padStart(2, "0"),
@@ -46,13 +65,16 @@ function buildHeroStats(gh: GitHubStats | null) {
 }
 
 export default async function Home() {
-  const [allPosts, gh, sanityNow] = await Promise.all([
+  const [allPosts, gh, sanityNow, cms] = await Promise.all([
     getAllPosts(),
     getGitHubStats(),
     getNowEntries(),
+    getSiteSettings(),
   ]);
+
+  const s = { ...DEFAULTS, ...Object.fromEntries(Object.entries(cms).filter(([, v]) => v != null)) };
   const recentPosts = allPosts.slice(0, 3);
-  const heroStats = buildHeroStats(gh);
+  const heroStats = buildHeroStats(gh, s.yearsShipping, s.industryDetail);
   const nowEntries = sanityNow.length > 0 ? sanityNow : NOW_FALLBACK;
   const currentNow =
     nowEntries.find((e) => e.current && e.status === "building") ??
@@ -97,10 +119,10 @@ export default async function Home() {
               </div>
               <div>
                 <p className="font-display text-sm font-semibold tracking-tight">
-                  Shubham Arora
+                  {siteConfig.name}
                 </p>
                 <p className="text-xs text-foreground-muted">
-                  Builder · Engineer · Product Thinker
+                  {s.tagline}
                 </p>
               </div>
               <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-subtle px-3 py-1 text-xs font-medium text-accent sm:ml-auto">
@@ -108,25 +130,23 @@ export default async function Home() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
                 </span>
-                Open to PM &amp; senior eng roles
+                {s.statusBadge}
               </p>
             </div>
 
             <h1 className="mt-9 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
-              Engineering depth.{" "}
+              {s.heroHeadlinePlain}{" "}
               <span className="bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">
-                Product instincts.
+                {s.heroHeadlineAccent}
               </span>
             </h1>
 
             <p className="mt-5 max-w-xl text-base text-foreground-muted sm:text-lg">
-              Five years building at scale across fintech, health, and cloud.
-              Now bringing that engineering depth to product — shipping the
-              right thing, not just building it right.
+              {s.heroSubtitle}
             </p>
 
             <p className="mt-4 font-mono text-xs text-foreground-muted">
-              {companies.join(" → ")} · 2020 → 2026
+              {s.companies.join(" → ")} · {s.careerStartYear} → {new Date().getFullYear()}
             </p>
 
             {currentNow && (
@@ -322,14 +342,13 @@ export default async function Home() {
         <Container size="md" className="text-center">
           <ScrollReveal>
           <p className="text-xs font-medium uppercase tracking-widest text-accent">
-            Open to opportunities
+            {s.ctaLabel}
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Let&apos;s build something together
+            {s.ctaHeadline}
           </h2>
           <p className="mx-auto mt-4 max-w-md text-base text-foreground-muted">
-            Open to senior engineering, product, and AI/LLM roles where craft
-            and customer obsession both matter.
+            {s.ctaBody}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <CopyEmail />
