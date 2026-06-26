@@ -6,7 +6,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllProjects } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
-import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
+import { KIND_LABELS } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: `Projects — ${siteConfig.name}`,
@@ -26,8 +26,7 @@ interface Props {
 
 export default async function Projects({ searchParams }: Props) {
   const { kind } = await searchParams;
-  const sanityProjects = await getAllProjects();
-  const allProjects = [...STATIC_PROJECTS, ...sanityProjects];
+  const allProjects = await getAllProjects();
   const filtered = kind ? allProjects.filter((p) => p.kind === kind) : allProjects;
 
   return (
