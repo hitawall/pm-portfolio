@@ -11,7 +11,7 @@ import { ContributionGraph } from "@/components/site/ContributionGraph";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts, getNowEntries, getSiteSettings, getAllProjects } from "@/sanity/lib/queries";
 import { siteConfig, githubFallbackStats } from "@/lib/config";
-import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
+import { KIND_LABELS } from "@/lib/projects";
 import { getGitHubStats, formatRelativeTime, type GitHubStats } from "@/lib/github";
 import { NOW_FALLBACK } from "@/lib/now";
 import { NowFeed } from "@/components/site/NowFeed";
@@ -80,7 +80,7 @@ export default async function Home() {
   ]);
 
   const s = { ...DEFAULTS, ...Object.fromEntries(Object.entries(cms).filter(([, v]) => v != null)) };
-  const projectCount = sanityProjects.length > 0 ? sanityProjects.length : STATIC_PROJECTS.length;
+  const projectCount = sanityProjects.length;
   const recentPosts = allPosts.slice(0, 3);
   const heroStats = buildHeroStats(gh, projectCount, s.yearsShipping, s.industryDetail);
   const nowEntries = sanityNow.length > 0 ? sanityNow : NOW_FALLBACK;
@@ -248,7 +248,7 @@ export default async function Home() {
           </ScrollReveal>
 
           <div className="divide-y divide-border">
-            {STATIC_PROJECTS.map((project, i) => (
+            {sanityProjects.map((project, i) => (
               <ScrollReveal key={project._id} delay={i * 0.08}>
                 <a
                   href={project.externalUrl ?? "#"}
