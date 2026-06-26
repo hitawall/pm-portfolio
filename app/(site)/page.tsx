@@ -9,7 +9,7 @@ import { CopyEmail } from "@/components/ui/CopyEmail";
 import { HeroMotion } from "@/components/site/HeroMotion";
 import { ContributionGraph } from "@/components/site/ContributionGraph";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { getAllPosts, getNowEntries, getSiteSettings } from "@/sanity/lib/queries";
+import { getAllPosts, getNowEntries, getSiteSettings, getAllProjects } from "@/sanity/lib/queries";
 import { siteConfig, githubFallbackStats } from "@/lib/config";
 import { STATIC_PROJECTS, KIND_LABELS } from "@/lib/projects";
 import { getGitHubStats, formatRelativeTime, type GitHubStats } from "@/lib/github";
@@ -33,8 +33,15 @@ const DEFAULTS = {
     "Open to senior engineering, product, and AI/LLM roles where craft and customer obsession both matter.",
 };
 
+function formatProjectCount(n: number): string {
+  if (n < 10) return String(n).padStart(2, "0");
+  const floor = Math.floor(n / 10) * 10;
+  return `${floor}+`;
+}
+
 function buildHeroStats(
   gh: GitHubStats | null,
+  projectCount: number,
   yearsShipping: string,
   industryDetail: string
 ) {
@@ -42,7 +49,7 @@ function buildHeroStats(
     { label: "Years shipping", value: yearsShipping, detail: industryDetail },
     {
       label: "Projects built",
-      value: String(STATIC_PROJECTS.length).padStart(2, "0"),
+      value: formatProjectCount(projectCount),
       detail: "side quests included",
     },
     {
@@ -65,16 +72,18 @@ function buildHeroStats(
 }
 
 export default async function Home() {
-  const [allPosts, gh, sanityNow, cms] = await Promise.all([
+  const [allPosts, gh, sanityNow, cms, sanityProjects] = await Promise.all([
     getAllPosts(),
     getGitHubStats(),
     getNowEntries(),
     getSiteSettings(),
+    getAllProjects(),
   ]);
 
   const s = { ...DEFAULTS, ...Object.fromEntries(Object.entries(cms).filter(([, v]) => v != null)) };
+  const projectCount = sanityProjects.length > 0 ? sanityProjects.length : STATIC_PROJECTS.length;
   const recentPosts = allPosts.slice(0, 3);
-  const heroStats = buildHeroStats(gh, s.yearsShipping, s.industryDetail);
+  const heroStats = buildHeroStats(gh, projectCount, s.yearsShipping, s.industryDetail);
   const nowEntries = sanityNow.length > 0 ? sanityNow : NOW_FALLBACK;
   const currentNow =
     nowEntries.find((e) => e.current && e.status === "building") ??
