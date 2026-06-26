@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/lib/config";
+import { getSiteSettings } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: `Resume — ${siteConfig.name}`,
@@ -11,7 +12,18 @@ export const metadata: Metadata = {
     "Resume of Shubham Arora — engineer and builder with 5 years of shipping at JPMC, Amazon, Blink Health, and Nutanix.",
 };
 
-export default function Resume() {
+/** Converts a Google Drive share URL to an embeddable preview URL. */
+function toEmbedUrl(url: string): string {
+  const match = url.match(/\/file\/d\/([^/]+)/);
+  if (match) return `https://drive.google.com/file/d/${match[1]}/preview`;
+  return url;
+}
+
+export default async function Resume() {
+  const { resumeUrl } = await getSiteSettings();
+  const embedSrc = resumeUrl ? toEmbedUrl(resumeUrl) : "/resume.pdf";
+  const downloadHref = resumeUrl ?? "/resume.pdf";
+
   return (
     <main
       id="main-content"
@@ -28,14 +40,14 @@ export default function Resume() {
               {siteConfig.name}
             </h1>
           </div>
-          <Button as="a" href="/resume.pdf" download>
+          <Button as="a" href={downloadHref} download={!resumeUrl} target={resumeUrl ? "_blank" : undefined} rel={resumeUrl ? "noopener noreferrer" : undefined}>
             <Download size={14} /> Download PDF
           </Button>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1} className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <iframe
-            src="/resume.pdf"
+            src={embedSrc}
             className="h-[82vh] w-full"
             title={`${siteConfig.name} — Resume`}
           />
@@ -44,8 +56,10 @@ export default function Resume() {
         <p className="mt-4 text-center text-sm text-foreground-muted">
           PDF not rendering?{" "}
           <a
-            href="/resume.pdf"
-            download
+            href={downloadHref}
+            download={!resumeUrl}
+            target={resumeUrl ? "_blank" : undefined}
+            rel={resumeUrl ? "noopener noreferrer" : undefined}
             className="text-accent underline-offset-4 hover:underline"
           >
             Download directly.
