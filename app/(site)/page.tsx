@@ -301,7 +301,7 @@ export default async function Home() {
                     href={project.externalUrl ?? "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface"
+                    className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
@@ -358,7 +358,7 @@ export default async function Home() {
                 <ScrollReveal key={post._id} delay={i * 0.08}>
                   <Link
                     href={`/thoughts/${post.slug.current}`}
-                    className="group block rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface"
+                    className="group block rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <p className="font-mono text-xs text-foreground-muted">
