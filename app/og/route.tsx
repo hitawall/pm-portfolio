@@ -35,7 +35,22 @@ export async function GET(request: NextRequest) {
             left: 0,
             right: 0,
             height: "4px",
-            background: "linear-gradient(90deg, #b45309 0%, #fbbf24 100%)",
+            background: "linear-gradient(90deg, #fb923c 0%, #fde047 100%)",
+          }}
+        />
+
+        {/* Radial glow — echoes the hero backdrop */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-120px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "900px",
+            height: "480px",
+            borderRadius: "50%",
+            background: "radial-gradient(ellipse at center, rgba(251,146,60,0.18) 0%, transparent 70%)",
+            pointerEvents: "none",
           }}
         />
 
@@ -50,7 +65,7 @@ export async function GET(request: NextRequest) {
                     fontWeight: 600,
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: "#fbbf24",
+                    color: "#fde047",
                   }}
                 >
                   {type}
@@ -111,12 +126,12 @@ export async function GET(request: NextRequest) {
             style={{
               display: "flex",
               alignItems: "center",
-              background: "linear-gradient(135deg, #b45309 0%, #fbbf24 100%)",
+              background: "linear-gradient(135deg, #fb923c 0%, #fde047 100%)",
               borderRadius: "100px",
               padding: "12px 28px",
               fontSize: "15px",
               fontWeight: 700,
-              color: "#1c1008",
+              color: "#431407",
               letterSpacing: "-0.01em",
             }}
           >
