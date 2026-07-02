@@ -35,7 +35,7 @@ export async function sendContactEmail(
 
   try {
     await resend.emails.send({
-      from: "Portfolio Contact <hello@arorashubham.com>",
+      from: "Portfolio Contact <hello@contact.arorashubham.com>",
       to: siteConfig.email,
       replyTo: email,
       subject: `Portfolio contact${company ? ` — ${company}` : ""}: ${name}`,
