@@ -91,17 +91,16 @@ export default async function CaseStudyPage({ params }: Props) {
         </ScrollReveal>
 
         {cs.coverImage && (
-          <ScrollReveal
-            delay={0.1}
-            className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-border"
-          >
-            <Image
-              src={urlFor(cs.coverImage).width(1200).height(675).url()}
-              alt={cs.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 800px"
-            />
+          <ScrollReveal delay={0.1} className="mb-12">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+              <Image
+                src={urlFor(cs.coverImage).width(1200).height(675).url()}
+                alt={cs.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
           </ScrollReveal>
         )}
 
