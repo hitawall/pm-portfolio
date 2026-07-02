@@ -17,8 +17,9 @@ export const project = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Product", value: "product" },
+          { title: "AI / LLM", value: "ai" },
           { title: "Engineering", value: "engineering" },
+          { title: "Product", value: "product" },
           { title: "Hobby", value: "hobby" },
         ],
         layout: "radio",

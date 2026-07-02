@@ -10,13 +10,14 @@ import { KIND_LABELS } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: `Projects — ${siteConfig.name}`,
-  description: "Side projects and experiments across product, engineering, and hobby work.",
+  description: "Side projects and experiments across AI/LLM systems, backend engineering, and hobby builds.",
 };
 
 const FILTER_OPTIONS = [
   { label: "All", value: "" },
-  { label: "Product", value: "product" },
+  { label: "AI / LLM", value: "ai" },
   { label: "Engineering", value: "engineering" },
+  { label: "Product", value: "product" },
   { label: "Hobby", value: "hobby" },
 ];
 

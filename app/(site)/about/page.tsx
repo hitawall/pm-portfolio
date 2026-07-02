@@ -9,50 +9,51 @@ import { siteConfig } from "@/lib/config";
 export const metadata: Metadata = {
   title: `About — ${siteConfig.name}`,
   description:
-    "Engineer, builder, and product thinker. Five years shipping at JPMC, Amazon, Blink Health, and Nutanix.",
+    "Backend engineer with 5 years at JPMC, Amazon, Blink Health, and Nutanix. Now building LLM systems and agent architectures.",
 };
 
 const sections = [
   {
     id: "engineering",
-    heading: "The engineering years",
+    heading: "Five years in the backend",
     paragraphs: [
-      "I spent five years as a software engineer — at JPMC building risk and compliance tooling, at Amazon working on large-scale distributed systems, at Blink Health shipping consumer-facing product and pricing infrastructure, and at Nutanix building cloud management software for enterprise customers.",
-      "These weren't incremental experiences. Each company operated at a different scale, with a different customer, under a different set of constraints. I shipped features that processed millions of transactions, debugged performance issues in systems handling petabytes of data, and built APIs that other engineers depended on. I got good at building things.",
-      "But somewhere along the way, I started being more interested in the decisions that preceded the building.",
+      "I spent five years as a backend engineer — at JPMC building risk and compliance systems that processed millions of transactions daily, at Amazon working on large-scale distributed infrastructure, at Blink Health owning pricing and fulfillment backends for a consumer health platform, and at Nutanix building cloud management software used by enterprise teams globally.",
+      "Each role pushed me deeper into systems thinking. I debugged race conditions in distributed workflows, designed APIs that other engineers built on top of, and shipped data pipelines where correctness wasn't optional. I got good at building things that don't break — and fast at diagnosing them when they do.",
+      "That foundation — knowing how data moves, where latency hides, why things fail at scale — is what I bring to everything I build now.",
     ],
   },
   {
-    id: "how-i-think",
-    heading: "How I think",
+    id: "ai-pull",
+    heading: "The pull toward AI",
     paragraphs: [
-      "The shift was gradual. I found myself most energized not by the implementation challenge, but by the upstream questions: Who is this for? What problem does this actually solve? What's the simplest version that proves the hypothesis?",
-      "At Blink Health, I watched how pricing decisions — made without deep user context — created friction that engineering heroics couldn't fix. At Nutanix, I spent time embedded with customers and realized the gap between what we were building and what they needed was a strategy problem, not an execution problem. I started pulling on those threads.",
-      "Now I build with both lenses open at once. I care about the architecture and I care about whether we're building the right thing in the first place.",
+      "My interest in LLMs started as a side project and became something I couldn't put down. I started experimenting with retrieval pipelines, prompt engineering, and early agent architectures. The more I dug in, the more I realised this was the most interesting backend problem space I'd ever encountered.",
+      "LLM systems surface every hard problem in software — latency under uncertainty, eval at scale, orchestration of non-deterministic components, and the constant tension between capability and reliability. They require the same rigor as any distributed system, with an extra layer of unpredictability that makes engineering them genuinely challenging.",
+      "I've been building in this space seriously: RAG pipelines with reranking, multi-step agent loops with tool use, structured output extraction, and observability for LLM calls. Not demos — systems designed to run in production.",
+    ],
+  },
+  {
+    id: "how-i-build",
+    heading: "How I build AI systems",
+    paragraphs: [
+      "I approach LLM engineering the way I approach any backend system: define the interface, control the failure modes, measure what matters. That means thinking carefully about context construction before reaching for a bigger model, treating evals as a first-class concern, and building retrieval pipelines that degrade gracefully rather than hallucinating confidently.",
+      "I'm comfortable across the full stack of a GenAI backend: vector databases and embedding strategies, chunk sizing and reranking tradeoffs, agent loop design, function/tool calling schemas, streaming responses, and the infrastructure to trace and debug LLM calls in production.",
+      "I don't believe every problem needs an LLM. I do believe that engineers who understand both when to use them and how to make them reliable are rare — and that's the gap I'm trying to occupy.",
     ],
   },
   {
     id: "what-i-bring",
     heading: "What I bring",
     paragraphs: [
-      "I can read the diff. I can sit in an architecture review and understand the trade-offs being discussed — not just the conclusion. I can give meaningful feedback on a technical spec, scope work honestly with stakeholders, and push back on requirements that don't survive contact with the system.",
-      "I built the pipelines I now want to reason about. I understand why certain APIs are slow, why some database designs create long-term constraints, and why a \"two-week fix\" sometimes isn't. That keeps me grounded and makes me a useful partner — to engineers, to PMs, and to anyone trying to ship something real.",
-      "More broadly: I think in systems. Years of debugging distributed infrastructure teaches you to reason about second-order effects, question assumptions, and model how a change propagates through everything else. That applies to code, to products, and to organizations.",
-    ],
-  },
-  {
-    id: "what-im-building",
-    heading: "What I'm building",
-    paragraphs: [
-      "Lately I've been deep in LLM systems — building tools that automate tedious workflows, experimenting with retrieval and agent architectures, and thinking hard about where AI actually changes the product surface vs. where it's noise.",
-      "I'm interested in roles at the intersection of engineering and product: senior engineering positions with product scope, technical PM roles, AI/ML product work, or 0→1 builder roles at companies where technical depth is treated as a first-class asset. I work best on teams that move fast, argue from first principles, and hold themselves to outcomes over outputs.",
+      "Backend depth applied to AI: I know why your RAG pipeline is returning irrelevant chunks, why your agent is looping, and why your latency spikes on the third tool call. I've built the underlying infrastructure, so I reason about AI systems at the right level of abstraction.",
+      "Systems thinking at scale: years of debugging distributed infrastructure teaches you to trace causality, question assumptions, and model second-order effects. That translates directly to diagnosing LLM system failures — which are rarely where they appear to be.",
+      "I work best on teams building AI-native products where the engineering challenges are real — not wrappers, but systems where reliability, latency, and eval strategy actually matter.",
     ],
   },
   {
     id: "outside",
     heading: "Outside work",
     paragraphs: [
-      "I follow AI/ML research more than is probably healthy. I build side projects — mostly tools I wish existed. I enjoy long runs and occasionally cooking something ambitious on a weekend.",
+      "I read AI/ML papers more than is probably healthy — especially anything touching agents, reasoning, and retrieval. I build side projects mostly in the GenAI space, usually tools I need and can't find. I enjoy long runs, occasionally cook something ambitious, and have strong opinions about text editors.",
     ],
   },
 ];
@@ -73,7 +74,7 @@ export default function About() {
             {siteConfig.name}
           </h1>
           <p className="mt-3 text-lg text-foreground-muted">
-            Engineer, builder, product thinker.
+            Backend engineer. GenAI builder.
           </p>
         </ScrollReveal>
 
