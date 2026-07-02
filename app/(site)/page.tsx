@@ -16,6 +16,7 @@ import { getGitHubStats, type GitHubStats } from "@/lib/github";
 import { RelativeTime } from "@/components/ui/RelativeTime";
 import { NOW_FALLBACK } from "@/lib/now";
 import { NowFeed } from "@/components/site/NowFeed";
+import { ContactForm } from "@/components/site/ContactForm";
 
 const DEFAULTS = {
   tagline: "Builder · Engineer · Product Thinker",
@@ -347,31 +348,22 @@ export default async function Home() {
         </Container>
       </section>
 
-      {/* ── Contact CTA ──────────────────────────────────────── */}
+      {/* ── Contact ──────────────────────────────────────────── */}
       <section id="contact" className="border-t border-border py-24 sm:py-32">
-        <Container size="md" className="text-center">
-          <ScrollReveal>
-          <p className="text-xs font-medium uppercase tracking-widest text-accent">
-            {s.ctaLabel}
-          </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            {s.ctaHeadline}
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-base text-foreground-muted">
-            {s.ctaBody}
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <CopyEmail />
-            <Button
-              as="a"
-              href={siteConfig.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="ghost"
-            >
-              LinkedIn <ArrowUpRight size={14} />
-            </Button>
-          </div>
+        <Container size="sm">
+          <ScrollReveal className="mb-10 text-center">
+            <p className="text-xs font-medium uppercase tracking-widest text-accent">
+              {s.ctaLabel}
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+              {s.ctaHeadline}
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-base text-foreground-muted">
+              {s.ctaBody}
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <ContactForm />
           </ScrollReveal>
         </Container>
       </section>

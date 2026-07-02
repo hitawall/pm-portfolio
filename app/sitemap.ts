@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/projects`, priority: 0.8 },
     { url: `${base}/about`, priority: 0.7 },
     { url: `${base}/resume`, priority: 0.6 },
+    { url: `${base}/contact`, priority: 0.8 },
   ];
 
   const workRoutes: MetadataRoute.Sitemap = caseStudies.map((cs) => ({
