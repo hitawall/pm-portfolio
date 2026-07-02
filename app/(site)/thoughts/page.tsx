@@ -65,7 +65,7 @@ export default async function Thoughts() {
               <ScrollReveal key={post._id} delay={i * 0.07}>
                 <Link
                   href={`/thoughts/${post.slug.current}`}
-                  className="group block rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface"
+                  className="group block rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <span className="font-mono text-xs text-foreground-muted">

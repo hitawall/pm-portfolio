@@ -90,7 +90,7 @@ export default async function Projects({ searchParams }: Props) {
               const hasMedia = images.length > 0 || !!videoEmbedUrl;
 
               const card = (
-                <div className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface">
+                <div className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                       {project.kind && (
@@ -109,7 +109,7 @@ export default async function Projects({ searchParams }: Props) {
                       />
                     )}
                   </div>
-                  <h2 className="mt-3 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
+                  <h2 className="mt-3 text-lg font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
                     {project.title}
                   </h2>
                   {project.summary && (
