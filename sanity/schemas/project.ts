@@ -33,8 +33,38 @@ export const project = defineType({
       type: "array",
       of: [{ type: "block" }],
     }),
+    defineField({
+      name: "videoUrl",
+      title: "Demo video URL",
+      description: "YouTube, Loom, or Vimeo share link — embedded as a preview on the project card.",
+      type: "url",
+    }),
+    defineField({
+      name: "media",
+      title: "Screenshots / images",
+      description: "Upload screenshots or demo images. First image is shown as card thumbnail.",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+              title: "Alt text",
+            }),
+            defineField({
+              name: "caption",
+              type: "string",
+              title: "Caption",
+            }),
+          ],
+        },
+      ],
+    }),
   ],
   preview: {
-    select: { title: "title", subtitle: "kind" },
+    select: { title: "title", subtitle: "kind", media: "media.0" },
   },
 });

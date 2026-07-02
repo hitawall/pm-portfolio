@@ -78,14 +78,18 @@ export type SiteSettings = {
   resumeUrl?: string;
 };
 
+export type ProjectImage = SanityImage & { _key: string; alt?: string; caption?: string };
+
 export type Project = {
   _id: string;
   title: string;
   slug: { current: string };
-  kind: "product" | "engineering" | "hobby";
+  kind: "ai" | "product" | "engineering" | "hobby";
   year: number;
   externalUrl?: string;
   summary: string;
+  videoUrl?: string;
+  media?: ProjectImage[];
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -174,7 +178,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 export async function getAllProjects(): Promise<Project[]> {
   if (!hasProjectId) return [];
   return client.fetch(
-    groq`*[_type == "project"] | order(year desc) { _id, title, slug, kind, year, externalUrl, summary }`,
+    groq`*[_type == "project"] | order(year desc) { _id, title, slug, kind, year, externalUrl, summary, videoUrl, media[]{_key, asset, alt, caption, hotspot, crop} }`,
     {},
     revalidate
   );
