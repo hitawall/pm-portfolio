@@ -17,6 +17,9 @@ import { RelativeTime } from "@/components/ui/RelativeTime";
 import { NOW_FALLBACK } from "@/lib/now";
 import { NowFeed } from "@/components/site/NowFeed";
 import { ContactForm } from "@/components/site/ContactForm";
+import { urlFor } from "@/sanity/lib/image";
+import { toVideoEmbedUrl } from "@/lib/embed";
+import { ProjectMedia } from "@/components/ui/ProjectMedia";
 
 const DEFAULTS = {
   tagline: "Builder · Engineer · Product Thinker",
@@ -251,35 +254,49 @@ export default async function Home() {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {sanityProjects.map((project, i) => (
-              <ScrollReveal key={project._id} delay={i * 0.06}>
-                <a
-                  href={project.externalUrl ?? "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground-muted">
-                        {KIND_LABELS[project.kind] ?? project.kind}
-                      </span>
-                      <span className="font-mono text-xs text-foreground-muted">{project.year}</span>
+            {sanityProjects.map((project, i) => {
+              const images = (project.media ?? []).map((img) => ({
+                url: urlFor(img).width(1200).url(),
+                alt: img.alt,
+                caption: img.caption,
+              }));
+              const videoEmbedUrl = project.videoUrl
+                ? (toVideoEmbedUrl(project.videoUrl) ?? undefined)
+                : undefined;
+              const hasMedia = images.length > 0 || !!videoEmbedUrl;
+              return (
+                <ScrollReveal key={project._id} delay={i * 0.06}>
+                  <a
+                    href={project.externalUrl ?? "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground-muted">
+                          {KIND_LABELS[project.kind] ?? project.kind}
+                        </span>
+                        <span className="font-mono text-xs text-foreground-muted">{project.year}</span>
+                      </div>
+                      <ArrowUpRight
+                        size={15}
+                        className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      />
                     </div>
-                    <ArrowUpRight
-                      size={15}
-                      className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-                    />
-                  </div>
-                  <h3 className="mt-3 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
-                    {project.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-foreground-muted">
-                    {project.summary}
-                  </p>
-                </a>
-              </ScrollReveal>
-            ))}
+                    <h3 className="mt-3 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+                      {project.summary}
+                    </p>
+                    {hasMedia && (
+                      <ProjectMedia images={images} videoEmbedUrl={videoEmbedUrl} />
+                    )}
+                  </a>
+                </ScrollReveal>
+              );
+            })}
           </div>
         </Container>
       </section>

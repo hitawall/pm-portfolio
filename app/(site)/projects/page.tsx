@@ -7,6 +7,9 @@ import { getAllProjects } from "@/sanity/lib/queries";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { KIND_LABELS } from "@/lib/projects";
+import { urlFor } from "@/sanity/lib/image";
+import { toVideoEmbedUrl } from "@/lib/embed";
+import { ProjectMedia } from "@/components/ui/ProjectMedia";
 
 export const metadata: Metadata = {
   title: `Projects — ${siteConfig.name}`,
@@ -76,6 +79,16 @@ export default async function Projects({ searchParams }: Props) {
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {filtered.map((project, i) => {
+              const images = (project.media ?? []).map((img) => ({
+                url: urlFor(img).width(1200).url(),
+                alt: img.alt,
+                caption: img.caption,
+              }));
+              const videoEmbedUrl = project.videoUrl
+                ? (toVideoEmbedUrl(project.videoUrl) ?? undefined)
+                : undefined;
+              const hasMedia = images.length > 0 || !!videoEmbedUrl;
+
               const card = (
                 <div className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface">
                   <div className="flex items-center justify-between gap-2">
@@ -100,9 +113,12 @@ export default async function Projects({ searchParams }: Props) {
                     {project.title}
                   </h2>
                   {project.summary && (
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-foreground-muted">
+                    <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
                       {project.summary}
                     </p>
+                  )}
+                  {hasMedia && (
+                    <ProjectMedia images={images} videoEmbedUrl={videoEmbedUrl} />
                   )}
                 </div>
               );
