@@ -2,7 +2,7 @@ export const revalidate = 3600;
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Pencil } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CopyEmail } from "@/components/ui/CopyEmail";
@@ -62,6 +62,7 @@ function buildHeroStats(
         ? gh.totalContributions.toLocaleString("en-US")
         : githubFallbackStats.contributions,
       detail: "past year · GitHub",
+      href: `https://github.com/${siteConfig.githubUsername}?tab=overview`,
     },
     {
       label: "Last commit",
@@ -70,6 +71,9 @@ function buildHeroStats(
       detail: gh?.lastPush
         ? gh.lastPush.repo
         : `github.com/${siteConfig.githubUsername}`,
+      href: gh?.lastPush
+        ? `https://github.com/${siteConfig.githubUsername}/${gh.lastPush.repo}`
+        : `https://github.com/${siteConfig.githubUsername}`,
     },
   ];
 }
@@ -183,34 +187,49 @@ export default async function Home() {
           {/* Stat cards */}
           <HeroMotion delay={0.12} className="mt-12">
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {heroStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-xl border border-border bg-surface/60 p-4 backdrop-blur-sm transition-colors duration-200 hover:border-border-strong"
-                >
-                  <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
-                    {stat.label}
-                  </p>
-                  <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
-                    {"pushedAt" in stat && stat.pushedAt
-                      ? <RelativeTime isoDate={stat.pushedAt} />
-                      : stat.value}
-                  </p>
-                  <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted">
-                    {stat.detail}
-                  </p>
-                </div>
-              ))}
+              {heroStats.map((stat) => {
+                const Tag = "href" in stat && stat.href ? "a" : "div";
+                const linkProps = "href" in stat && stat.href
+                  ? { href: stat.href, target: "_blank", rel: "noopener noreferrer" }
+                  : {};
+                return (
+                  <Tag
+                    key={stat.label}
+                    {...linkProps}
+                    className="group rounded-xl border border-border bg-surface/60 p-4 backdrop-blur-sm transition-colors duration-200 hover:border-border-strong"
+                  >
+                    <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                      {stat.label}
+                    </p>
+                    <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
+                      {"pushedAt" in stat && stat.pushedAt
+                        ? <RelativeTime isoDate={stat.pushedAt} />
+                        : stat.value}
+                    </p>
+                    <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted transition-colors duration-150 group-hover:text-accent">
+                      {stat.detail}
+                    </p>
+                  </Tag>
+                );
+              })}
             </div>
           </HeroMotion>
 
           {/* Contribution graph — only when live data is available */}
           {gh && (
             <HeroMotion delay={0.2} className="mt-3">
-              <ContributionGraph
-                weeks={gh.weeks}
-                totalContributions={gh.totalContributions}
-              />
+              <a
+                href={`https://github.com/${siteConfig.githubUsername}?tab=overview`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transition-opacity duration-200 hover:opacity-90"
+                aria-label="View GitHub contribution history"
+              >
+                <ContributionGraph
+                  weeks={gh.weeks}
+                  totalContributions={gh.totalContributions}
+                />
+              </a>
             </HeroMotion>
           )}
         </Container>
@@ -223,9 +242,21 @@ export default async function Home() {
             <p className="text-xs font-medium uppercase tracking-widest text-accent">
               Now
             </p>
-            <h2 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
-              What I&apos;m building
-            </h2>
+            <div className="mt-1 flex items-center gap-3">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                What I&apos;m building
+              </h2>
+              <a
+                href="/studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-0.5 self-end text-foreground-muted opacity-30 transition-all duration-200 hover:text-accent hover:opacity-100"
+                aria-label="Edit Now entries in Sanity Studio"
+                title="Edit in Studio"
+              >
+                <Pencil size={15} />
+              </a>
+            </div>
           </ScrollReveal>
           <ScrollReveal delay={0.08}>
             <NowFeed entries={nowEntries} />
