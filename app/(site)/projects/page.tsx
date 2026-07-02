@@ -74,46 +74,46 @@ export default async function Projects({ searchParams }: Props) {
             {kind ? `No ${KIND_LABELS[kind] ?? kind} projects yet.` : "Projects coming soon."}
           </p>
         ) : (
-          <div className="divide-y divide-border">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {filtered.map((project, i) => {
-              const row = (
-                <div className="group flex items-start justify-between gap-6 py-7">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3">
+              const card = (
+                <div className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
                       {project.kind && (
-                        <span className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                        <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground-muted">
                           {KIND_LABELS[project.kind] ?? project.kind}
                         </span>
                       )}
                       {project.year && (
-                        <span className="text-xs text-foreground-muted">· {project.year}</span>
+                        <span className="font-mono text-xs text-foreground-muted">{project.year}</span>
                       )}
                     </div>
-                    <h2 className="mt-1 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-foreground-muted">
-                      {project.title}
-                    </h2>
-                    {project.summary && (
-                      <p className="mt-1.5 max-w-lg text-sm text-foreground-muted">
-                        {project.summary}
-                      </p>
+                    {project.externalUrl && (
+                      <ArrowUpRight
+                        size={15}
+                        className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      />
                     )}
                   </div>
-                  {project.externalUrl && (
-                    <ArrowUpRight
-                      size={16}
-                      className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    />
+                  <h2 className="mt-3 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
+                    {project.title}
+                  </h2>
+                  {project.summary && (
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-foreground-muted">
+                      {project.summary}
+                    </p>
                   )}
                 </div>
               );
               return (
-                <ScrollReveal key={project._id} delay={i * 0.07}>
+                <ScrollReveal key={project._id} delay={i * 0.05}>
                   {project.externalUrl ? (
-                    <a href={project.externalUrl} target="_blank" rel="noopener noreferrer">
-                      {row}
+                    <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
+                      {card}
                     </a>
                   ) : (
-                    row
+                    card
                   )}
                 </ScrollReveal>
               );

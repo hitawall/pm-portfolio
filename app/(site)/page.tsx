@@ -250,33 +250,33 @@ export default async function Home() {
             </Link>
           </ScrollReveal>
 
-          <div className="divide-y divide-border">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {sanityProjects.map((project, i) => (
-              <ScrollReveal key={project._id} delay={i * 0.08}>
+              <ScrollReveal key={project._id} delay={i * 0.06}>
                 <a
                   href={project.externalUrl ?? "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start justify-between gap-6 py-7"
+                  className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface"
                 >
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground-muted">
                         {KIND_LABELS[project.kind] ?? project.kind}
                       </span>
-                      <span className="text-xs text-foreground-muted">· {project.year}</span>
+                      <span className="font-mono text-xs text-foreground-muted">{project.year}</span>
                     </div>
-                    <h3 className="mt-1 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-foreground-muted">
-                      {project.title}
-                    </h3>
-                    <p className="mt-1.5 max-w-lg text-sm text-foreground-muted">
-                      {project.summary}
-                    </p>
+                    <ArrowUpRight
+                      size={15}
+                      className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                    />
                   </div>
-                  <ArrowUpRight
-                    size={16}
-                    className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
+                  <h3 className="mt-3 text-base font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-foreground-muted">
+                    {project.summary}
+                  </p>
                 </a>
               </ScrollReveal>
             ))}
@@ -305,41 +305,41 @@ export default async function Home() {
           </ScrollReveal>
 
           {recentPosts.length > 0 ? (
-            <div className="flex flex-col divide-y divide-border">
+            <div className="flex flex-col gap-4">
               {recentPosts.map((post, i) => (
                 <ScrollReveal key={post._id} delay={i * 0.08}>
-                <Link
-                  href={`/thoughts/${post.slug.current}`}
-                  className="group flex items-start justify-between gap-6 py-7 transition-colors"
-                >
-                  <div className="flex-1">
-                    <p className="font-mono text-xs text-foreground-muted">
-                      {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </p>
-                    <p className="mt-1 font-semibold leading-snug">
+                  <Link
+                    href={`/thoughts/${post.slug.current}`}
+                    className="group block rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:bg-surface"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <p className="font-mono text-xs text-foreground-muted">
+                        {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </p>
+                      <ArrowUpRight
+                        size={15}
+                        className="mt-0.5 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      />
+                    </div>
+                    <p className="mt-2 font-semibold leading-snug tracking-tight transition-colors duration-150 group-hover:text-accent">
                       {post.title}
                     </p>
                     {post.summary && (
-                      <p className="mt-1 text-sm text-foreground-muted line-clamp-2">
+                      <p className="mt-1.5 text-sm leading-relaxed text-foreground-muted line-clamp-2">
                         {post.summary}
                       </p>
                     )}
-                  </div>
-                  <ArrowUpRight
-                    size={16}
-                    className="mt-1 shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </Link>
+                  </Link>
                 </ScrollReveal>
               ))}
             </div>
           ) : (
             <p className="text-sm text-foreground-muted">
-              Writing on product thinking, engineering trade-offs, and systems at scale.{" "}
+              Writing on engineering trade-offs, AI systems, and what I&apos;m building.{" "}
               <Link href="/thoughts" className="underline underline-offset-4 hover:text-foreground">
                 Browse all posts →
               </Link>
