@@ -31,7 +31,7 @@ export default async function Resume() {
     >
       <Container size="lg" className="py-10 sm:py-14">
 
-        <ScrollReveal className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <ScrollReveal className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center print:hidden">
           <div>
             <p className="text-xs font-medium uppercase tracking-widest text-accent">
               Resume
@@ -45,7 +45,7 @@ export default async function Resume() {
           </Button>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1} className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+        <ScrollReveal delay={0.1} className="print:hidden overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
           <iframe
             src={embedSrc}
             className="h-[82vh] w-full"
@@ -53,7 +53,7 @@ export default async function Resume() {
           />
         </ScrollReveal>
 
-        <p className="mt-4 text-center text-sm text-foreground-muted">
+        <p className="mt-4 text-center text-sm text-foreground-muted print:hidden">
           PDF not rendering?{" "}
           <a
             href={downloadHref}
@@ -65,6 +65,12 @@ export default async function Resume() {
             Download directly.
           </a>
         </p>
+
+        {/* Print-only fallback — iframes don't print reliably */}
+        <div className="hidden print:block text-sm text-foreground-muted text-center py-8">
+          <p>To view this resume, visit:</p>
+          <p className="mt-1 font-mono text-foreground">{downloadHref}</p>
+        </div>
 
       </Container>
     </main>
