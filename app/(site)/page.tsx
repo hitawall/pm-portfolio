@@ -12,7 +12,8 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts, getNowEntries, getSiteSettings, getAllProjects } from "@/sanity/lib/queries";
 import { siteConfig, githubFallbackStats } from "@/lib/config";
 import { KIND_LABELS } from "@/lib/projects";
-import { getGitHubStats, formatRelativeTime, type GitHubStats } from "@/lib/github";
+import { getGitHubStats, type GitHubStats } from "@/lib/github";
+import { RelativeTime } from "@/components/ui/RelativeTime";
 import { NOW_FALLBACK } from "@/lib/now";
 import { NowFeed } from "@/components/site/NowFeed";
 
@@ -60,9 +61,8 @@ function buildHeroStats(
     },
     {
       label: "Last commit",
-      value: gh?.lastPush
-        ? formatRelativeTime(gh.lastPush.pushedAt)
-        : githubFallbackStats.lastCommit,
+      value: githubFallbackStats.lastCommit,
+      pushedAt: gh?.lastPush?.pushedAt ?? null,
       detail: gh?.lastPush
         ? gh.lastPush.repo
         : `github.com/${siteConfig.githubUsername}`,
@@ -188,7 +188,9 @@ export default async function Home() {
                     {stat.label}
                   </p>
                   <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
-                    {stat.value}
+                    {"pushedAt" in stat && stat.pushedAt
+                      ? <RelativeTime isoDate={stat.pushedAt} />
+                      : stat.value}
                   </p>
                   <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted">
                     {stat.detail}
