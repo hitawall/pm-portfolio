@@ -17,6 +17,8 @@ import { RelativeTime } from "@/components/ui/RelativeTime";
 import { NOW_FALLBACK } from "@/lib/now";
 import { NowFeed } from "@/components/site/NowFeed";
 import { ContactForm } from "@/components/site/ContactForm";
+import { ParallaxGlow } from "@/components/site/ParallaxGlow";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { urlFor } from "@/sanity/lib/image";
 import { toVideoEmbedUrl } from "@/lib/embed";
 import { ProjectMedia } from "@/components/ui/ProjectMedia";
@@ -101,23 +103,8 @@ export default async function Home() {
 
       {/* ── Hero — proof-of-work dashboard ───────────────────── */}
       <section className="relative overflow-hidden border-b border-border py-20 sm:py-28">
-        {/* Gradient glow backdrop */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div
-            className="absolute -top-32 left-1/2 h-[420px] w-[760px] max-w-full -translate-x-1/2 blur-3xl"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%)",
-            }}
-          />
-          <div
-            className="absolute -top-16 left-[12%] h-[260px] w-[400px] blur-3xl"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, color-mix(in srgb, var(--accent-2) 12%, transparent) 0%, transparent 70%)",
-            }}
-          />
-        </div>
+        {/* Gradient glow backdrop — scroll-linked parallax */}
+        <ParallaxGlow />
 
         <Container size="md" className="relative">
           <HeroMotion>
@@ -177,10 +164,14 @@ export default async function Home() {
             )}
 
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button as={Link} href="/projects">
-                View projects <ArrowUpRight size={14} />
-              </Button>
-              <CopyEmail label="Get in touch" variant="ghost" />
+              <Magnetic>
+                <Button as={Link} href="/projects">
+                  View projects <ArrowUpRight size={14} />
+                </Button>
+              </Magnetic>
+              <Magnetic>
+                <CopyEmail label="Get in touch" variant="ghost" />
+              </Magnetic>
             </div>
           </HeroMotion>
 
