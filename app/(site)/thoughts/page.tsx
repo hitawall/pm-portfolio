@@ -4,10 +4,9 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts } from "@/sanity/lib/queries";
-import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: `Thoughts — ${siteConfig.name}`,
+  title: "Thoughts",
   description:
     "Writing on product thinking, engineering trade-offs, and systems at scale.",
 };

@@ -7,7 +7,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: `About — ${siteConfig.name}`,
+  title: "About",
   description:
     "Backend engineer with 5 years at JPMC, Amazon, Blink Health, and Nutanix. Now building LLM systems and agent architectures.",
 };

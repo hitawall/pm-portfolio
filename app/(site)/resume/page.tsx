@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/config";
 import { getSiteSettings } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: `Resume — ${siteConfig.name}`,
+  title: "Resume",
   description:
     "Resume of Shubham Arora — engineer and builder with 5 years of shipping at JPMC, Amazon, Blink Health, and Nutanix.",
 };

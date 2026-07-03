@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { PortableText } from "@/components/content/PortableText";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts, getPostBySlug } from "@/sanity/lib/queries";
-import { siteConfig, getBaseUrl } from "@/lib/config";
+import { getBaseUrl } from "@/lib/config";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : undefined;
   const ogUrl = `${getBaseUrl()}/og?${new URLSearchParams({ title: post.title, type: "Thought", ...(sub && { sub }) }).toString()}`;
   return {
-    title: `${post.title} — ${siteConfig.name}`,
+    title: post.title,
     description: post.summary,
     openGraph: { images: [ogUrl] },
     twitter: { card: "summary_large_image", images: [ogUrl] },
