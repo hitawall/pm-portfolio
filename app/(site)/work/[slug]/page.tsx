@@ -7,7 +7,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { MetricStat } from "@/components/ui/MetricStat";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { siteConfig, getBaseUrl } from "@/lib/config";
+import { getBaseUrl } from "@/lib/config";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const sub = [cs.company, cs.year].filter(Boolean).join(" · ");
   const ogUrl = `${getBaseUrl()}/og?${new URLSearchParams({ title: cs.title, type: "Case Study", ...(sub && { sub }) }).toString()}`;
   return {
-    title: `${cs.title} — ${siteConfig.name}`,
+    title: cs.title,
     description: cs.summary,
     openGraph: { images: [ogUrl] },
     twitter: { card: "summary_large_image", images: [ogUrl] },

@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: `Work — ${siteConfig.name}`,
+  title: "Work",
   description:
     "Case studies from 5 years of shipping product at JPMC, Amazon, Blink Health, and Nutanix.",
 };

@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllProjects } from "@/sanity/lib/queries";
-import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { KIND_LABELS } from "@/lib/projects";
 import { urlFor } from "@/sanity/lib/image";
@@ -12,7 +11,7 @@ import { toVideoEmbedUrl } from "@/lib/embed";
 import { ProjectMedia } from "@/components/ui/ProjectMedia";
 
 export const metadata: Metadata = {
-  title: `Projects — ${siteConfig.name}`,
+  title: "Projects",
   description: "Side projects and experiments across AI/LLM systems, backend engineering, and hobby builds.",
 };
 

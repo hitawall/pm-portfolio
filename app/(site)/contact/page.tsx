@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ContactForm } from "@/components/site/ContactForm";
-import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: `Contact — ${siteConfig.name}`,
+  title: "Contact",
   description:
     "Get in touch with Shubham Arora — backend engineer and GenAI builder open to senior engineering and AI/ML roles.",
 };
