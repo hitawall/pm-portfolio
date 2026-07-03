@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Shubham Arora",
   title: "Shubham Arora — Backend Engineer · GenAI Builder",
   description:
-    "Backend engineer with 5 years at JPMC, Amazon, Blink Health, and Nutanix. Building LLM systems, agent architectures, and distributed backends. Open to senior engineering and AI/ML roles.",
+    "Backend engineer, 5 years at JPMC, Amazon, Blink Health, Nutanix — now building LLM systems and agent architectures. Open to senior engineering and AI/ML roles.",
   github: "https://github.com/hitawall",
   githubUsername: "hitawall",
   linkedin: "https://in.linkedin.com/in/shubham-arora-se/",
