@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Resume",
   description:
     "Resume of Shubham Arora — engineer and builder with 5 years of shipping at JPMC, Amazon, Blink Health, and Nutanix.",
+  alternates: { canonical: "/resume" },
 };
 
 /** Converts a Google Drive share URL to an embeddable preview URL. */

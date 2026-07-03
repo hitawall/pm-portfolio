@@ -13,6 +13,7 @@ import { ProjectMedia } from "@/components/ui/ProjectMedia";
 export const metadata: Metadata = {
   title: "Projects",
   description: "Side projects and experiments across AI/LLM systems, backend engineering, and hobby builds.",
+  alternates: { canonical: "/projects" },
 };
 
 const FILTER_OPTIONS = [

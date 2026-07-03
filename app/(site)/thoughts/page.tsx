@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Thoughts",
   description:
     "Writing on product thinking, engineering trade-offs, and systems at scale.",
+  alternates: { canonical: "/thoughts" },
 };
 
 function formatDate(dateString: string): string {
