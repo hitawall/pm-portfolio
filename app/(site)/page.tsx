@@ -128,11 +128,8 @@ export default async function Home() {
                   {s.tagline}
                 </p>
               </div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-subtle px-3 py-1 text-xs font-medium text-accent sm:ml-auto">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-                </span>
+              <p className="inline-flex items-baseline gap-2 border-b border-accent/40 pb-0.5 font-mono text-xs uppercase tracking-wider text-accent sm:ml-auto">
+                <span aria-hidden>—</span>
                 {s.statusBadge}
               </p>
             </div>
@@ -153,11 +150,8 @@ export default async function Home() {
             </p>
 
             {currentNow && (
-              <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 font-mono text-xs text-foreground-muted backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-                </span>
+              <p className="mt-4 inline-flex items-baseline gap-2 border-b border-border pb-1 font-mono text-xs text-foreground-muted">
+                <span aria-hidden className="text-accent">—</span>
                 {currentNow.status === "building" ? "building" : currentNow.status}:{" "}
                 <span className="text-foreground">{currentNow.title}</span>
               </p>
