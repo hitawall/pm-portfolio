@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Work",
   description:
     "Case studies from 5 years of shipping product at JPMC, Amazon, Blink Health, and Nutanix.",
+  alternates: { canonical: "/work" },
 };
 
 export default async function Work() {

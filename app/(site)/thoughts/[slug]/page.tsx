@@ -49,6 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.summary,
+    alternates: { canonical: `/thoughts/${slug}` },
     openGraph: { images: [ogUrl] },
     twitter: { card: "summary_large_image", images: [ogUrl] },
   };
