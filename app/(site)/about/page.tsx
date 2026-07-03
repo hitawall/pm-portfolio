@@ -96,6 +96,14 @@ export default function About() {
                     <p key={j} className="leading-[1.85]">{p}</p>
                   ))}
                 </div>
+                {s.id === "how-i-build" && (
+                  <blockquote className="mt-6 ml-8 border-l-2 border-accent/40 pl-4 text-sm italic text-foreground-muted">
+                    &ldquo;Good design is as little design as possible.&rdquo;
+                    <footer className="mt-1 font-mono text-xs not-italic tracking-wide text-foreground-muted/70">
+                      — Dieter Rams
+                    </footer>
+                  </blockquote>
+                )}
               </section>
             </ScrollReveal>
           ))}

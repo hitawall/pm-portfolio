@@ -36,6 +36,9 @@ export function Footer() {
             <CopyEmail label="Email" variant="link" size="sm" className="h-auto p-0 text-sm font-normal" />
           </div>
         </div>
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-wide text-foreground-muted/60">
+          Set in Space Grotesk &amp; Geist — grid discipline after Josef Müller-Brockmann&apos;s Swiss school.
+        </p>
       </Container>
     </footer>
   );
