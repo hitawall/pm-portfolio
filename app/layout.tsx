@@ -44,6 +44,15 @@ export const metadata: Metadata = {
   },
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.name,
+  jobTitle: siteConfig.title.split(" — ")[1] ?? siteConfig.title,
+  url: getBaseUrl(),
+  sameAs: [siteConfig.github, siteConfig.linkedin],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,6 +65,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-dvh flex-col bg-background text-foreground antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />
