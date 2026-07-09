@@ -1,0 +1,20 @@
+# Hourly refresh of homepage GitHub stats (GH-140).
+# Best-effort upgrade over the daily Vercel cron in vercel.json — GitHub
+# auto-disables scheduled workflows after 60 days without repo activity,
+# so the Vercel cron remains the guaranteed daily baseline.
+name: Revalidate site stats
+
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+jobs:
+  revalidate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping revalidate endpoint
+        run: |
+          curl -fsS --max-time 30 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://www.arorashubham.com/api/cron/revalidate"
