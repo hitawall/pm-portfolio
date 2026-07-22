@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Bezel } from "@/components/ui/Bezel";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/lib/config";
 import { getSiteSettings } from "@/sanity/lib/queries";
@@ -28,7 +29,7 @@ export default async function Resume() {
   return (
     <main
       id="main-content"
-      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
+      className="flex-1"
     >
       <Container size="lg" className="py-10 sm:py-14">
 
@@ -46,12 +47,14 @@ export default async function Resume() {
           </Button>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1} className="print:hidden overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
-          <iframe
-            src={embedSrc}
-            className="h-[82vh] w-full"
-            title={`${siteConfig.name} — Resume`}
-          />
+        <ScrollReveal delay={0.1} className="print:hidden">
+          <Bezel className="overflow-hidden">
+            <iframe
+              src={embedSrc}
+              className="h-[82vh] w-full"
+              title={`${siteConfig.name} — Resume`}
+            />
+          </Bezel>
         </ScrollReveal>
 
         <p className="mt-4 text-center text-sm text-foreground-muted print:hidden">

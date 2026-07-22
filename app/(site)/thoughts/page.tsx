@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { Bezel } from "@/components/ui/Bezel";
 import { getAllPosts } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
@@ -63,9 +64,11 @@ export default async function Thoughts() {
           <div className="flex flex-col gap-4">
             {posts.map((post, i) => (
               <ScrollReveal key={post._id} delay={i * 0.07}>
-                <Link
+                <Bezel
+                  as={Link}
                   href={`/thoughts/${post.slug.current}`}
-                  className="group block rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]"
+                  shellClassName="transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
+                  className="group block p-5"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <span className="font-mono text-xs text-foreground-muted">
@@ -96,7 +99,7 @@ export default async function Thoughts() {
                       ))}
                     </div>
                   )}
-                </Link>
+                </Bezel>
               </ScrollReveal>
             ))}
           </div>

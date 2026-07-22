@@ -33,12 +33,12 @@ After linking, any memory Claude writes during a session lands in the repo worki
 Repositioning from "Product Dark — Tangerine" to **Ethereal Glass** — an Awwwards-tier premium UI/UX pass per the `high-end-visual-design` skill. Vibe archetype: Ethereal Glass (deep OLED black, mesh-glow orbs, Double-Bezel nested cards, magnetic button-in-button CTAs, fluid-island nav). Brand accent (tangerine/yellow) kept from Redesign 2.0 for continuity — only the surface language and motion system changed. Phased across issues #147–#152.
 
 **Status:**
-- Phase 1 (#147) — foundation: Ethereal Glass tokens, Double-Bezel primitives, fluid-island nav, magnetic CTA — in progress
-- Phase 2 (#148) — homepage hero + bento stats dashboard
-- Phase 3 (#149) — contact page (must preserve BotID/honeypot/time-trap hardening from #145)
-- Phase 4 (#150) — work/projects listings
-- Phase 5 (#151) — about/resume/thoughts, retire remaining `font-serif` usages
-- Phase 6 (#152) — full-site sweep: OG image, motion/a11y/perf QA
+- Phase 1 (#147) — foundation: Ethereal Glass tokens, Double-Bezel primitives, fluid-island nav, magnetic CTA — done
+- Phase 2 (#148) — homepage hero + bento stats dashboard — done
+- Phase 3 (#149) — contact page (preserved BotID/honeypot/time-trap hardening from #145) — done
+- Phase 4 (#150) — work/projects listings — done
+- Phase 5 (#151) — about/resume/thoughts, retired remaining `font-serif` usages — done
+- Phase 6 (#152) — full-site sweep: OG image, motion/a11y/perf QA — in progress
 
 **Execution protocol:** one issue → one branch → one PR per phase. **Stop after opening each PR — the user manually reviews and merges before the next phase begins.** Do not start the next phase unprompted.
 
@@ -133,7 +133,7 @@ npm run format   # Prettier + Tailwind class sort
 | `--ease-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | same (legacy, still used in older components) |
 | `--ease-spring` | `cubic-bezier(0.32, 0.72, 0, 1)` | new default motion curve for Redesign 3.0 (nav, buttons, mobile menu) |
 
-**Font utilities:** `font-display` (Space Grotesk) · `font-sans` (Geist Sans) · `font-mono` (Geist Mono). All `h1–h6` get Space Grotesk + `-0.02em` tracking via base layer. `font-serif` temporarily maps to Geist Sans until Phase 5 (#151) removes its usages (about page, PortableText).
+**Font utilities:** `font-display` (Space Grotesk) · `font-sans` (Geist Sans) · `font-mono` (Geist Mono). All `h1–h6` get Space Grotesk + `-0.02em` tracking via base layer. `font-serif` was retired in Phase 5 (#151) — no remaining usages.
 
 **Recurring patterns:** gradient headline accent = `bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent` (hero only). Glow shadows = arbitrary `shadow-[0_4px_16px_var(--accent-glow)]`. Double-Bezel card = `<Bezel>` component (`.bezel-shell` outer tray + `.bezel-core` inner glass pane with concentric radii) — use for any premium card/panel surface instead of a flat `rounded-xl border` card. Mesh-glow backdrop = `.mesh-glow-bg` utility, mounted once in `app/layout.tsx` as a fixed `-z-10` layer — don't remount per-page.
 
