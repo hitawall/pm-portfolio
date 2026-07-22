@@ -2,12 +2,14 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { sendContactEmail, type ContactState } from "@/app/actions/contact";
+import { Bezel } from "@/components/ui/Bezel";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 const INITIAL: ContactState = { status: "idle" };
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-surface/60 px-4 py-2.5 text-sm text-foreground placeholder:text-foreground-muted backdrop-blur-sm transition-colors duration-150 focus:border-accent focus:outline-none";
+  "w-full rounded-lg border border-border bg-background/40 px-4 py-2.5 text-sm text-foreground placeholder:text-foreground-muted transition-colors duration-150 focus:border-accent focus:outline-none";
 
 export function ContactForm() {
   const [state, action, pending] = useActionState(sendContactEmail, INITIAL);
@@ -24,7 +26,7 @@ export function ContactForm() {
 
   if (state.status === "success") {
     return (
-      <div className="rounded-xl border border-border bg-surface/60 p-8 text-center backdrop-blur-sm">
+      <Bezel className="p-8 text-center">
         <p className="text-2xl">✓</p>
         <p className="mt-3 font-semibold text-foreground">Message sent</p>
         <p className="mt-1 text-sm text-foreground-muted">
@@ -36,12 +38,12 @@ export function ContactForm() {
         >
           Send another message
         </button>
-      </div>
+      </Bezel>
     );
   }
 
   return (
-    <form ref={formRef} action={action} className="space-y-4">
+    <Bezel as="form" ref={formRef} action={action} className="space-y-4 p-6 sm:p-8">
       {/* Honeypot: hidden from sighted/keyboard users, blind form-fill bots still populate it. */}
       <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
         <label htmlFor="website">Website</label>
@@ -124,17 +126,9 @@ export function ContactForm() {
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={pending}
-        className={cn(
-          "inline-flex h-10 w-full items-center justify-center rounded-lg bg-accent px-6 text-sm font-semibold text-accent-foreground shadow-[0_4px_16px_var(--accent-glow)] transition-all duration-200",
-          "hover:bg-accent-hover hover:shadow-[0_6px_20px_var(--accent-glow)]",
-          "disabled:cursor-not-allowed disabled:opacity-60"
-        )}
-      >
+      <Button type="submit" disabled={pending} className="w-full justify-center">
         {pending ? "Sending…" : "Send message"}
-      </button>
-    </form>
+      </Button>
+    </Bezel>
   );
 }

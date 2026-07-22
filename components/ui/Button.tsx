@@ -12,6 +12,8 @@ interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   target?: string;
   rel?: string;
   download?: boolean | string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
   /** Renders a nested circular trailing icon (button-in-button). */
   icon?: boolean;
 }
@@ -28,7 +30,7 @@ export function Button({
   return (
     <As
       className={cn(
-        "group inline-flex items-center gap-2 rounded-full font-medium transition-all duration-300 ease-[var(--ease-spring)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 active:scale-[0.98]",
+        "group inline-flex items-center gap-2 rounded-full font-medium transition-all duration-300 ease-[var(--ease-spring)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100",
         size === "md" && cn("h-10 py-1.5 pl-5 text-sm", icon ? "pr-2" : "pr-5"),
         size === "sm" && cn("h-8 py-1 pl-4 text-sm", icon ? "pr-1.5" : "pr-4"),
         variant === "primary" &&

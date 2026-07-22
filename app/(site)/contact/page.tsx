@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <main id="main-content" className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]">
+    <main id="main-content" className="flex-1">
       <Container size="sm" className="py-20 sm:py-28">
         <ScrollReveal className="mb-10">
           <p className="text-xs font-medium uppercase tracking-widest text-accent">
