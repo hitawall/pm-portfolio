@@ -5,8 +5,8 @@ import Link from "next/link";
 import { ArrowUpRight, Pencil } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Bezel } from "@/components/ui/Bezel";
 import { CopyEmail } from "@/components/ui/CopyEmail";
-import { HeroMotion } from "@/components/site/HeroMotion";
 import { ContributionGraph } from "@/components/site/ContributionGraph";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getAllPosts, getNowEntries, getSiteSettings, getAllProjects } from "@/sanity/lib/queries";
@@ -101,122 +101,173 @@ export default async function Home() {
   return (
     <main id="main-content" className="flex-1">
 
-      {/* ── Hero — proof-of-work dashboard ───────────────────── */}
+      {/* ── Hero — Asymmetrical Bento proof-of-work dashboard ── */}
       <section className="relative overflow-hidden border-b border-border py-20 sm:py-28">
         {/* Gradient glow backdrop — scroll-linked parallax */}
         <ParallaxGlow />
 
-        <Container size="md" className="relative">
-          <HeroMotion>
-            {/* Identity row */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-              <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border-strong">
-                <Image
-                  src="/avatar.jpg"
-                  alt="Shubham Arora"
-                  width={48}
-                  height={48}
-                  className="h-full w-full scale-[1.1] object-cover [object-position:50%_48%]"
-                  priority
-                />
-              </div>
-              <div>
-                <p className="font-display text-sm font-semibold tracking-tight">
-                  {siteConfig.name}
+        <Container size="lg" className="relative">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+            {/* Feature card — identity, headline, CTAs */}
+            <ScrollReveal className="lg:col-span-8 lg:row-span-2">
+              <Bezel shellClassName="h-full" className="flex h-full flex-col p-6 sm:p-8">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border-strong">
+                    <Image
+                      src="/avatar.jpg"
+                      alt="Shubham Arora"
+                      width={48}
+                      height={48}
+                      className="h-full w-full scale-[1.1] object-cover [object-position:50%_48%]"
+                      priority
+                    />
+                  </div>
+                  <div>
+                    <p className="font-display text-sm font-semibold tracking-tight">
+                      {siteConfig.name}
+                    </p>
+                    <p className="text-xs text-foreground-muted">{s.tagline}</p>
+                  </div>
+                  <p className="inline-flex items-baseline gap-2 border-b border-accent/40 pb-0.5 font-mono text-xs uppercase tracking-wider text-accent sm:ml-auto">
+                    <span aria-hidden>—</span>
+                    {s.statusBadge}
+                  </p>
+                </div>
+
+                <h1 className="mt-9 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+                  {s.heroHeadlinePlain}{" "}
+                  <span className="bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">
+                    {s.heroHeadlineAccent}
+                  </span>
+                </h1>
+
+                <p className="mt-5 max-w-xl text-base text-foreground-muted sm:text-lg">
+                  {s.heroSubtitle}
                 </p>
-                <p className="text-xs text-foreground-muted">
-                  {s.tagline}
+
+                <p className="mt-4 font-mono text-xs text-foreground-muted">
+                  {s.companies.join(" → ")} · {s.careerStartYear} → {new Date().getFullYear()}
                 </p>
-              </div>
-              <p className="inline-flex items-baseline gap-2 border-b border-accent/40 pb-0.5 font-mono text-xs uppercase tracking-wider text-accent sm:ml-auto">
-                <span aria-hidden>—</span>
-                {s.statusBadge}
-              </p>
+
+                {currentNow && (
+                  <p className="mt-4 inline-flex items-baseline gap-2 border-b border-border pb-1 font-mono text-xs text-foreground-muted">
+                    <span aria-hidden className="text-accent">—</span>
+                    {currentNow.status === "building" ? "building" : currentNow.status}:{" "}
+                    <span className="text-foreground">{currentNow.title}</span>
+                  </p>
+                )}
+
+                <div className="mt-auto flex flex-wrap gap-3 pt-7">
+                  <Magnetic>
+                    <Button as={Link} href="/projects" icon>
+                      View projects
+                    </Button>
+                  </Magnetic>
+                  <Magnetic>
+                    <CopyEmail label="Get in touch" variant="ghost" />
+                  </Magnetic>
+                </div>
+              </Bezel>
+            </ScrollReveal>
+
+            {/* Right stack — years shipping + projects built */}
+            <div className="flex flex-col gap-4 lg:col-span-4 lg:row-span-2">
+              <ScrollReveal delay={0.08} className="flex-1">
+                <Bezel shellClassName="h-full" className="flex h-full flex-col justify-center p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                    {heroStats[0].label}
+                  </p>
+                  <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
+                    {heroStats[0].value}
+                  </p>
+                  <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted">
+                    {heroStats[0].detail}
+                  </p>
+                </Bezel>
+              </ScrollReveal>
+              <ScrollReveal delay={0.14} className="flex-1">
+                <Bezel shellClassName="h-full" className="flex h-full flex-col justify-center p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                    {heroStats[1].label}
+                  </p>
+                  <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
+                    {heroStats[1].value}
+                  </p>
+                  <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted">
+                    {heroStats[1].detail}
+                  </p>
+                </Bezel>
+              </ScrollReveal>
             </div>
 
-            <h1 className="mt-9 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
-              {s.heroHeadlinePlain}{" "}
-              <span className="bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">
-                {s.heroHeadlineAccent}
-              </span>
-            </h1>
-
-            <p className="mt-5 max-w-xl text-base text-foreground-muted sm:text-lg">
-              {s.heroSubtitle}
-            </p>
-
-            <p className="mt-4 font-mono text-xs text-foreground-muted">
-              {s.companies.join(" → ")} · {s.careerStartYear} → {new Date().getFullYear()}
-            </p>
-
-            {currentNow && (
-              <p className="mt-4 inline-flex items-baseline gap-2 border-b border-border pb-1 font-mono text-xs text-foreground-muted">
-                <span aria-hidden className="text-accent">—</span>
-                {currentNow.status === "building" ? "building" : currentNow.status}:{" "}
-                <span className="text-foreground">{currentNow.title}</span>
-              </p>
-            )}
-
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Magnetic>
-                <Button as={Link} href="/projects">
-                  View projects <ArrowUpRight size={14} />
-                </Button>
-              </Magnetic>
-              <Magnetic>
-                <CopyEmail label="Get in touch" variant="ghost" />
-              </Magnetic>
-            </div>
-          </HeroMotion>
-
-          {/* Stat cards */}
-          <HeroMotion delay={0.12} className="mt-12">
-            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {heroStats.map((stat) => {
-                const Tag = "href" in stat && stat.href ? "a" : "div";
-                const linkProps = "href" in stat && stat.href
-                  ? { href: stat.href, target: "_blank", rel: "noopener noreferrer" }
-                  : {};
-                return (
-                  <Tag
-                    key={stat.label}
-                    {...linkProps}
-                    className="group rounded-xl border border-border bg-surface/60 p-4 backdrop-blur-sm transition-colors duration-200 hover:border-border-strong"
-                  >
-                    <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
-                      {stat.label}
-                    </p>
-                    <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
-                      {"pushedAt" in stat && stat.pushedAt
-                        ? <RelativeTime isoDate={stat.pushedAt} />
-                        : stat.value}
-                    </p>
-                    <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted transition-colors duration-150 group-hover:text-accent">
-                      {stat.detail}
-                    </p>
-                  </Tag>
-                );
-              })}
-            </div>
-          </HeroMotion>
-
-          {/* Contribution graph — only when live data is available */}
-          {gh && (
-            <HeroMotion delay={0.2} className="mt-3">
-              <a
-                href={`https://github.com/${siteConfig.githubUsername}?tab=overview`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block transition-opacity duration-200 hover:opacity-90"
-                aria-label="View GitHub contribution history"
+            {/* Contributions stat */}
+            <ScrollReveal delay={0.18} className="lg:col-span-6">
+              <Bezel
+                as={heroStats[2].href ? "a" : "div"}
+                href={heroStats[2].href}
+                target={heroStats[2].href ? "_blank" : undefined}
+                rel={heroStats[2].href ? "noopener noreferrer" : undefined}
+                shellClassName="h-full"
+                className="group flex h-full flex-col justify-center p-5 transition-colors duration-200"
               >
-                <ContributionGraph
-                  weeks={gh.weeks}
-                  totalContributions={gh.totalContributions}
-                />
-              </a>
-            </HeroMotion>
-          )}
+                <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                  {heroStats[2].label}
+                </p>
+                <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
+                  {heroStats[2].value}
+                </p>
+                <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted transition-colors duration-150 group-hover:text-accent">
+                  {heroStats[2].detail}
+                </p>
+              </Bezel>
+            </ScrollReveal>
+
+            {/* Last commit stat */}
+            <ScrollReveal delay={0.22} className="lg:col-span-6">
+              <Bezel
+                as={heroStats[3].href ? "a" : "div"}
+                href={heroStats[3].href}
+                target={heroStats[3].href ? "_blank" : undefined}
+                rel={heroStats[3].href ? "noopener noreferrer" : undefined}
+                shellClassName="h-full"
+                className="group flex h-full flex-col justify-center p-5 transition-colors duration-200"
+              >
+                <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
+                  {heroStats[3].label}
+                </p>
+                <p className="mt-2 font-mono text-2xl font-medium tabular-nums sm:text-3xl">
+                  {"pushedAt" in heroStats[3] && heroStats[3].pushedAt ? (
+                    <RelativeTime isoDate={heroStats[3].pushedAt} />
+                  ) : (
+                    heroStats[3].value
+                  )}
+                </p>
+                <p className="mt-1 truncate font-mono text-[11px] text-foreground-muted transition-colors duration-150 group-hover:text-accent">
+                  {heroStats[3].detail}
+                </p>
+              </Bezel>
+            </ScrollReveal>
+
+            {/* Contribution graph — only when live data is available */}
+            {gh && (
+              <ScrollReveal delay={0.26} className="lg:col-span-12">
+                <Bezel
+                  as="a"
+                  href={`https://github.com/${siteConfig.githubUsername}?tab=overview`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  shellClassName="h-full"
+                  className="block p-5 transition-opacity duration-200 hover:opacity-90"
+                  aria-label="View GitHub contribution history"
+                >
+                  <ContributionGraph
+                    weeks={gh.weeks}
+                    totalContributions={gh.totalContributions}
+                  />
+                </Bezel>
+              </ScrollReveal>
+            )}
+          </div>
         </Container>
       </section>
 
