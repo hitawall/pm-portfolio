@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useRef } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { sendContactEmail, type ContactState } from "@/app/actions/contact";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +12,15 @@ const inputClass =
 export function ContactForm() {
   const [state, action, pending] = useActionState(sendContactEmail, INITIAL);
   const formRef = useRef<HTMLFormElement>(null);
+  const renderedAtRef = useRef<HTMLInputElement>(null);
+
+  // Set on mount (not SSR'd) so a bot submitting straight from fetched HTML
+  // has no timestamp to spoof — it lands too early instead.
+  useEffect(() => {
+    if (renderedAtRef.current) {
+      renderedAtRef.current.value = String(Date.now());
+    }
+  }, []);
 
   if (state.status === "success") {
     return (
@@ -33,6 +42,19 @@ export function ContactForm() {
 
   return (
     <form ref={formRef} action={action} className="space-y-4">
+      {/* Honeypot: hidden from sighted/keyboard users, blind form-fill bots still populate it. */}
+      <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+      <input ref={renderedAtRef} type="hidden" name="renderedAt" />
+
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <label htmlFor="name" className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
@@ -43,6 +65,7 @@ export function ContactForm() {
             name="name"
             type="text"
             required
+            maxLength={100}
             autoComplete="name"
             placeholder="Alex Johnson"
             className={inputClass}
@@ -57,6 +80,7 @@ export function ContactForm() {
             name="email"
             type="email"
             required
+            maxLength={254}
             autoComplete="email"
             placeholder="alex@company.com"
             className={inputClass}
@@ -72,6 +96,7 @@ export function ContactForm() {
           id="company"
           name="company"
           type="text"
+          maxLength={120}
           autoComplete="organization"
           placeholder="Acme Corp — Senior Recruiter"
           className={inputClass}
@@ -87,6 +112,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
+          maxLength={5000}
           placeholder="Tell me about the role or opportunity…"
           className={cn(inputClass, "resize-none")}
         />
