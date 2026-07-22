@@ -3,6 +3,9 @@ import { cn } from "@/lib/utils";
 interface BezelProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
   shellClassName?: string;
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 /**

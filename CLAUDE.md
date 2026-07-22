@@ -98,13 +98,12 @@ npm run format   # Prettier + Tailwind class sort
 | `components/ui/Container.tsx` | max-width wrapper | `size?: sm\|md\|lg`, `as?` |
 | `components/ui/Section.tsx` | vertical padding block | `as?` |
 | `components/ui/Button.tsx` | CTA — pill shape, button-in-button trailing icon, magnetic hover | `variant?: primary\|ghost`, `size?: sm\|md`, `as?` (renders as `<a>` for links), `icon?: boolean` (nested circular trailing arrow) |
-| `components/ui/Bezel.tsx` | Double-Bezel nested card (outer shell + inner glass core) — use for premium card/panel surfaces | `as?`, `className?` (applies to inner core), `shellClassName?` (applies to outer shell) |
-| `components/ui/ScrollReveal.tsx` | fade-up on scroll-into-view | `delay?` for stagger |
+| `components/ui/Bezel.tsx` | Double-Bezel nested card (outer shell + inner glass core) — use for premium card/panel surfaces | `as?`, `href?`/`target?`/`rel?` (renders as `<a>`), `className?` (applies to inner core), `shellClassName?` (applies to outer shell) |
+| `components/ui/ScrollReveal.tsx` | scroll-entry choreography — fade-up + blur resolve on scroll-into-view | `delay?` for stagger — sole entrance-animation primitive site-wide (`HeroMotion` retired in #148, folded into this) |
 | `components/ui/CopyEmail.tsx` / `CopyEmailIcon.tsx` | email → clipboard with "Copied!" feedback | `label?`, `variant?`, `size?` |
 | `components/site/Header.tsx` | floating glass-pill nav (fluid-island), detached from viewport top | edit `navLinks[]` in `NavLinks.tsx` to add routes |
 | `components/site/MobileNav.tsx` | hamburger-to-X morph + full-screen glass overlay with staggered link reveal | always-mounted, toggled via opacity/pointer-events (not conditional JSX) so CSS transitions run |
 | `components/site/Footer.tsx` | footer + socials | reads `siteConfig` |
-| `components/site/HeroMotion.tsx` | fade-up entrance wrapper (motion/react) | `className?`, `delay?` — respects `prefers-reduced-motion` |
 | `components/site/ThemeToggle.tsx` | sun/moon toggle | client component |
 | `components/content/PortableText.tsx` | Sanity rich-text renderer | `value: unknown[]`, `className?` |
 | `lib/config.ts` | **single source of truth** for name, email, social URLs | update here first |
