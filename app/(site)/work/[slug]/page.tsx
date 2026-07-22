@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { PortableText } from "@/components/content/PortableText";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { Bezel } from "@/components/ui/Bezel";
 import { MetricStat } from "@/components/ui/MetricStat";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
@@ -58,10 +59,7 @@ export default async function CaseStudyPage({ params }: Props) {
   const nextIndex = () => ++sectionIndex;
 
   return (
-    <main
-      id="main-content"
-      className="flex-1 [background:radial-gradient(ellipse_70%_30%_at_50%_0%,color-mix(in_srgb,var(--accent)_8%,transparent),transparent)]"
-    >
+    <main id="main-content" className="flex-1">
       <Container size="md" className="py-14 sm:py-20">
         <ScrollReveal className="mb-10">
           <p className="font-mono text-xs uppercase tracking-widest text-foreground-muted">
@@ -93,7 +91,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {cs.coverImage && (
           <ScrollReveal delay={0.1} className="mb-12">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+            <Bezel className="relative aspect-[16/9] overflow-hidden">
               <Image
                 src={urlFor(cs.coverImage).width(1200).height(675).url()}
                 alt={cs.title}
@@ -101,7 +99,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 800px"
               />
-            </div>
+            </Bezel>
           </ScrollReveal>
         )}
 
@@ -109,21 +107,20 @@ export default async function CaseStudyPage({ params }: Props) {
           {/* Outcomes — strip on mobile, sticky rail on desktop */}
           {cs.outcomes && cs.outcomes.length > 0 && (
             <aside className="lg:w-60 lg:shrink-0">
-              <ScrollReveal
-                delay={0.12}
-                className="grid grid-cols-2 gap-x-6 gap-y-5 rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm lg:sticky lg:top-24 lg:grid-cols-1"
-              >
-                <p className="col-span-full font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
-                  Outcomes
-                </p>
-                {cs.outcomes.map((o) => (
-                  <MetricStat
-                    key={o.label}
-                    label={o.label}
-                    value={o.value}
-                    delta={o.delta}
-                  />
-                ))}
+              <ScrollReveal delay={0.12} className="lg:sticky lg:top-24">
+                <Bezel className="grid grid-cols-2 gap-x-6 gap-y-5 p-5 lg:grid-cols-1">
+                  <p className="col-span-full font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
+                    Outcomes
+                  </p>
+                  {cs.outcomes.map((o) => (
+                    <MetricStat
+                      key={o.label}
+                      label={o.label}
+                      value={o.value}
+                      delta={o.delta}
+                    />
+                  ))}
+                </Bezel>
               </ScrollReveal>
             </aside>
           )}
@@ -163,7 +160,7 @@ export default async function CaseStudyPage({ params }: Props) {
             {cs.decisions && cs.decisions.length > 0 && (
               <ScrollReveal className="mb-12">
                 <SectionEyebrow index={nextIndex()} title="Decisions" />
-                <div className="mt-4 divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface/40">
+                <Bezel shellClassName="mt-4" className="divide-y divide-border overflow-hidden bg-surface/40">
                   {cs.decisions.map((d, i) => (
                     <div key={i} className="p-5">
                       <p className="text-sm font-semibold tracking-tight">
@@ -187,7 +184,7 @@ export default async function CaseStudyPage({ params }: Props) {
                       )}
                     </div>
                   ))}
-                </div>
+                </Bezel>
               </ScrollReveal>
             )}
 
