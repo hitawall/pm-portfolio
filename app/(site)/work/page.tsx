@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { Bezel } from "@/components/ui/Bezel";
 import { MetricStat } from "@/components/ui/MetricStat";
 import { getAllCaseStudies } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
@@ -40,7 +41,7 @@ export default async function Work() {
         </ScrollReveal>
 
         {caseStudies.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-border bg-surface/50 p-10 text-center">
+          <div className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
             <p className="text-sm font-medium text-foreground">
               Detailed case studies in progress
             </p>
@@ -64,9 +65,11 @@ export default async function Work() {
                 delay={i * 0.07}
                 className={cn(cs.featured && "sm:col-span-2")}
               >
-                <Link
+                <Bezel
+                  as={Link}
                   href={`/work/${cs.slug.current}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface/60 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]"
+                  shellClassName="h-full transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
+                  className="group flex h-full flex-col overflow-hidden"
                 >
                   <div
                     className={cn(
@@ -138,7 +141,7 @@ export default async function Work() {
                       </div>
                     )}
                   </div>
-                </Link>
+                </Bezel>
               </ScrollReveal>
             ))}
           </div>

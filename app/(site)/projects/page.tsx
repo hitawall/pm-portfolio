@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { Bezel } from "@/components/ui/Bezel";
 import { getAllProjects } from "@/sanity/lib/queries";
 import { cn } from "@/lib/utils";
 import { KIND_LABELS } from "@/lib/projects";
@@ -89,48 +90,46 @@ export default async function Projects({ searchParams }: Props) {
                 : undefined;
               const hasMedia = images.length > 0 || !!videoEmbedUrl;
 
-              const card = (
-                <div className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]">
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      {project.kind && (
-                        <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground-muted">
-                          {KIND_LABELS[project.kind] ?? project.kind}
-                        </span>
-                      )}
-                      {project.year && (
-                        <span className="font-mono text-xs text-foreground-muted">{project.year}</span>
-                      )}
-                    </div>
-                    {project.externalUrl && (
-                      <ArrowUpRight
-                        size={15}
-                        className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-                      />
-                    )}
-                  </div>
-                  <h2 className="mt-3 text-lg font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
-                    {project.title}
-                  </h2>
-                  {project.summary && (
-                    <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
-                      {project.summary}
-                    </p>
-                  )}
-                  {hasMedia && (
-                    <ProjectMedia images={images} videoEmbedUrl={videoEmbedUrl} />
-                  )}
-                </div>
-              );
               return (
                 <ScrollReveal key={project._id} delay={i * 0.05}>
-                  {project.externalUrl ? (
-                    <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
-                      {card}
-                    </a>
-                  ) : (
-                    card
-                  )}
+                  <Bezel
+                    as={project.externalUrl ? "a" : "div"}
+                    href={project.externalUrl || undefined}
+                    target={project.externalUrl ? "_blank" : undefined}
+                    rel={project.externalUrl ? "noopener noreferrer" : undefined}
+                    shellClassName="h-full transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
+                    className="group flex h-full flex-col p-5"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        {project.kind && (
+                          <span className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wide text-foreground-muted">
+                            {KIND_LABELS[project.kind] ?? project.kind}
+                          </span>
+                        )}
+                        {project.year && (
+                          <span className="font-mono text-xs text-foreground-muted">{project.year}</span>
+                        )}
+                      </div>
+                      {project.externalUrl && (
+                        <ArrowUpRight
+                          size={15}
+                          className="shrink-0 text-foreground-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                        />
+                      )}
+                    </div>
+                    <h2 className="mt-3 text-lg font-semibold tracking-tight transition-colors duration-150 group-hover:text-accent">
+                      {project.title}
+                    </h2>
+                    {project.summary && (
+                      <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
+                        {project.summary}
+                      </p>
+                    )}
+                    {hasMedia && (
+                      <ProjectMedia images={images} videoEmbedUrl={videoEmbedUrl} />
+                    )}
+                  </Bezel>
                 </ScrollReveal>
               );
             })}
