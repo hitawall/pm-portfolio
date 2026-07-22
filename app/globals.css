@@ -66,9 +66,6 @@
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
-  /* font-serif is still referenced by about + PortableText; renders as
-     sans until those pages are restyled in Phase 5 (GH-151). */
-  --font-serif: var(--font-geist-sans);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   /* Primary Redesign 3.0 motion curve — springy settle, used for nav
      morphs, magnetic hovers, and scroll-entry choreography. */
