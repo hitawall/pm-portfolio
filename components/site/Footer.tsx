@@ -15,7 +15,7 @@ export function Footer() {
               href={siteConfig.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors duration-[120ms] hover:text-foreground"
+              className="transition-colors duration-300 ease-[var(--ease-spring)] hover:text-foreground"
             >
               GitHub
             </a>
@@ -23,13 +23,13 @@ export function Footer() {
               href={siteConfig.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors duration-[120ms] hover:text-foreground"
+              className="transition-colors duration-300 ease-[var(--ease-spring)] hover:text-foreground"
             >
               LinkedIn
             </a>
             <a
               href="/resume"
-              className="transition-colors duration-[120ms] hover:text-foreground"
+              className="transition-colors duration-300 ease-[var(--ease-spring)] hover:text-foreground"
             >
               Resume
             </a>

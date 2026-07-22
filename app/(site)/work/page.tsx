@@ -41,7 +41,7 @@ export default async function Work() {
         </ScrollReveal>
 
         {caseStudies.length === 0 ? (
-          <div className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
+          <ScrollReveal delay={0.05} className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
             <p className="text-sm font-medium text-foreground">
               Detailed case studies in progress
             </p>
@@ -56,7 +56,7 @@ export default async function Work() {
               </a>
               .
             </p>
-          </div>
+          </ScrollReveal>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
             {caseStudies.map((cs, i) => (

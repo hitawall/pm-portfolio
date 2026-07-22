@@ -44,22 +44,22 @@ export default async function Thoughts() {
         </ScrollReveal>
 
         {posts.length === 0 ? (
-          <div className="space-y-3 py-4 text-sm text-foreground-muted">
-            <p>
+          <ScrollReveal delay={0.05} className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
+            <p className="text-sm font-medium text-foreground">
               I write about engineering trade-offs, AI systems, and what I&apos;m building. First posts dropping soon.
             </p>
-            <p>
+            <p className="mt-2 text-sm text-foreground-muted">
               In the meantime,{" "}
-              <Link href="/projects" className="underline underline-offset-4 hover:text-foreground">
+              <Link href="/projects" className="text-accent underline-offset-4 hover:underline">
                 browse the projects
               </Link>{" "}
               or{" "}
-              <Link href="/about" className="underline underline-offset-4 hover:text-foreground">
+              <Link href="/about" className="text-accent underline-offset-4 hover:underline">
                 read about the journey
               </Link>
               .
             </p>
-          </div>
+          </ScrollReveal>
         ) : (
           <div className="flex flex-col gap-4">
             {posts.map((post, i) => (
