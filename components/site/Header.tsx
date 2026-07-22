@@ -8,9 +8,9 @@ import { siteConfig } from "@/lib/config";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
-      <Container>
-        <nav className="flex h-14 items-center justify-between">
+    <header className="sticky top-0 z-50 px-4 pt-4 sm:pt-6">
+      <Container size="lg">
+        <nav className="flex h-14 items-center justify-between rounded-full border border-border bg-surface/70 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6">
           <Link
             href="/"
             className="font-display text-sm font-semibold tracking-tight text-foreground transition-colors duration-[120ms] hover:text-foreground-muted"

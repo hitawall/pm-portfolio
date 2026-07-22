@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens — Product Dark (Redesign 2.0) ----------
-   Dark is the designed-first surface; light is derived from the same
-   cool-zinc hue system. Accent: tangerine with a sunny-yellow edge. */
+/* ---------- Semantic tokens — Ethereal Glass (Redesign 3.0) ----------
+   Dark is the designed-first surface: OLED black + glass panels lit by a
+   soft tangerine/yellow mesh glow. Light is a derived, secondary surface.
+   Accent identity (tangerine + sunny-yellow edge) carries over from
+   Redesign 2.0 — only the materials (glass, hairlines, glow) changed. */
 :root {
   --background: #fafafa;
   --foreground: #111113;
@@ -17,15 +19,22 @@
   --accent-2: #ca8a04;
   /* Raw rgba for box-shadow glows */
   --accent-glow: rgba(234, 88, 12, 0.18);
+  /* Bezel (Double-Bezel nested card) surfaces */
+  --bezel-shell-bg: rgba(0, 0, 0, 0.03);
+  --bezel-shell-border: rgba(0, 0, 0, 0.06);
+  --bezel-inner-highlight: rgba(255, 255, 255, 0.6);
+  /* Background mesh glow orbs */
+  --mesh-glow-1: rgba(234, 88, 12, 0.1);
+  --mesh-glow-2: rgba(202, 138, 4, 0.06);
 }
 
 .dark {
-  --background: #0a0a0b;
+  --background: #050505;
   --foreground: #f4f4f5;
   --foreground-muted: #9b9ba4;
-  --border: #1f1f23;
-  --border-strong: #2e2e35;
-  --surface: #131316;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --surface: #0d0d10;
   --accent: #fb923c;
   --accent-hover: #fdba74;
   /* Bright orange-400 bg needs dark text for contrast */
@@ -33,6 +42,13 @@
   --accent-subtle: #2b1205;
   --accent-2: #fde047;
   --accent-glow: rgba(251, 146, 60, 0.25);
+  /* Bezel (Double-Bezel nested card) surfaces */
+  --bezel-shell-bg: rgba(255, 255, 255, 0.04);
+  --bezel-shell-border: rgba(255, 255, 255, 0.08);
+  --bezel-inner-highlight: rgba(255, 255, 255, 0.15);
+  /* Background mesh glow orbs */
+  --mesh-glow-1: rgba(251, 146, 60, 0.16);
+  --mesh-glow-2: rgba(253, 224, 71, 0.1);
 }
 
 @theme inline {
@@ -51,9 +67,12 @@
   --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
   /* font-serif is still referenced by about + PortableText; renders as
-     sans until those pages are restyled in Phase 6 (GH-88). */
+     sans until those pages are restyled in Phase 5 (GH-151). */
   --font-serif: var(--font-geist-sans);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Primary Redesign 3.0 motion curve — springy settle, used for nav
+     morphs, magnetic hovers, and scroll-entry choreography. */
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 /* ---------- Base ---------- */
@@ -67,6 +86,32 @@ body {
 ::selection {
   background-color: var(--accent);
   color: var(--accent-fg);
+}
+
+/* ---------- Ethereal Glass primitives ---------- */
+@layer utilities {
+  /* Fixed, pointer-events-none mesh glow — mount once in the root layout.
+     Never on a scrolling container: backdrop-blur + gradients repaint on
+     every scroll frame otherwise. */
+  .mesh-glow-bg {
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 0%, var(--mesh-glow-1), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 100% 20%, var(--mesh-glow-2), transparent 60%);
+  }
+
+  /* Double-Bezel outer shell: machined-hardware tray around glass content. */
+  .bezel-shell {
+    background-color: var(--bezel-shell-bg);
+    border: 1px solid var(--bezel-shell-border);
+    border-radius: 2rem;
+    padding: 0.375rem;
+  }
+
+  /* Double-Bezel inner core: the glass pane sitting in the shell. */
+  .bezel-core {
+    border-radius: calc(2rem - 0.375rem);
+    box-shadow: inset 0 1px 1px var(--bezel-inner-highlight);
+  }
 }
 
 /* ---------- Accessibility ---------- */

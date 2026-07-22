@@ -28,19 +28,21 @@ After linking, any memory Claude writes during a session lands in the repo worki
 - `.claude/settings.json` — shared permissions (versioned)
 - `.claude/settings.local.json` — per-machine permissions (gitignored; keep locally)
 
-## Current initiative: Redesign 2.0 (milestone "Redesign 2.0")
+## Current initiative: Redesign 3.0 (milestone "Redesign 3.0")
 
-Repositioning from "editorial journal" to **product-grade dark + builder's workshop**. Plan: `.claude/plans/snoopy-toasting-salamander.md` (if linked) — 6 phases, issues #74–#89.
+Repositioning from "Product Dark — Tangerine" to **Ethereal Glass** — an Awwwards-tier premium UI/UX pass per the `high-end-visual-design` skill. Vibe archetype: Ethereal Glass (deep OLED black, mesh-glow orbs, Double-Bezel nested cards, magnetic button-in-button CTAs, fluid-island nav). Brand accent (tangerine/yellow) kept from Redesign 2.0 for continuity — only the surface language and motion system changed. Phased across issues #147–#152.
 
 **Status:**
-- Phase 1 ✓ — design language (tokens/fonts #74, dashboard hero shell #75, cleanup #76)
-- Phase 2 — live GitHub hero data (#77 stats lib, #78 contribution graph)
-- Phase 3 — Now/building feed via Sanity (#79, #80)
-- Phase 4 — PM-grade case studies (#81 schema, #82 /work index, #83 detail narrative)
-- Phase 5 — motion polish (#84 magnetic buttons, #85 scroll-linked, #86 page fade)
-- Phase 6 — full-site sweep (#87 projects/thoughts, #88 about/resume, #89 OG + QA)
+- Phase 1 (#147) — foundation: Ethereal Glass tokens, Double-Bezel primitives, fluid-island nav, magnetic CTA — in progress
+- Phase 2 (#148) — homepage hero + bento stats dashboard
+- Phase 3 (#149) — contact page (must preserve BotID/honeypot/time-trap hardening from #145)
+- Phase 4 (#150) — work/projects listings
+- Phase 5 (#151) — about/resume/thoughts, retire remaining `font-serif` usages
+- Phase 6 (#152) — full-site sweep: OG image, motion/a11y/perf QA
 
-**Execution protocol:** one issue → one branch → one PR per task. **Stop after opening each PR — the user manually reviews and squash-merges before the next task begins.** Do not start the next task unprompted.
+**Execution protocol:** one issue → one branch → one PR per phase. **Stop after opening each PR — the user manually reviews and merges before the next phase begins.** Do not start the next phase unprompted.
+
+**Prior initiative (Redesign 2.0, milestone closed):** all 6 phases (#74–#89) shipped the Product Dark — Tangerine language this redesign builds on.
 
 **Pre-redesign open issues:** #10 P1 (replace `public/resume.pdf` with real CV — user action) · #8 P2 (Sanity revalidation webhook) · #19 P2 (cover image layout bug on `/work/[slug]`, parked).
 
@@ -95,10 +97,12 @@ npm run format   # Prettier + Tailwind class sort
 |---|---|---|
 | `components/ui/Container.tsx` | max-width wrapper | `size?: sm\|md\|lg`, `as?` |
 | `components/ui/Section.tsx` | vertical padding block | `as?` |
-| `components/ui/Button.tsx` | CTA button — primary has accent glow shadow | `variant?: primary\|ghost`, `size?: sm\|md`, `as?` (renders as `<a>` for links) |
+| `components/ui/Button.tsx` | CTA — pill shape, button-in-button trailing icon, magnetic hover | `variant?: primary\|ghost`, `size?: sm\|md`, `as?` (renders as `<a>` for links), `icon?: boolean` (nested circular trailing arrow) |
+| `components/ui/Bezel.tsx` | Double-Bezel nested card (outer shell + inner glass core) — use for premium card/panel surfaces | `as?`, `className?` (applies to inner core), `shellClassName?` (applies to outer shell) |
 | `components/ui/ScrollReveal.tsx` | fade-up on scroll-into-view | `delay?` for stagger |
 | `components/ui/CopyEmail.tsx` / `CopyEmailIcon.tsx` | email → clipboard with "Copied!" feedback | `label?`, `variant?`, `size?` |
-| `components/site/Header.tsx` | sticky glassy nav (backdrop-blur) | edit `navLinks[]` in `NavLinks.tsx` to add routes |
+| `components/site/Header.tsx` | floating glass-pill nav (fluid-island), detached from viewport top | edit `navLinks[]` in `NavLinks.tsx` to add routes |
+| `components/site/MobileNav.tsx` | hamburger-to-X morph + full-screen glass overlay with staggered link reveal | always-mounted, toggled via opacity/pointer-events (not conditional JSX) so CSS transitions run |
 | `components/site/Footer.tsx` | footer + socials | reads `siteConfig` |
 | `components/site/HeroMotion.tsx` | fade-up entrance wrapper (motion/react) | `className?`, `delay?` — respects `prefers-reduced-motion` |
 | `components/site/ThemeToggle.tsx` | sun/moon toggle | client component |
@@ -109,27 +113,30 @@ npm run format   # Prettier + Tailwind class sort
 
 ## Design tokens (globals.css — do not re-read file, use table)
 
-**Design language: Product Dark — Tangerine** (Redesign 2.0). Dark-first, cool-zinc neutrals + tangerine accent with sunny-yellow gradient edge. Glassy surfaces (`bg-surface/60 backdrop-blur`), radial glow backdrops, Space Grotesk headlines, mono tabular numerals for data.
+**Design language: Ethereal Glass** (Redesign 3.0, phased rollout from #147). Deep OLED-black surface, radial mesh-glow orbs behind content, Double-Bezel nested cards (outer shell + inner glass core), tangerine/yellow accent kept from Redesign 2.0 for brand continuity. Space Grotesk headlines, mono tabular numerals for data, spring-based motion curve.
 
 | Tailwind class | Light | Dark (default) |
 |---|---|---|
-| `bg-background` | `#fafafa` | `#0a0a0b` |
+| `bg-background` | `#fafafa` | `#050505` |
 | `text-foreground` | `#111113` | `#f4f4f5` |
 | `text-foreground-muted` | `#6b6b76` | `#9b9ba4` |
-| `border-border` | `#e4e4e7` | `#1f1f23` |
-| `border-border-strong` | `#d4d4d8` | `#2e2e35` |
-| `bg-surface` | `#f4f4f5` | `#131316` |
+| `border-border` | `#e4e4e7` | `rgba(255,255,255,0.08)` |
+| `border-border-strong` | `#d4d4d8` | `rgba(255,255,255,0.14)` |
+| `bg-surface` | `#f4f4f5` | `#0d0d10` |
 | `bg-accent` | `#ea580c` (orange-600) | `#fb923c` (orange-400) |
 | `hover:bg-accent-hover` | `#c2410c` (darker) | `#fdba74` (lighter) |
 | `text-accent-foreground` | `#ffffff` | `#431407` (dark text on bright orange) |
 | `bg-accent-subtle` | `#ffedd5` | `#2b1205` |
 | `text-accent-2` | `#ca8a04` (yellow-600) | `#fde047` (yellow-300) — gradient edge |
 | `--accent-glow` (raw rgba) | `rgba(234,88,12,0.18)` | `rgba(251,146,60,0.25)` |
-| `--ease-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | same |
+| `--bezel-shell-bg` / `--bezel-shell-border` / `--bezel-inner-highlight` (raw) | see `globals.css` | Double-Bezel shell/core tokens |
+| `--mesh-glow-1` / `--mesh-glow-2` (raw) | see `globals.css` | radial background-glow orb colors |
+| `--ease-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | same (legacy, still used in older components) |
+| `--ease-spring` | `cubic-bezier(0.32, 0.72, 0, 1)` | new default motion curve for Redesign 3.0 (nav, buttons, mobile menu) |
 
-**Font utilities:** `font-display` (Space Grotesk) · `font-sans` (Geist Sans) · `font-mono` (Geist Mono). All `h1–h6` get Space Grotesk + `-0.02em` tracking via base layer. `font-serif` temporarily maps to Geist Sans until Phase 6 removes its usages (about page, PortableText).
+**Font utilities:** `font-display` (Space Grotesk) · `font-sans` (Geist Sans) · `font-mono` (Geist Mono). All `h1–h6` get Space Grotesk + `-0.02em` tracking via base layer. `font-serif` temporarily maps to Geist Sans until Phase 5 (#151) removes its usages (about page, PortableText).
 
-**Recurring patterns:** gradient headline accent = `bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent` (hero only). Glow shadows = arbitrary `shadow-[0_4px_16px_var(--accent-glow)]`. Glass card = `rounded-xl border border-border bg-surface/60 backdrop-blur-sm`.
+**Recurring patterns:** gradient headline accent = `bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent` (hero only). Glow shadows = arbitrary `shadow-[0_4px_16px_var(--accent-glow)]`. Double-Bezel card = `<Bezel>` component (`.bezel-shell` outer tray + `.bezel-core` inner glass pane with concentric radii) — use for any premium card/panel surface instead of a flat `rounded-xl border` card. Mesh-glow backdrop = `.mesh-glow-bg` utility, mounted once in `app/layout.tsx` as a fixed `-z-10` layer — don't remount per-page.
 
 **Global focus ring:** `@layer base { *:focus-visible }` in `globals.css` sets a 2px accent outline. Components that need a custom ring use `focus-visible:outline-none` (higher-priority `@layer utilities`) to override it.
 

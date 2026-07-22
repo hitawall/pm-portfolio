@@ -69,6 +69,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <div aria-hidden="true" className="mesh-glow-bg pointer-events-none fixed inset-0 -z-10" />
         {children}
         <Analytics />
         <SpeedInsights />
