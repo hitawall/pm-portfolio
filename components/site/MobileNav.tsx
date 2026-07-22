@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/work", label: "Work" },
@@ -17,36 +17,61 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <div className="sm:hidden">
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close menu" : "Open menu"}
-        className="rounded-md p-1.5 text-foreground-muted transition-colors duration-[120ms] hover:text-accent"
+        aria-expanded={open}
+        className="relative z-50 flex h-8 w-8 items-center justify-center"
       >
-        {open ? <X size={18} /> : <Menu size={18} />}
+        <span
+          className={cn(
+            "absolute h-px w-4 bg-foreground transition-transform duration-300 ease-[var(--ease-spring)]",
+            open ? "rotate-45" : "-translate-y-1"
+          )}
+        />
+        <span
+          className={cn(
+            "absolute h-px w-4 bg-foreground transition-transform duration-300 ease-[var(--ease-spring)]",
+            open ? "-rotate-45" : "translate-y-1"
+          )}
+        />
       </button>
 
-      {open && (
-        <div className="absolute left-0 right-0 top-14 border-b border-border bg-background">
-          <nav className="flex flex-col px-6 py-4">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className={`py-2.5 text-sm transition-colors duration-[120ms] ${
-                  pathname === href || pathname.startsWith(href + "/")
-                    ? "font-semibold text-foreground"
-                    : "text-foreground-muted hover:text-foreground"
-                }`}
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-background/95 backdrop-blur-3xl transition-opacity duration-300 ease-[var(--ease-spring)]",
+          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        )}
+      >
+        <nav className="flex h-full flex-col items-center justify-center gap-2">
+          {navLinks.map(({ href, label }, i) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              style={{ transitionDelay: open ? `${100 + i * 60}ms` : "0ms" }}
+              className={cn(
+                "font-display text-2xl transition-all duration-500 ease-[var(--ease-spring)]",
+                open ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+                pathname === href || pathname.startsWith(href + "/")
+                  ? "text-foreground"
+                  : "text-foreground-muted"
+              )}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 }
