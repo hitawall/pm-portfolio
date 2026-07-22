@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { Bezel } from "@/components/ui/Bezel";
 import type { NowEntry } from "@/sanity/lib/queries";
 
 const STATUS_STYLES: Record<NowEntry["status"], { dot: string; label: string }> = {
@@ -22,9 +23,10 @@ export function NowFeed({ entries }: { entries: NowEntry[] }) {
         const style = STATUS_STYLES[entry.status] ?? STATUS_STYLES.building;
         const Title = entry.link ? "a" : "div";
         return (
-          <div
+          <Bezel
             key={entry._id}
-            className="rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-colors duration-200 hover:border-border-strong"
+            shellClassName="transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
+            className="p-5"
           >
             <div className="flex items-center gap-2">
               <span className={`h-2 w-2 rounded-full ${style.dot}`} />
@@ -63,7 +65,7 @@ export function NowFeed({ entries }: { entries: NowEntry[] }) {
                 {entry.description}
               </p>
             )}
-          </div>
+          </Bezel>
         );
       })}
     </div>

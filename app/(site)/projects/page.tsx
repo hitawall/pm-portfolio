@@ -74,9 +74,11 @@ export default async function Projects({ searchParams }: Props) {
         </ScrollReveal>
 
         {filtered.length === 0 ? (
-          <p className="text-sm text-foreground-muted">
-            {kind ? `No ${KIND_LABELS[kind] ?? kind} projects yet.` : "Projects coming soon."}
-          </p>
+          <ScrollReveal delay={0.05} className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
+            <p className="text-sm font-medium text-foreground">
+              {kind ? `No ${KIND_LABELS[kind] ?? kind} projects yet.` : "Projects coming soon."}
+            </p>
+          </ScrollReveal>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {filtered.map((project, i) => {

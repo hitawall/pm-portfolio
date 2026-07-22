@@ -118,6 +118,7 @@ export default async function Home() {
                       alt="Shubham Arora"
                       width={48}
                       height={48}
+                      sizes="48px"
                       className="h-full w-full scale-[1.1] object-cover [object-position:50%_48%]"
                       priority
                     />
@@ -333,11 +334,13 @@ export default async function Home() {
               const hasMedia = images.length > 0 || !!videoEmbedUrl;
               return (
                 <ScrollReveal key={project._id} delay={i * 0.06}>
-                  <a
+                  <Bezel
+                    as="a"
                     href={project.externalUrl ?? "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-full flex-col rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]"
+                    shellClassName="h-full transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
+                    className="group flex h-full flex-col p-5"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
@@ -360,7 +363,7 @@ export default async function Home() {
                     {hasMedia && (
                       <ProjectMedia images={images} videoEmbedUrl={videoEmbedUrl} />
                     )}
-                  </a>
+                  </Bezel>
                 </ScrollReveal>
               );
             })}
@@ -392,9 +395,11 @@ export default async function Home() {
             <div className="flex flex-col gap-4">
               {recentPosts.map((post, i) => (
                 <ScrollReveal key={post._id} delay={i * 0.08}>
-                  <Link
+                  <Bezel
+                    as={Link}
                     href={`/thoughts/${post.slug.current}`}
-                    className="group block rounded-xl border border-border bg-surface/60 p-5 backdrop-blur-sm transition-all duration-200 hover:border-border-strong hover:shadow-[0_0_24px_var(--accent-glow)]"
+                    shellClassName="transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
+                    className="group block p-5"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <p className="font-mono text-xs text-foreground-muted">
@@ -417,14 +422,14 @@ export default async function Home() {
                         {post.summary}
                       </p>
                     )}
-                  </Link>
+                  </Bezel>
                 </ScrollReveal>
               ))}
             </div>
           ) : (
             <p className="text-sm text-foreground-muted">
               Writing on engineering trade-offs, AI systems, and what I&apos;m building.{" "}
-              <Link href="/thoughts" className="underline underline-offset-4 hover:text-foreground">
+              <Link href="/thoughts" className="text-accent underline-offset-4 hover:underline">
                 Browse all posts →
               </Link>
             </p>

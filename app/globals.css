@@ -127,3 +127,16 @@ body {
   }
 }
 
+/* Motion/react components (ScrollReveal, Magnetic, ParallaxGlow) already gate
+   on useReducedMotion(). This catches everything else — CSS transitions on
+   MobileNav, Button, and hover-glow cards — so reduced-motion users still get
+   the end state without the transform/opacity animation. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

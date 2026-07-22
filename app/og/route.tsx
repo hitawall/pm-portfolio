@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#09090b",
+          backgroundColor: "#050505",
           padding: "60px 72px",
           fontFamily: "sans-serif",
           position: "relative",
@@ -72,10 +72,10 @@ export async function GET(request: NextRequest) {
                 </div>
               )}
               {type && sub && (
-                <div style={{ color: "#3f3f46", fontSize: "13px" }}>·</div>
+                <div style={{ color: "#9b9ba4", fontSize: "13px" }}>·</div>
               )}
               {sub && (
-                <div style={{ fontSize: "13px", color: "#71717a", letterSpacing: "0.03em" }}>
+                <div style={{ fontSize: "13px", color: "#9b9ba4", letterSpacing: "0.03em" }}>
                   {sub}
                 </div>
               )}
@@ -86,7 +86,7 @@ export async function GET(request: NextRequest) {
             style={{
               fontSize: titleSize,
               fontWeight: 700,
-              color: "#fafafa",
+              color: "#f4f4f5",
               lineHeight: 1.15,
               letterSpacing: "-0.025em",
               maxWidth: "960px",
@@ -103,7 +103,7 @@ export async function GET(request: NextRequest) {
             alignItems: "center",
             justifyContent: "space-between",
             paddingTop: "40px",
-            borderTop: "1px solid #27272a",
+            borderTop: "1px solid rgba(255,255,255,0.14)",
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -111,13 +111,13 @@ export async function GET(request: NextRequest) {
               style={{
                 fontSize: "18px",
                 fontWeight: 700,
-                color: "#fafafa",
+                color: "#f4f4f5",
                 letterSpacing: "-0.01em",
               }}
             >
               {siteConfig.name}
             </div>
-            <div style={{ fontSize: "13px", color: "#71717a", letterSpacing: "0.04em" }}>
+            <div style={{ fontSize: "13px", color: "#9b9ba4", letterSpacing: "0.04em" }}>
               Backend Engineer · GenAI
             </div>
           </div>

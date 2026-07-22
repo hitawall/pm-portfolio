@@ -22,7 +22,7 @@ export function ContributionGraph({ weeks, totalContributions }: Props) {
   const height = 7 * STEP - GAP;
 
   return (
-    <div className="rounded-xl border border-border bg-surface/60 p-4 backdrop-blur-sm">
+    <div>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
           GitHub activity
