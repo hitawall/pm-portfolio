@@ -10,7 +10,7 @@ import { getSiteSettings } from "@/sanity/lib/queries";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Resume of Shubham Arora — engineer and builder with 5 years of shipping at JPMC, Amazon, Blink Health, and Nutanix.",
+    "Resume of Shubham Arora, engineer and builder with 5 years of shipping at JPMC, Amazon, Blink Health, and Nutanix.",
   alternates: { canonical: "/resume" },
 };
 
@@ -52,7 +52,7 @@ export default async function Resume() {
             <iframe
               src={embedSrc}
               className="h-[82vh] w-full"
-              title={`${siteConfig.name} — Resume`}
+              title={`${siteConfig.name} · Resume`}
             />
           </Bezel>
         </ScrollReveal>

@@ -37,7 +37,7 @@ export function Footer() {
           </div>
         </div>
         <p className="mt-4 font-mono text-[11px] uppercase tracking-wide text-foreground-muted/60">
-          Set in Space Grotesk &amp; Geist — grid discipline after Josef Müller-Brockmann&apos;s Swiss school.
+          Set in Space Grotesk &amp; Geist, grid discipline after Josef Müller-Brockmann&apos;s Swiss school.
         </p>
       </Container>
     </footer>

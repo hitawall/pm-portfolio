@@ -46,7 +46,7 @@ export default async function Work() {
               Detailed case studies in progress
             </p>
             <p className="mt-2 text-sm text-foreground-muted">
-              I&apos;m writing up the full stories behind the work — problem, process, and outcome.
+              I&apos;m writing up the full stories behind the work: problem, process, and outcome.
               In the meantime,{" "}
               <a
                 href={`mailto:${siteConfig.email}`}

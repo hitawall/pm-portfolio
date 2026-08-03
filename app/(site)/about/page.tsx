@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CopyEmail } from "@/components/ui/CopyEmail";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { PullQuote } from "@/components/ui/PullQuote";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -18,9 +19,9 @@ const sections = [
     id: "engineering",
     heading: "Five years in the backend",
     paragraphs: [
-      "I spent five years as a backend engineer — at JPMC building risk and compliance systems that processed millions of transactions daily, at Amazon working on large-scale distributed infrastructure, at Blink Health owning pricing and fulfillment backends for a consumer health platform, and at Nutanix building cloud management software used by enterprise teams globally.",
-      "Each role pushed me deeper into systems thinking. I debugged race conditions in distributed workflows, designed APIs that other engineers built on top of, and shipped data pipelines where correctness wasn't optional. I got good at building things that don't break — and fast at diagnosing them when they do.",
-      "That foundation — knowing how data moves, where latency hides, why things fail at scale — is what I bring to everything I build now.",
+      "I spent five years as a backend engineer: at JPMC building risk and compliance systems that processed millions of transactions daily, at Amazon working on large-scale distributed infrastructure, at Blink Health owning pricing and fulfillment backends for a consumer health platform, and at Nutanix building cloud management software used by enterprise teams globally.",
+      "Each role pushed me deeper into systems thinking. I debugged race conditions in distributed workflows, designed APIs that other engineers built on top of, and shipped data pipelines where correctness wasn't optional. I got good at building things that don't break, and fast at diagnosing them when they do.",
+      "That foundation, knowing how data moves, where latency hides, why things fail at scale, is what I bring to everything I build now.",
     ],
   },
   {
@@ -28,8 +29,8 @@ const sections = [
     heading: "The pull toward AI",
     paragraphs: [
       "My interest in LLMs started as a side project and became something I couldn't put down. I started experimenting with retrieval pipelines, prompt engineering, and early agent architectures. The more I dug in, the more I realised this was the most interesting backend problem space I'd ever encountered.",
-      "LLM systems surface every hard problem in software — latency under uncertainty, eval at scale, orchestration of non-deterministic components, and the constant tension between capability and reliability. They require the same rigor as any distributed system, with an extra layer of unpredictability that makes engineering them genuinely challenging.",
-      "I've been building in this space seriously: RAG pipelines with reranking, multi-step agent loops with tool use, structured output extraction, and observability for LLM calls. Not demos — systems designed to run in production.",
+      "LLM systems surface every hard problem in software: latency under uncertainty, eval at scale, orchestration of non-deterministic components, and the constant tension between capability and reliability. They require the same rigor as any distributed system, with an extra layer of unpredictability that makes engineering them genuinely challenging.",
+      "I've been building in this space seriously: RAG pipelines with reranking, multi-step agent loops with tool use, structured output extraction, and observability for LLM calls. Not demos: systems designed to run in production.",
     ],
   },
   {
@@ -38,7 +39,7 @@ const sections = [
     paragraphs: [
       "I approach LLM engineering the way I approach any backend system: define the interface, control the failure modes, measure what matters. That means thinking carefully about context construction before reaching for a bigger model, treating evals as a first-class concern, and building retrieval pipelines that degrade gracefully rather than hallucinating confidently.",
       "I'm comfortable across the full stack of a GenAI backend: vector databases and embedding strategies, chunk sizing and reranking tradeoffs, agent loop design, function/tool calling schemas, streaming responses, and the infrastructure to trace and debug LLM calls in production.",
-      "I don't believe every problem needs an LLM. I do believe that engineers who understand both when to use them and how to make them reliable are rare — and that's the gap I'm trying to occupy.",
+      "I don't believe every problem needs an LLM. I do believe that engineers who understand both when to use them and how to make them reliable are rare, and that's the gap I'm trying to occupy.",
     ],
   },
   {
@@ -46,15 +47,15 @@ const sections = [
     heading: "What I bring",
     paragraphs: [
       "Backend depth applied to AI: I know why your RAG pipeline is returning irrelevant chunks, why your agent is looping, and why your latency spikes on the third tool call. I've built the underlying infrastructure, so I reason about AI systems at the right level of abstraction.",
-      "Systems thinking at scale: years of debugging distributed infrastructure teaches you to trace causality, question assumptions, and model second-order effects. That translates directly to diagnosing LLM system failures — which are rarely where they appear to be.",
-      "I work best on teams building AI-native products where the engineering challenges are real — not wrappers, but systems where reliability, latency, and eval strategy actually matter.",
+      "Systems thinking at scale: years of debugging distributed infrastructure teaches you to trace causality, question assumptions, and model second-order effects. That translates directly to diagnosing LLM system failures, which are rarely where they appear to be.",
+      "I work best on teams building AI-native products where the engineering challenges are real: not wrappers, but systems where reliability, latency, and eval strategy actually matter.",
     ],
   },
   {
     id: "outside",
     heading: "Outside work",
     paragraphs: [
-      "I read AI/ML papers more than is probably healthy — especially anything touching agents, reasoning, and retrieval. I build side projects mostly in the GenAI space, usually tools I need and can't find. I enjoy long runs, occasionally cook something ambitious, and have strong opinions about text editors.",
+      "I read AI/ML papers more than is probably healthy, especially anything touching agents, reasoning, and retrieval. I build side projects mostly in the GenAI space, usually tools I need and can't find. I enjoy long runs, occasionally cook something ambitious, and have strong opinions about text editors.",
     ],
   },
 ];
@@ -97,12 +98,12 @@ export default function About() {
                   ))}
                 </div>
                 {s.id === "how-i-build" && (
-                  <blockquote className="mt-6 ml-8 border-l-2 border-accent/40 pl-4 text-sm italic text-foreground-muted">
-                    &ldquo;Good design is as little design as possible.&rdquo;
-                    <footer className="mt-1 font-mono text-xs not-italic tracking-wide text-foreground-muted/70">
-                      — Dieter Rams
-                    </footer>
-                  </blockquote>
+                  <PullQuote
+                    className="mt-6 ml-8"
+                    quote="Although sometimes I have failed, but inside my mind, I clearly understand that failure actually makes me stronger."
+                    author="Lee Chong Wei"
+                    context="former world No. 1, three-time Olympic silver medalist"
+                  />
                 )}
               </section>
             </ScrollReveal>

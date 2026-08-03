@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/site/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Shubham Arora — backend engineer and GenAI builder open to senior engineering and AI/ML roles.",
+    "Get in touch with Shubham Arora, backend engineer and GenAI builder open to senior engineering and AI/ML roles.",
   alternates: { canonical: "/contact" },
 };
 
