@@ -7,7 +7,7 @@ export const NOW_FALLBACK: NowEntry[] = [
     title: "Portfolio Redesign 2.0",
     status: "building",
     description:
-      "Dark product-grade rebuild of this site — live GitHub hero, PM-grade case studies.",
+      "Dark product-grade rebuild of this site, live GitHub hero, PM-grade case studies.",
     startedAt: "2026-06-10",
     current: true,
   },
@@ -16,7 +16,7 @@ export const NOW_FALLBACK: NowEntry[] = [
     title: "AI product evals",
     status: "learning",
     description:
-      "Evaluating LLM products beyond vibes — evals, rubrics, regression suites.",
+      "Evaluating LLM products beyond vibes: evals, rubrics, regression suites.",
     startedAt: "2026-05-20",
     current: true,
   },

@@ -4,6 +4,7 @@ import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { NavLinks } from "@/components/site/NavLinks";
 import { MobileNav } from "@/components/site/MobileNav";
 import { CopyEmailIcon } from "@/components/ui/CopyEmailIcon";
+import { ShuttlecockMark } from "@/components/ui/ShuttlecockMark";
 import { siteConfig } from "@/lib/config";
 
 export function Header() {
@@ -13,10 +14,10 @@ export function Header() {
         <nav className="flex h-14 items-center justify-between rounded-full border border-border bg-surface/70 px-4 shadow-[0_8px_32px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6">
           <Link
             href="/"
-            className="font-display text-sm font-semibold tracking-tight text-foreground transition-colors duration-[120ms] hover:text-foreground-muted"
+            className="flex items-center gap-1.5 font-display text-sm font-semibold tracking-tight text-foreground transition-colors duration-[120ms] hover:text-foreground-muted"
           >
             {siteConfig.name}
-            <span className="text-accent">.</span>
+            <ShuttlecockMark className="h-3.5 w-3.5 text-accent" />
           </Link>
           <div className="flex items-center gap-6">
             <NavLinks />

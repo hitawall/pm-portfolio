@@ -100,7 +100,7 @@ export function ContactForm() {
           type="text"
           maxLength={120}
           autoComplete="organization"
-          placeholder="Acme Corp — Senior Recruiter"
+          placeholder="Acme Corp · Senior Recruiter"
           className={inputClass}
         />
       </div>

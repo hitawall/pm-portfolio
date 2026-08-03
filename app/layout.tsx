@@ -26,7 +26,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
-    template: `%s — ${siteConfig.name}`,
+    template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
   metadataBase: new URL(getBaseUrl()),
@@ -48,7 +48,7 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: siteConfig.name,
-  jobTitle: siteConfig.title.split(" — ")[1] ?? siteConfig.title,
+  jobTitle: siteConfig.title.split(" · ").slice(1).join(" · ") || siteConfig.title,
   url: getBaseUrl(),
   sameAs: [siteConfig.github, siteConfig.linkedin],
 };

@@ -110,7 +110,7 @@ export async function sendContactEmail(
       from: "Portfolio Contact <hello@contact.arorashubham.com>",
       to: siteConfig.email,
       replyTo: email,
-      subject: `Portfolio contact${company ? ` — ${company}` : ""}: ${name}`,
+      subject: `Portfolio contact${company ? ` · ${company}` : ""}: ${name}`,
       text: [
         `From: ${name} <${email}>`,
         company ? `Company: ${company}` : null,

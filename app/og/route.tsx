@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#050505",
+          backgroundColor: "#070b14",
           padding: "60px 72px",
           fontFamily: "sans-serif",
           position: "relative",
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
             left: 0,
             right: 0,
             height: "4px",
-            background: "linear-gradient(90deg, #fb923c 0%, #fde047 100%)",
+            background: "linear-gradient(90deg, #b91c1c 0%, #e8bd45 100%)",
           }}
         />
 
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
             width: "900px",
             height: "480px",
             borderRadius: "50%",
-            background: "radial-gradient(ellipse at center, rgba(251,146,60,0.18) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at center, rgba(239,68,68,0.2) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -65,17 +65,17 @@ export async function GET(request: NextRequest) {
                     fontWeight: 600,
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: "#fde047",
+                    color: "#e8bd45",
                   }}
                 >
                   {type}
                 </div>
               )}
               {type && sub && (
-                <div style={{ color: "#9b9ba4", fontSize: "13px" }}>·</div>
+                <div style={{ color: "#8b93a8", fontSize: "13px" }}>·</div>
               )}
               {sub && (
-                <div style={{ fontSize: "13px", color: "#9b9ba4", letterSpacing: "0.03em" }}>
+                <div style={{ fontSize: "13px", color: "#8b93a8", letterSpacing: "0.03em" }}>
                   {sub}
                 </div>
               )}
@@ -86,7 +86,7 @@ export async function GET(request: NextRequest) {
             style={{
               fontSize: titleSize,
               fontWeight: 700,
-              color: "#f4f4f5",
+              color: "#eef1f6",
               lineHeight: 1.15,
               letterSpacing: "-0.025em",
               maxWidth: "960px",
@@ -103,7 +103,7 @@ export async function GET(request: NextRequest) {
             alignItems: "center",
             justifyContent: "space-between",
             paddingTop: "40px",
-            borderTop: "1px solid rgba(255,255,255,0.14)",
+            borderTop: "1px solid rgba(238,241,246,0.16)",
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -111,7 +111,7 @@ export async function GET(request: NextRequest) {
               style={{
                 fontSize: "18px",
                 fontWeight: 700,
-                color: "#f4f4f5",
+                color: "#eef1f6",
                 letterSpacing: "-0.01em",
               }}
             >
@@ -126,12 +126,12 @@ export async function GET(request: NextRequest) {
             style={{
               display: "flex",
               alignItems: "center",
-              background: "linear-gradient(135deg, #fb923c 0%, #fde047 100%)",
+              background: "#b91c1c",
               borderRadius: "100px",
               padding: "12px 28px",
               fontSize: "15px",
               fontWeight: 700,
-              color: "#431407",
+              color: "#ffffff",
               letterSpacing: "-0.01em",
             }}
           >

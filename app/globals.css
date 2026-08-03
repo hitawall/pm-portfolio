@@ -1,54 +1,61 @@
 @import "tailwindcss";
 
-/* ---------- Semantic tokens — Ethereal Glass (Redesign 3.0) ----------
-   Dark is the designed-first surface: OLED black + glass panels lit by a
-   soft tangerine/yellow mesh glow. Light is a derived, secondary surface.
-   Accent identity (tangerine + sunny-yellow edge) carries over from
-   Redesign 2.0 — only the materials (glass, hairlines, glow) changed. */
+/* ---------- Semantic tokens — Center Court (Redesign 4.0) ----------
+   Cool ink-navy court surface (not warm OLED black) + chalk-white lines.
+   Single accent family: court crimson to trophy gold. --accent stays
+   identical across modes (a deep, contrast-safe crimson) so buttons never
+   need mode-specific text-color inversion; only the surface materials and
+   the gold edge shift in brightness between modes. Supersedes the
+   tangerine/yellow Ethereal Glass tokens from Redesign 3.0. */
 :root {
-  --background: #fafafa;
-  --foreground: #111113;
-  --foreground-muted: #6b6b76;
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --surface: #f4f4f5;
-  --accent: #ea580c;
-  --accent-hover: #c2410c;
+  --background: #f7f8fb;
+  --foreground: #0d1220;
+  --foreground-muted: #5b6478;
+  --border: #e1e4ee;
+  --border-strong: #ccd1e0;
+  --surface: #edf0f6;
+  --accent: #b91c1c;
+  --accent-hover: #921515;
   --accent-fg: #ffffff;
-  --accent-subtle: #ffedd5;
-  --accent-2: #ca8a04;
+  --accent-subtle: #fbe0e0;
+  --accent-2: #7d5e08;
   /* Raw rgba for box-shadow glows */
-  --accent-glow: rgba(234, 88, 12, 0.18);
+  --accent-glow: rgba(185, 28, 28, 0.14);
   /* Bezel (Double-Bezel nested card) surfaces */
-  --bezel-shell-bg: rgba(0, 0, 0, 0.03);
-  --bezel-shell-border: rgba(0, 0, 0, 0.06);
+  --bezel-shell-bg: rgba(13, 18, 32, 0.035);
+  --bezel-shell-border: rgba(13, 18, 32, 0.08);
   --bezel-inner-highlight: rgba(255, 255, 255, 0.6);
+  /* Court-line hairlines: bezel service-line rule + background hatch */
+  --court-line: rgba(13, 18, 32, 0.14);
+  --court-grid: rgba(13, 18, 32, 0.05);
   /* Background mesh glow orbs */
-  --mesh-glow-1: rgba(234, 88, 12, 0.1);
-  --mesh-glow-2: rgba(202, 138, 4, 0.06);
+  --mesh-glow-1: rgba(185, 28, 28, 0.07);
+  --mesh-glow-2: rgba(125, 94, 8, 0.05);
 }
 
 .dark {
-  --background: #050505;
-  --foreground: #f4f4f5;
-  --foreground-muted: #9b9ba4;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --surface: #0d0d10;
-  --accent: #fb923c;
-  --accent-hover: #fdba74;
-  /* Bright orange-400 bg needs dark text for contrast */
-  --accent-fg: #431407;
-  --accent-subtle: #2b1205;
-  --accent-2: #fde047;
-  --accent-glow: rgba(251, 146, 60, 0.25);
+  --background: #070b14;
+  --foreground: #eef1f6;
+  --foreground-muted: #8b93a8;
+  --border: rgba(148, 163, 196, 0.12);
+  --border-strong: rgba(148, 163, 196, 0.2);
+  --surface: #0e1422;
+  --accent: #b91c1c;
+  --accent-hover: #d33232;
+  --accent-fg: #ffffff;
+  --accent-subtle: #f0d3d3;
+  --accent-2: #e8bd45;
+  --accent-glow: rgba(239, 68, 68, 0.28);
   /* Bezel (Double-Bezel nested card) surfaces */
-  --bezel-shell-bg: rgba(255, 255, 255, 0.04);
-  --bezel-shell-border: rgba(255, 255, 255, 0.08);
+  --bezel-shell-bg: rgba(148, 163, 196, 0.05);
+  --bezel-shell-border: rgba(148, 163, 196, 0.14);
   --bezel-inner-highlight: rgba(255, 255, 255, 0.15);
+  /* Court-line hairlines: bezel service-line rule + background hatch */
+  --court-line: rgba(238, 241, 246, 0.16);
+  --court-grid: rgba(148, 163, 196, 0.07);
   /* Background mesh glow orbs */
-  --mesh-glow-1: rgba(251, 146, 60, 0.16);
-  --mesh-glow-2: rgba(253, 224, 71, 0.1);
+  --mesh-glow-1: rgba(239, 68, 68, 0.16);
+  --mesh-glow-2: rgba(232, 189, 69, 0.09);
 }
 
 @theme inline {
@@ -85,23 +92,45 @@ body {
   color: var(--accent-fg);
 }
 
-/* ---------- Ethereal Glass primitives ---------- */
+/* ---------- Center Court primitives ---------- */
 @layer utilities {
   /* Fixed, pointer-events-none mesh glow — mount once in the root layout.
      Never on a scrolling container: backdrop-blur + gradients repaint on
-     every scroll frame otherwise. */
+     every scroll frame otherwise. Court-line hatch is a faint diagonal
+     hairline grid, standing in for court markings without being literal. */
   .mesh-glow-bg {
     background:
       radial-gradient(ellipse 60% 40% at 15% 0%, var(--mesh-glow-1), transparent 60%),
-      radial-gradient(ellipse 50% 35% at 100% 20%, var(--mesh-glow-2), transparent 60%);
+      radial-gradient(ellipse 50% 35% at 100% 20%, var(--mesh-glow-2), transparent 60%),
+      repeating-linear-gradient(
+        115deg,
+        var(--court-grid) 0px,
+        var(--court-grid) 1px,
+        transparent 1px,
+        transparent 136px
+      );
   }
 
   /* Double-Bezel outer shell: machined-hardware tray around glass content. */
   .bezel-shell {
+    position: relative;
     background-color: var(--bezel-shell-bg);
     border: 1px solid var(--bezel-shell-border);
     border-radius: 2rem;
     padding: 0.375rem;
+  }
+
+  /* Service-line rule — a single hairline near the top of every card,
+     the recurring court-marking signature carried across all surfaces. */
+  .bezel-shell::after {
+    content: "";
+    position: absolute;
+    left: 1.5rem;
+    right: 1.5rem;
+    top: 0.375rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--court-line) 20%, var(--court-line) 80%, transparent);
+    pointer-events: none;
   }
 
   /* Double-Bezel inner core: the glass pane sitting in the shell. */

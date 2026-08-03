@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function SectionEyebrow({ index, title }: { index: number; title: string }) {
   return (
     <p className="font-mono text-xs uppercase tracking-widest text-accent">
-      {String(index).padStart(2, "0")} — {title}
+      {String(index).padStart(2, "0")} · {title}
     </p>
   );
 }
@@ -148,7 +148,7 @@ export default async function CaseStudyPage({ params }: Props) {
                         aria-hidden
                         className="select-none font-mono text-accent"
                       >
-                        —
+                        •
                       </span>
                       {c}
                     </li>

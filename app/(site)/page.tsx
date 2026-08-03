@@ -19,6 +19,7 @@ import { NowFeed } from "@/components/site/NowFeed";
 import { ContactForm } from "@/components/site/ContactForm";
 import { ParallaxGlow } from "@/components/site/ParallaxGlow";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { PullQuote } from "@/components/ui/PullQuote";
 import { urlFor } from "@/sanity/lib/image";
 import { toVideoEmbedUrl } from "@/lib/embed";
 import { ProjectMedia } from "@/components/ui/ProjectMedia";
@@ -29,7 +30,7 @@ const DEFAULTS = {
   heroHeadlinePlain: "Engineering depth.",
   heroHeadlineAccent: "Product instincts.",
   heroSubtitle:
-    "Five years building at scale across fintech, health, and cloud. Now bringing that engineering depth to product — shipping the right thing, not just building it right.",
+    "Five years building at scale across fintech, health, and cloud. Now bringing that engineering depth to product: shipping the right thing, not just building it right.",
   companies: ["JPMC", "Amazon", "Blink Health", "Nutanix"],
   careerStartYear: 2020,
   yearsShipping: "05",
@@ -130,7 +131,7 @@ export default async function Home() {
                     <p className="text-xs text-foreground-muted">{s.tagline}</p>
                   </div>
                   <p className="inline-flex items-baseline gap-2 border-b border-accent/40 pb-0.5 font-mono text-xs uppercase tracking-wider text-accent sm:ml-auto">
-                    <span aria-hidden>—</span>
+                    <span aria-hidden>•</span>
                     {s.statusBadge}
                   </p>
                 </div>
@@ -152,7 +153,7 @@ export default async function Home() {
 
                 {currentNow && (
                   <p className="mt-4 inline-flex items-baseline gap-2 border-b border-border pb-1 font-mono text-xs text-foreground-muted">
-                    <span aria-hidden className="text-accent">—</span>
+                    <span aria-hidden className="text-accent">•</span>
                     {currentNow.status === "building" ? "building" : currentNow.status}:{" "}
                     <span className="text-foreground">{currentNow.title}</span>
                   </p>
@@ -269,6 +270,19 @@ export default async function Home() {
               </ScrollReveal>
             )}
           </div>
+        </Container>
+      </section>
+
+      {/* ── Pull quote — Axelsen ─────────────────────────────── */}
+      <section className="py-16 sm:py-20">
+        <Container size="md">
+          <ScrollReveal>
+            <PullQuote
+              quote="Every day is an exam for me. I want to be able to look at myself in the mirror every single day and tell myself that I did everything I could in order to become better, both on and off the court."
+              author="Viktor Axelsen"
+              context="two-time Olympic badminton champion"
+            />
+          </ScrollReveal>
         </Container>
       </section>
 
