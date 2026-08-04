@@ -74,7 +74,7 @@ export default async function Projects({ searchParams }: Props) {
         </ScrollReveal>
 
         {filtered.length === 0 ? (
-          <ScrollReveal delay={0.05} className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
+          <ScrollReveal delay={0.05} className="rounded-[1.25rem] border border-dashed border-border bg-surface/50 p-8 text-center">
             <p className="text-sm font-medium text-foreground">
               {kind ? `No ${KIND_LABELS[kind] ?? kind} projects yet.` : "Projects coming soon."}
             </p>
@@ -100,7 +100,7 @@ export default async function Projects({ searchParams }: Props) {
                     target={project.externalUrl ? "_blank" : undefined}
                     rel={project.externalUrl ? "noopener noreferrer" : undefined}
                     shellClassName="h-full transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
-                    className="group flex h-full flex-col p-5"
+                    className="group flex h-full flex-col p-4"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">

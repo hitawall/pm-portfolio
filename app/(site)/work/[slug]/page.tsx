@@ -108,7 +108,7 @@ export default async function CaseStudyPage({ params }: Props) {
           {cs.outcomes && cs.outcomes.length > 0 && (
             <aside className="lg:w-60 lg:shrink-0">
               <ScrollReveal delay={0.12} className="lg:sticky lg:top-24">
-                <Bezel className="grid grid-cols-2 gap-x-6 gap-y-5 p-5 lg:grid-cols-1">
+                <Bezel className="grid grid-cols-2 gap-x-6 gap-y-5 p-4 lg:grid-cols-1">
                   <p className="col-span-full font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
                     Outcomes
                   </p>
@@ -162,7 +162,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 <SectionEyebrow index={nextIndex()} title="Decisions" />
                 <Bezel shellClassName="mt-4" className="divide-y divide-border overflow-hidden bg-surface/40">
                   {cs.decisions.map((d, i) => (
-                    <div key={i} className="p-5">
+                    <div key={i} className="p-4">
                       <p className="text-sm font-semibold tracking-tight">
                         {d.decision}
                       </p>
