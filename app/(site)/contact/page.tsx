@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <main id="main-content" className="flex-1">
-      <Container size="sm" className="py-20 sm:py-28">
+      <Container size="sm" className="py-14 sm:py-20">
         <ScrollReveal className="mb-10">
           <p className="text-xs font-medium uppercase tracking-widest text-accent">
             Get in touch

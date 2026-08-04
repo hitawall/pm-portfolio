@@ -26,7 +26,7 @@ export function NowFeed({ entries }: { entries: NowEntry[] }) {
           <Bezel
             key={entry._id}
             shellClassName="transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
-            className="p-5"
+            className="p-4"
           >
             <div className="flex items-center gap-2">
               <span className={`h-2 w-2 rounded-full ${style.dot}`} />

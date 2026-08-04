@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 export default function NotFound() {
   return (
     <main id="main-content" className="flex-1">
-      <Container className="py-24 sm:py-32">
+      <Container className="py-16 sm:py-24">
         <div className="max-w-xl">
           <p className="font-mono text-sm text-foreground-muted">404</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">

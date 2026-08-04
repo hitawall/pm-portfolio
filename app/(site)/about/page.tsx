@@ -66,9 +66,9 @@ export default function About() {
       id="main-content"
       className="flex-1"
     >
-      <Container size="md" className="py-20 sm:py-28">
+      <Container size="md" className="py-14 sm:py-20">
 
-        <ScrollReveal className="mb-20">
+        <ScrollReveal className="mb-14">
           <p className="text-xs font-medium uppercase tracking-widest text-accent">
             About
           </p>
@@ -80,7 +80,7 @@ export default function About() {
           </p>
         </ScrollReveal>
 
-        <article className="space-y-14 text-base leading-[1.85] text-foreground">
+        <article className="space-y-12 text-base leading-[1.75] text-foreground">
           {sections.map((s, i) => (
             <ScrollReveal key={s.id} delay={i * 0.07}>
               <section>
@@ -94,7 +94,7 @@ export default function About() {
                 </div>
                 <div className="space-y-4 pl-8 text-foreground-muted">
                   {s.paragraphs.map((p, j) => (
-                    <p key={j} className="leading-[1.85]">{p}</p>
+                    <p key={j} className="leading-[1.75]">{p}</p>
                   ))}
                 </div>
                 {s.id === "how-i-build" && (

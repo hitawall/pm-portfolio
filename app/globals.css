@@ -111,13 +111,15 @@ body {
       );
   }
 
-  /* Double-Bezel outer shell: machined-hardware tray around glass content. */
+  /* Double-Bezel outer shell: machined-hardware tray around glass content.
+     Radius/padding kept modest — the 2rem/0.375rem originals read as
+     oversized "zoomed in" chrome once tiled across a whole page of cards. */
   .bezel-shell {
     position: relative;
     background-color: var(--bezel-shell-bg);
     border: 1px solid var(--bezel-shell-border);
-    border-radius: 2rem;
-    padding: 0.375rem;
+    border-radius: 1.25rem;
+    padding: 0.25rem;
   }
 
   /* Service-line rule — a single hairline near the top of every card,
@@ -125,9 +127,9 @@ body {
   .bezel-shell::after {
     content: "";
     position: absolute;
-    left: 1.5rem;
-    right: 1.5rem;
-    top: 0.375rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    top: 0.25rem;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--court-line) 20%, var(--court-line) 80%, transparent);
     pointer-events: none;
@@ -135,7 +137,7 @@ body {
 
   /* Double-Bezel inner core: the glass pane sitting in the shell. */
   .bezel-core {
-    border-radius: calc(2rem - 0.375rem);
+    border-radius: calc(1.25rem - 0.25rem);
     box-shadow: inset 0 1px 1px var(--bezel-inner-highlight);
   }
 }
