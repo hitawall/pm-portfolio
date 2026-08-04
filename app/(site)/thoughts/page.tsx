@@ -44,7 +44,7 @@ export default async function Thoughts() {
         </ScrollReveal>
 
         {posts.length === 0 ? (
-          <ScrollReveal delay={0.05} className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
+          <ScrollReveal delay={0.05} className="rounded-[1.25rem] border border-dashed border-border bg-surface/50 p-8 text-center">
             <p className="text-sm font-medium text-foreground">
               I write about engineering trade-offs, AI systems, and what I&apos;m building. First posts dropping soon.
             </p>
@@ -68,7 +68,7 @@ export default async function Thoughts() {
                   as={Link}
                   href={`/thoughts/${post.slug.current}`}
                   shellClassName="transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
-                  className="group block p-5"
+                  className="group block p-4"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <span className="font-mono text-xs text-foreground-muted">

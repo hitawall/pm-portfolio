@@ -43,7 +43,7 @@ export function ContactForm() {
   }
 
   return (
-    <Bezel as="form" ref={formRef} action={action} className="space-y-4 p-6 sm:p-8">
+    <Bezel as="form" ref={formRef} action={action} className="space-y-4 p-6 sm:p-7">
       {/* Honeypot: hidden from sighted/keyboard users, blind form-fill bots still populate it. */}
       <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
         <label htmlFor="website">Website</label>

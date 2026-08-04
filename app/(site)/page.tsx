@@ -103,7 +103,7 @@ export default async function Home() {
     <main id="main-content" className="flex-1">
 
       {/* ── Hero — Asymmetrical Bento proof-of-work dashboard ── */}
-      <section className="relative overflow-hidden border-b border-border py-20 sm:py-28">
+      <section className="relative overflow-hidden border-b border-border py-14 sm:py-20">
         {/* Gradient glow backdrop — scroll-linked parallax */}
         <ParallaxGlow />
 
@@ -111,7 +111,7 @@ export default async function Home() {
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
             {/* Feature card — identity, headline, CTAs */}
             <ScrollReveal className="lg:col-span-8 lg:row-span-2">
-              <Bezel shellClassName="h-full" className="flex h-full flex-col p-6 sm:p-8">
+              <Bezel shellClassName="h-full" className="flex h-full flex-col p-6 sm:p-7">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
                   <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border-strong">
                     <Image
@@ -136,7 +136,7 @@ export default async function Home() {
                   </p>
                 </div>
 
-                <h1 className="mt-9 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+                <h1 className="mt-8 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
                   {s.heroHeadlinePlain}{" "}
                   <span className="bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">
                     {s.heroHeadlineAccent}
@@ -175,7 +175,7 @@ export default async function Home() {
             {/* Right stack — years shipping + projects built */}
             <div className="flex flex-col gap-4 lg:col-span-4 lg:row-span-2">
               <ScrollReveal delay={0.08} className="flex-1">
-                <Bezel shellClassName="h-full" className="flex h-full flex-col justify-center p-5">
+                <Bezel shellClassName="h-full" className="flex h-full flex-col justify-center p-4">
                   <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
                     {heroStats[0].label}
                   </p>
@@ -188,7 +188,7 @@ export default async function Home() {
                 </Bezel>
               </ScrollReveal>
               <ScrollReveal delay={0.14} className="flex-1">
-                <Bezel shellClassName="h-full" className="flex h-full flex-col justify-center p-5">
+                <Bezel shellClassName="h-full" className="flex h-full flex-col justify-center p-4">
                   <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
                     {heroStats[1].label}
                   </p>
@@ -210,7 +210,7 @@ export default async function Home() {
                 target={heroStats[2].href ? "_blank" : undefined}
                 rel={heroStats[2].href ? "noopener noreferrer" : undefined}
                 shellClassName="h-full"
-                className="group flex h-full flex-col justify-center p-5 transition-colors duration-200"
+                className="group flex h-full flex-col justify-center p-4 transition-colors duration-200"
               >
                 <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
                   {heroStats[2].label}
@@ -232,7 +232,7 @@ export default async function Home() {
                 target={heroStats[3].href ? "_blank" : undefined}
                 rel={heroStats[3].href ? "noopener noreferrer" : undefined}
                 shellClassName="h-full"
-                className="group flex h-full flex-col justify-center p-5 transition-colors duration-200"
+                className="group flex h-full flex-col justify-center p-4 transition-colors duration-200"
               >
                 <p className="text-xs font-medium uppercase tracking-wide text-foreground-muted">
                   {heroStats[3].label}
@@ -259,7 +259,7 @@ export default async function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   shellClassName="h-full"
-                  className="block p-5 transition-opacity duration-200 hover:opacity-90"
+                  className="block p-4 transition-opacity duration-200 hover:opacity-90"
                   aria-label="View GitHub contribution history"
                 >
                   <ContributionGraph
@@ -274,7 +274,7 @@ export default async function Home() {
       </section>
 
       {/* ── Pull quote — Axelsen ─────────────────────────────── */}
-      <section className="py-16 sm:py-20">
+      <section className="py-10 sm:py-14">
         <Container size="md">
           <ScrollReveal>
             <PullQuote
@@ -287,7 +287,7 @@ export default async function Home() {
       </section>
 
       {/* ── Now ──────────────────────────────────────────────── */}
-      <section id="now" className="py-20 sm:py-24">
+      <section id="now" className="py-14 sm:py-20">
         <Container size="md">
           <ScrollReveal className="mb-10">
             <p className="text-xs font-medium uppercase tracking-widest text-accent">
@@ -316,7 +316,7 @@ export default async function Home() {
       </section>
 
       {/* ── Projects ─────────────────────────────────────────── */}
-      <section id="projects" className="border-t border-border py-24 sm:py-32">
+      <section id="projects" className="border-t border-border py-16 sm:py-24">
         <Container size="md">
           <ScrollReveal className="mb-12 flex items-end justify-between">
             <div>
@@ -354,7 +354,7 @@ export default async function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     shellClassName="h-full transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
-                    className="group flex h-full flex-col p-5"
+                    className="group flex h-full flex-col p-4"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
@@ -386,7 +386,7 @@ export default async function Home() {
       </section>
 
       {/* ── Recent Thoughts ──────────────────────────────────── */}
-      <section className="border-t border-border py-24 sm:py-32">
+      <section className="border-t border-border py-16 sm:py-24">
         <Container size="md">
           <ScrollReveal className="mb-12 flex items-end justify-between">
             <div>
@@ -413,7 +413,7 @@ export default async function Home() {
                     as={Link}
                     href={`/thoughts/${post.slug.current}`}
                     shellClassName="transition-shadow duration-300 hover:shadow-[0_0_24px_var(--accent-glow)]"
-                    className="group block p-5"
+                    className="group block p-4"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <p className="font-mono text-xs text-foreground-muted">
@@ -452,7 +452,7 @@ export default async function Home() {
       </section>
 
       {/* ── Contact ──────────────────────────────────────────── */}
-      <section id="contact" className="border-t border-border py-24 sm:py-32">
+      <section id="contact" className="border-t border-border py-16 sm:py-24">
         <Container size="sm">
           <ScrollReveal className="mb-10 text-center">
             <p className="text-xs font-medium uppercase tracking-widest text-accent">

@@ -41,7 +41,7 @@ export default async function Work() {
         </ScrollReveal>
 
         {caseStudies.length === 0 ? (
-          <ScrollReveal delay={0.05} className="rounded-[2rem] border border-dashed border-border bg-surface/50 p-10 text-center">
+          <ScrollReveal delay={0.05} className="rounded-[1.25rem] border border-dashed border-border bg-surface/50 p-8 text-center">
             <p className="text-sm font-medium text-foreground">
               Detailed case studies in progress
             </p>
@@ -102,7 +102,7 @@ export default async function Work() {
                     )}
                   </div>
 
-                  <div className="flex flex-1 flex-col p-5">
+                  <div className="flex flex-1 flex-col p-4">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="font-mono text-[11px] text-foreground-muted">
                         {cs.company}
